@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Herramientas</title>
+    <!-- Bootstrap y CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="Style.css">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Vogue">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=TT Moons">
+ <!-- JavaScript Bundle with Popper -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet">
+
+    <script src="https://kit.fontawesome.com/2d6d5bfb49.js" crossorigin="anonymous"></script>
+</head>
+
+<body class="profile-color" style="padding-top: 75px;">
+    <!-- Nav bar -->
+    <nav class="navbar navbar-expand-xl navbar-light bg-white border-bottom" style="z-index: 5;">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="Index.html">
+                <img src="/img/Logo.png" alt="Logo" class="logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="Index.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="ong.html">Suscripción</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Categorías
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="/search.html">Herramientas de Cultivo</a></li>
+                            <li><a class="dropdown-item" href="/search2.html">Tierra</a></li>
+                            <li><a class="dropdown-item" href="/search1.html">Maceteros</a></li>
+                            <li><a class="dropdown-item" href="/search3.html">Plantas</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="/search4.html">Ver Todo</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item flex-grow-1">
+                        <form class="d-flex flex-grow-1" action="search.html">
+                            <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar">
+                            <button class="btn btn-outline-success rounded-0" type="submit">Buscar</button>
+                        </form>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDerecho"
+                            aria-controls="offcanvasRight">Iniciar sesión</a>
+                    </li>
+                    <!--OFFCANVAS LOGIN-->
+                    <div class="offcanvas offcanvas-end mmenu" tabindex="-1" id="offcanvasDerecho"
+                        aria-labelledby="offcanvasRightLabel">
+                        <div class="offcanvas-header">
+                            <h4 class="offcanvas-title vogue" id="offcanvasRightLabel">Bienvenido De Nuevo </h4>
+                            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+                                aria-label="Close"></button>
+                        </div>
+                        <hr>
+                        <div class="offcanvas-body">
+                            <form action="/profile.html" method="get">
+                                <!-- Email  -->
+                                <div class="form-outline mb-4">
+                                    <input type="email" id="Email_imp" class="form-control rounded-0 border-custom-1" />
+                                    <label class="form-label" for="Email_imp_label">Correo electronico</label>
+                                </div>
+                                <!-- Contraseña -->
+                                <div class="form-outline mb-4">
+                                    <input type="password" id="Password_imp"
+                                        class="form-control rounded-0 border-custom-1" />
+                                    <label class="form-label" for="Password_imp_label">Contraseña</label>
+                                </div>
+                                <div class="row mb-4">
+                                    <div class="col d-flex justify-content-center">
+                                        <!-- Checkbox -->
+                                        <div class="form-check">
+                                            <input class="form-check-input rounded-0 custom-checkbox" type="checkbox"
+                                                value="" id="form2Example31" />
+                                            <label class="form-check-label" for="form2Example31">Recuérdame</label>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <a class="link-hover" href="Password_ol.html">Olvidaste tu contraseña</a>
+                                    </div>
+                                </div>
+                                <div class="d-flex gap-2">
+                                    <button type="submit" class="btn btn-dark rounded-0 btn-custom btn-lg w-50"
+                                        id="Ingresar_imp" disabled>Ingresar</button>
+                                    <button type="button"
+                                        class="btn rounded-0 btn-custom-1 border-custom-1 btn-lg w-50 btn-hover"
+                                        data-bs-dismiss="modal">
+                                        <a href="create_acc.html">
+                                            Registrarme
+                                        </a>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!--FIN DEL OFF CANVAS PARA MOVERLO-->
+                    <li class="nav-item">
+                        <a class="nav-link" href="cart.html">
+                            <i class="bi bi-cart-fill"></i> Carrito
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!--------------------------------------------------------------------------------------------------------->
+    <!-- Search Engine -->
+    <div class="container-fluid py-md-4">
+        <div class="row">
+            <div class="col-md-3 pb-2 col-md-3 pb-2 pt-md-0 pt-2">
+                <div class="card rounded-0">
+                    <div class="ms-3 mt-3">
+                        <h4 class="vogue">Categorías</h5>
+                    </div>
+                    <div>
+                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 ttmoons ms-4">
+                            <li><a class="link-dark rounded" href="/search.html">Herramientas de Cultivo</a></li>
+                            <li><a class="link-dark rounded" href="/search2.html">Tierra</a></li>
+                            <li><a class="link-dark rounded" href="/search1.html">Maceteros</a></li>
+                            <li><a class="link-dark rounded" href="/search3.html">Plantas</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="link-dark rounded" href="/search4.html">Ver Todo</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="card rounded-0">
+                    <div class="row px-3">
+                        <div class="border-bottom">
+                            <div class="row align-items-center py-2">
+                                <a href="/Productos/product3.html">
+                                    <div class="col-md-9 d-flex">
+                                        <img src="/img/prod3.jpg" alt="prod3" class="img-search me-2 mt-md-auto mt-4">
+                                        <div class="col my-md-1">
+                                            <h5 class="mb-0 mt-3 vogue">Pistola Riego Plástica con Gatillo Trasero 100S
+                                            </h5>
+                                            <p class="mb-1 state-1 ttmoons">Vendido por Benjamín</p>
+                                            <h5 class="mb-0 ttmoons">$9.990 CLP</h5>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row px-3">
+                        <div class="border-bottom">
+                            <div class="row align-items-center py-2">
+                                <a href="/Productos/product2.html">
+                                    <div class="col-md-9 d-flex">
+                                        <img src="/img/prod2.jpg" alt="prod2" class="img-search me-2 mt-md-auto mt-4">
+                                        <div class="col my-md-1">
+                                            <h5 class="mb-0 mt-3 vogue">Pala Manual FiberComp® 100S</h5>
+                                            <p class="mb-1 state-1 ttmoons">Vendido por Alexander</p>
+                                            <h5 class="mb-0 ttmoons">$6.490 CLP</h5>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row px-3">
+                        <div class="border-bottom">
+                            <div class="row align-items-center py-2">
+                                <a href="/Productos/product4.html">
+                                    <div class="col-md-9 d-flex">
+                                        <img src="/img/prod4.jpg" alt="prod4" class="img-search me-2 mt-md-auto mt-4">
+                                        <div class="col my-md-1">
+                                            <h5 class="mb-0 mt-3 vogue">Aspersor de Riego Rectangular Regulable Plástico
+                                                Gilmour
+                                            </h5>
+                                            <p class="mb-1 state-1 ttmoons">Vendido por Alejandro</p>
+                                            <h5 class="mb-0 ttmoons">$28.480 CLP</h5>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row px-3">
+                        <div class="border-bottom">
+                            <div class="row align-items-center py-2">
+                                <a href="/Productos/product5.html">
+                                    <div class="col-md-9 d-flex">
+                                        <img src="/img/prod5.jpg" alt="prod5" class="img-search me-2 mt-md-auto mt-4">
+                                        <div class="col my-md-1">
+                                            <h5 class="mb-0 mt-3 vogue">Rodilleras para Jardín Ultra-light</h5>
+                                            <p class="mb-1 state-1 ttmoons">Vendido por Diego</p>
+                                            <h5 class="mb-0 ttmoons">$18.990 CLP</h5>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row px-3">
+                        <div class="border-bottom">
+                            <div class="row align-items-center py-2">
+                                <a href="/Productos/product1.html">
+                                    <div class="col-md-9 d-flex">
+                                        <img src="/img/prod1.jpg" alt="prod1" class="img-search me-2 mt-md-auto mt-4">
+                                        <div class="col my-md-1">
+                                            <h5 class="mb-0 mt-3 vogue">Tijeras de Podar</h5>
+                                            <p class="mb-1 state-1 ttmoons">Vendido por Felipe</p>
+                                            <h5 class="mb-0 ttmoons">$9.990 CLP</h5>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row px-3">
+                        <div class="border-bottom">
+                            <div class="row align-items-center py-2">
+                                <a href="/Productos/product1.html">
+                                    <div class="col-md-9 d-flex">
+                                        <img src="/img/prod6.jpg" alt="prod6" class="img-search me-2 mt-md-auto mt-4">
+                                        <div class="col my-md-1">
+                                            <h5 class="mb-0 mt-3 vogue">Fertilizante para Rosas</h5>
+                                            <p class="mb-1 state-1 ttmoons">Vendido por Juan</p>
+                                            <h5 class="mb-0 ttmoons">$12.000 CLP</h5>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--------------------------------------------------------------------------------------------------------->
+  <!-- JQuery -->
+    <script src="/js/lg_jq.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+        crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+</body>
+
+</html>

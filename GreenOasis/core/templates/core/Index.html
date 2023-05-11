@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Oasis verde</title>
+	<!-- Bootstrap y CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<link rel="stylesheet" href="{% static 'core/css/Style.css' %}">
+	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Vogue">
+	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=TT Moons">
+	<!-- JavaScript Bundle with Popper -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+		crossorigin="anonymous"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+	<!-- Nav bar sin cuenta -->
+	<nav class="navbar navbar-expand-xl navbar-light bg-white border-bottom" style="z-index: 5;">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="/Index.html">
+				<img src="{% static 'core/img/Logo.png' %}" alt="Logo" class="logo">
+			</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+				aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNav">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<li class="nav-item">
+						<a class="nav-link active" aria-current="page" href="/Index.html">Inicio</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/ong.html">Suscripción</a>
+					</li>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+							data-bs-toggle="dropdown" aria-expanded="false">
+							Categorías
+						</a>
+						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<li><a class="dropdown-item" href="/search.html">Herramientas de Cultivo</a></li>
+							<li><a class="dropdown-item" href="/search2.html">Tierra</a></li>
+							<li><a class="dropdown-item" href="/search1.html">Maceteros</a></li>
+							<li><a class="dropdown-item" href="/search3.html">Plantas</a></li>
+							<li>
+								<hr class="dropdown-divider">
+							</li>
+							<li><a class="dropdown-item" href="/search4.html">Ver Todo</a></li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+					<li class="nav-item flex-grow-1">
+						<form class="d-flex flex-grow-1" action="cart.html">
+							<input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar">
+							<button class="btn btn-outline-success rounded-0" type="submit">Buscar</button>
+						</form>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDerecho"
+							aria-controls="offcanvasRight">Iniciar sesión</a>
+					</li>
+
+					<!--OFFCANVAS LOGIN-->
+					<div class="offcanvas offcanvas-end mmenu" tabindex="-1" id="offcanvasDerecho"
+						aria-labelledby="offcanvasRightLabel">
+						<div class="offcanvas-header">
+							<h4 class="offcanvas-title vogue" id="offcanvasRightLabel">Bienvenido De Nuevo </h4>
+							<button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+								aria-label="Close"></button>
+						</div>
+						<hr>
+						<div class="offcanvas-body">
+							<form action="/profile.html" method="get">
+								<!-- Email  -->
+								<div class="form-outline mb-4">
+									<input type="email" id="Email_imp" class="form-control rounded-0 border-custom-1" />
+									<label class="form-label" for="Email_imp_label">Correo electronico</label>
+								</div>
+								<!-- Contraseña -->
+								<div class="form-outline mb-4">
+									<input type="password" id="Password_imp"
+										class="form-control rounded-0 border-custom-1" />
+									<label class="form-label" for="Password_imp_label">Contraseña</label>
+								</div>
+								<div class="row mb-4">
+									<div class="col d-flex justify-content-center">
+										<!-- Checkbox -->
+										<div class="form-check">
+											<input class="form-check-input rounded-0 custom-checkbox" type="checkbox"
+												value="" id="form2Example31" />
+											<label class="form-check-label" for="form2Example31">Recuérdame</label>
+										</div>
+									</div>
+									<div class="col">
+										<a class="link-hover" href="Password_ol.html">Olvidaste tu contraseña</a>
+									</div>
+								</div>
+								<div class="d-flex gap-2">
+									<button type="submit" class="btn btn-dark rounded-0 btn-custom btn-lg w-50"
+										id="Ingresar_imp" disabled>Ingresar</button>
+									<button type="button"
+										class="btn rounded-0 btn-custom-1 border-custom-1 btn-lg w-50 btn-hover"
+										data-bs-dismiss="modal">
+										<a href="create_acc.html">
+											Registrarme
+										</a>
+									</button>
+								</div>
+							</form>
+						</div>
+					</div>
+					<!--FIN DEL OFF CANVAS PARA MOVERLO-->
+					<li class="nav-item">
+						<a class="nav-link" href="/cart.html">
+							<i class="bi bi-cart-fill"></i> Carrito
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<!--------------------------------------------------------------------------------------------------------->
+	<!-- Main Banner -->
+	<div class="container-fluid mt-5 d-none d-md-block">
+		<div class="row mx-auto px-5 py-5">
+			<div class="col-md-8 my-auto px-5">
+				<h1 class="vogue title-50">
+					Encuentra eso <br> perfecto para tu jardín
+				</h1>
+				<p>
+					Hermosas plantas que te <br> animan a ser creativo
+				</p>
+				<div class="py-2">
+					<a type="button" href="/search4.html" class="btn btn-dark btn-custom px-3 rounded-0">
+						Comprar ahora
+					</a>
+				</div>
+			</div>
+			<div class="col-md-4 my-auto text-center px-3">
+				<img src="{% static 'core/img/banner.png' %}" alt="Banner" class="img-fluid">
+			</div>
+		</div>
+	</div>
+
+	<!-- Mobile Banner -->
+	<div class="container-fluid mt-5 d-md-none g-1">
+		<div class="row mx-auto p-0 pt-5 pb-0">
+			<div class="col-12 my-auto px-2">
+				<h1 class="vogue title-35">
+					Encuentra eso perfecto para tu jardín
+				</h1>
+				<p>
+					Hermosas plantas que te animan a ser creativo
+				</p>
+				<div class="py-2 pb-4">
+					<button type="button" class="btn btn-dark btn-custom px-3 rounded-0">
+						Comprar ahora
+					</button>
+				</div>
+				<div class="col-md-4 my-auto text-center px-0">
+					<img src="{% static 'core/img/Banner_Movile.jpeg' %}" alt="Banner" class="img-fluid px-0">
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--------------------------------------------------------------------------------------------------------->
+	<!-- Categories -->
+	<div class="container">
+		<h1 class="text-center mt-5 py-5 mx-auto vogue title-35">Categorías</h1>
+		<div class="row mt-4">
+			<div class="col-md-3 col-sm-6 text-center">
+				<a href="/search.html">
+					<img src="{% static 'core/img/herramientas_de_jardin.jpeg' %}" alt="Imagen 1"
+						class="img-fluid h-75 opacity-hover">
+					<h4 class="text-center mt-3 vogue title-25">Herramientas de jardín</h4>
+				</a>
+			</div>
+			<div class="col-md-3 col-sm-6 text-center">
+				<a href="/search2.html">
+					<img src="{% static 'core/img/tierra.jpeg' %}" alt="Imagen 2" class="img-fluid h-75 opacity-hover">
+					<h4 class="text-center mt-3 vogue title-25">Tierra de abono</h4>
+				</a>
+			</div>
+			<div class="col-md-3 col-sm-6 text-center">
+				<a href="/search1.html">
+					<img src="{% static 'core/img/maceteros.jpeg' %}" alt="Imagen 3"
+						class="img-fluid h-75 opacity-hover">
+					<h4 class="text-center mt-3 vogue title-25">Maceteros</h4>
+				</a>
+			</div>
+			<div class="col-md-3 col-sm-6 text-center">
+				<a href="/search3.html">
+					<img src="{% static 'core/img/plantas_de_interior.jpeg' %}" alt="Imagen 4"
+						class="img-fluid h-75 opacity-hover">
+					<h4 class="text-center mt-3 vogue title-25">Plantas de interior</h4>
+				</a>
+			</div>
+		</div>
+	</div>
+	<!--------------------------------------------------------------------------------------------------------->
+	<!-- Productos -->
+	<div class="container mt-5">
+		<h1 class="text-center mb-4 py-5 vogue title-35">Nuestros Productos</h1>
+		<div class="row text-center">
+			<div class="col-md-3 col-sm-6 mb-4">
+				<h2 class="vogue title-35">Productos Destacados</h2>
+				<a href="/search4.html" class="vogue rounded-0 py-1 px-4 btn-custom-2 btn-hover">Ver todos</a>
+			</div>
+			<div class="col-md-3 col-sm-6 mb-4 ">
+				<a href="{% url 'producto' %}">
+					<img src="{% static 'core/img/prod1.jpg' %}" alt="Imagen 1" class="img-fluid opacity-hover"
+						style="width: 75%;"></a>
+				<div>
+					<h5 class="mt-3">Tijeras de podar</h5>
+					<h5 class="ttmoons">$9.990 CLP</h5>
+				</div>
+			</div>
+			<div class="col-md-3 col-sm-6 mb-4">
+				<a href="Productos/product2.html">
+					<img src="{% static 'core/img/prod2.jpg' %}" alt="Imagen 2" class="img-fluid opacity-hover"
+						style="width: 75%;"></a>
+				<div>
+					<h5 class="mt-3">Pala Manual FiberComp® 100S</h5>
+					<h5 class="ttmoons">$6.490 CLP</h5>
+				</div>
+			</div>
+			<div class="col-md-3 col-sm-6 mb-4">
+				<a href="Productos/product3.html"><img src="{% static 'core/img/prod3.jpg' %}" alt="Imagen 3"
+						class="img-fluid opacity-hover" style="width: 75%;"></a>
+				<div>
+					<h5 class="mt-3">Pistola Riego Plástica con Gatillo Trasero 100S</h5>
+					<h5 class="ttmoons">$9.990 CLP</h4>
+
+				</div>
+			</div>
+		</div>
+		<div class="row text-center">
+			<div class="col-md-3 col-sm-6 mb-4">
+				<a href="Productos/product4.html"><img src="{% static 'core/img/prod4.jpg' %}" alt="Imagen 4"
+						class="img-fluid opacity-hover" style="width: 75%;"></a>
+				<div>
+					<h5 class="mt-3">Aspersor de Riego Rectangular</h5>
+					<h5 class="ttmoons">$28.480 CLP</h5>
+					<br>
+				</div>
+			</div>
+			<div class="col-md-3 col-sm-6 mb-4">
+				<a href="Productos/product5.html"><img src="{% static 'core/img/prod5.jpg' %}" alt="Imagen 5"
+						class="img-fluid opacity-hover " style="width: 75%;"></a>
+				<div>
+					<h5 class="mt-3">Rodilleras para Jardín Ultra-light</h5>
+					<h5 class="ttmoons">$18.990 CLP</h5>
+				</div>
+			</div>
+			<div class="col-md-3 col-sm-6 mb-4">
+				<a href="Productos/product6.html"><img src="{% static 'core/img/prod6.jpg' %}" alt="Imagen 6"
+						class="img-fluid opacity-hover" style="width: 75%;"></a>
+				<div>
+					<h5 class="mt-3">Fertilizante para Rosas</h5>
+					<h5 class="ttmoons">$12.000 CLP</h5>
+				</div>
+			</div>
+			<div class="col-md-3 col-sm-6 mb-4">
+				<a href="Productos/product7.html"><img src="{% static 'core/img/prod7.jpg' %}" alt="Imagen 7"
+						class="img-fluid opacity-hover" style="width: 75%;"></a>
+				<div>
+					<h5 class="mt-3">Macetero Biodegradable Mediano Rojo</h5>
+					<h5 class="ttmoons">$8.000 CLP</h5>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--------------------------------------------------------------------------------------------------------->
+	<!-- Footer -->
+	<footer class="bg-white py-4 border-footer-custom">
+		<div class="container">
+			<div class="row">
+				<div class="col-12 col-md-4">
+					<h4 class="text-uppercase mb-4 ttmoons-black">Oasis Verde</h4>
+				</div>
+			</div>
+			<div class="row justify-content-center d-md-none">
+				<div class="col-12">
+					<h5 class="text-uppercase mb-0 title-15 letter-gray">Contactanos</h5>
+					<ul class="list-unstyled mt-4 vogue">
+						<li>Instagram</li>
+						<li>Facebook</li>
+					</ul>
+					<h5 class="text-uppercase mb-0 title-15 letter-gray mt-4">Sobre nosotros</h5>
+					<ul class="list-unstyled mt-4 vogue">
+						<li><a href="#">Quiénes somos</a></li>
+						<li><a href="#">Nuestros valores</a></li>
+						<li><a href="#">Política de privacidad</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="row justify-content-center d-none d-md-flex">
+				<div class="col-6 col-md-2">
+					<h5 class="text-uppercase mb-0 title-15 letter-gray">Contactanos</h5>
+					<ul class="list-unstyled mt-4 vogue">
+						<li>Instagram</li>
+						<li>Facebook</li>
+					</ul>
+				</div>
+				<div class="col-6 col-md-2">
+					<h5 class="text-uppercase mb-0 title-15 letter-gray">Sobre nosotros</h5>
+					<ul class="list-unstyled mt-4 vogue">
+						<li><a href="#">Política de privacidad</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+	<!-- JQuery -->
+	<script src="% static 'core/js/lg_jq.js'%"></script>
+	<!-- Bootstrap JS -->
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+		integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+		integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+		crossorigin="anonymous"></script>
+	<script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+	<script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+</body>
+
+</html>

@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Oasis verde</title>
+   <!-- Bootstrap y CSS -->
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+   <link rel="stylesheet" href="/Style.css">
+
+   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Vogue">
+   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=TT Moons">
+   <script src="https://kit.fontawesome.com/2d6d5bfb49.js" crossorigin="anonymous"></script>
+</head>
+
+<body class="profile-color" style="padding-top: 75px;">
+   <!-- Nav bar con cuenta -->
+   <nav class="navbar navbar-expand-xl navbar-light bg-white border-bottom" style="z-index: 5;">
+      <div class="container-fluid">
+         <a class="navbar-brand" href="/Index.html">
+            <img src="/img/Logo.png" alt="Logo" class="logo">
+         </a>
+         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+         </button>
+         <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+               <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="/Index.html">Inicio</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" href="/ong.html">Suscripción</a>
+               </li>
+               <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                     data-bs-toggle="dropdown" aria-expanded="false">
+                     Categorías
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                     <li><a class="dropdown-item" href="/search.html">Herramientas de Cultivo</a></li>
+                     <li><a class="dropdown-item" href="/search2.html">Tierra</a></li>
+                     <li><a class="dropdown-item" href="/search1.html">Maceteros</a></li>
+                     <li><a class="dropdown-item" href="/search3.html">Plantas</a></li>
+                     <li>
+                        <hr class="dropdown-divider">
+                     </li>
+                     <li><a class="dropdown-item" href="/search4.html">Ver Todo</a></li>
+                  </ul>
+               </li>
+            </ul>
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+               <li class="nav-item flex-grow-1">
+                  <form class="d-flex flex-grow-1" action="/search.html">
+                     <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar">
+                     <button class="btn btn-outline-success rounded-0" type="submit">Buscar</button>
+                  </form>
+               </li>
+               <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                     data-bs-toggle="dropdown" aria-expanded="false">
+                     Alejandro
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                     <li><a class="dropdown-item" href="/profile.html">Mi Perfil</a></li>
+                     <li><a class="dropdown-item" href="/profile_conf/h_buy.html">Mis Compras</a></li>
+                     <li>
+                        <hr class="dropdown-divider">
+                     </li>
+                     <li><a class="dropdown-item" href="/Index.html">Cerrar sesión</a></li>
+                  </ul>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" href="/cart.html">
+                     <i class="bi bi-cart-fill"></i> Carrito
+                  </a>
+               </li>
+            </ul>
+         </div>
+      </div>
+   </nav>
+   <!--------------------------------------------------------------------------------------------------------->
+   <!-- Menu Lateral -->
+   <div class="container-fluid col-md-2 navbar-profile-color sidebar phs">
+      <div class="row">
+         <div>
+            <div class="pt-3 pb-2 mb-3 border-bottom justify-content-center">
+               <div
+                  class="d-flex align-items-center ms-2 pb-3 mb-3 link-dark text-decoration-none border-bottom text-center">
+                  <div class="d-flex align-content-center">
+                     <div class="col-auto">
+                        <i class="fa-solid fa-user me-2" style="color: #000000;"></i>
+                     </div>
+                     <div class="col">
+                        <h5> Mi Cuenta </h5>
+                     </div>
+                  </div>
+               </div>
+               <ul class="list-unstyled ps-0">
+                  <li class="mb-1">
+                     <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
+                        data-bs-target="#home-collapse" aria-expanded="false">
+                        <i class="fa-sharp fa-solid fa-house" style="color: #000000;"></i>
+                        General
+                     </button>
+                     <div class="collapse" id="home-collapse">
+                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small ms-4">
+                           <li><a href="p_info.html" class="link-dark rounded">Personal</a></li>
+                           <li><a href="p_acc.html" class="link-dark rounded">Cuenta</a></li>
+                           <li><a href="p_pch.html" class="link-dark rounded">Metodo de Pago</a>
+                           </li>
+                           <li><a href="/ong.html" class="link-dark rounded">ONG</a></li>
+                        </ul>
+                     </div>
+                  </li>
+                  <li class="mb-1">
+                     <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
+                        data-bs-target="#dashboard-collapse" aria-expanded="false">
+                        <i class="fa-sharp fa-solid fa-clipboard me-1" style="color: #000000;"></i>
+                        Ventas
+                     </button>
+                     <div class="collapse" id="dashboard-collapse">
+                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small ms-4">
+                           <li><a href="/sales/vent_ing.html" class="link-dark rounded">Agregar</a></li>
+                           <li><a href="/sales/vent_edit.html" class="link-dark rounded">Modificar </a></li>
+                           <li><a href="/sales/vent_list.html" class="link-dark rounded">Lista</a></li>
+                        </ul>
+                     </div>
+                  </li>
+                  <li class="mb-1">
+                     <a href="h_buy.html">
+                        <button class="btn btn-toggle rounded">
+                           <i class="fa-sharp fa-solid fa-bag-shopping" style="color: #000000;"></i>
+                           Compras
+                        </button>
+                     </a>
+                  </li>
+               </ul>
+            </div>
+         </div>
+      </div>
+   </div>
+   <!-- Version Movil -->
+   <div
+      class="container-fluid sidebar col-1 mhs navbar-profile-color mb-3 align-items-center flex-column text-center pt-2 g-0">
+      <div class="sidebar-icon" id="menu">
+         <a data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+            <i class="fa-solid fa-bars"></i>
+         </a>
+      </div>
+      <div class="sidebar-icon" id="Home">
+         <i class="fa-solid fa-user" style="color: #000000;"></i>
+      </div>
+      <div class="sidebar-icon" id="icon2">
+         <i class="fa-sharp fa-solid fa-house" style="color: #000000;"></i>
+      </div>
+      <div class="sidebar-icon" id="icon3">
+         <i class="fa-sharp fa-solid fa-clipboard" style="color: #000000;"></i>
+      </div>
+      <div class="sidebar-icon" id="icon4">
+         <i class="fa-sharp fa-solid fa-bag-shopping" style="color: #000000;"></i>
+      </div>
+   </div>
+
+   <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+      <div class="offcanvas-header">
+         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+         <div class="pt-3 pb-2 mb-3 border-bottom">
+            <a href="#"
+               class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom text-center">
+               <div class="d-flex align-content-center">
+                  <div class="col-auto">
+                     <i class="fa-solid fa-user me-2" style="color: #000000;"></i>
+                  </div>
+                  <div class="col">
+                     <h5> Mi Cuenta </h5>
+                  </div>
+               </div>
+            </a>
+            <ul class="list-unstyled ps-0">
+               <li class="mb-1">
+                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
+                     data-bs-target="#home-collapse" aria-expanded="false">
+                     <i class="fa-sharp fa-solid fa-house" style="color: #000000;"></i>
+                     General
+                  </button>
+                  <div class="collapse" id="home-collapse">
+                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small ms-4">
+                        <li><a href="p_info.html" class="link-dark rounded">Personal</a></li>
+                        <li><a href="p_acc.html" class="link-dark rounded">Cuenta</a></li>
+                        <li><a href="p_pch.html" class="link-dark rounded">Metodo de Pago</a>
+                        </li>
+                        <li><a href="/ong.html" class="link-dark rounded">ONG</a></li>
+                     </ul>
+                  </div>
+               </li>
+               <li class="mb-1">
+                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
+                     data-bs-target="#dashboard-collapse" aria-expanded="false">
+                     <i class="fa-sharp fa-solid fa-clipboard" style="color: #000000;"></i>
+                     Ventas
+                  </button>
+                  <div class="collapse" id="dashboard-collapse">
+                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small ms-4">
+                        <li><a href="/sales/vent_ing.html" class="link-dark rounded">Agregar</a></li>
+                        <li><a href="/sales/vent_edit.html" class="link-dark rounded">Modificar </a></li>
+                        <li><a href="/sales/vent_list.html" class="link-dark rounded">Lista</a></li>
+                     </ul>
+                  </div>
+               </li>
+               <li class="mb-1">
+                  <a href="profile_conf/h_buy.html">
+                     <button class="btn btn-toggle rounded">
+                        <i class="fa-sharp fa-solid fa-bag-shopping" style="color: #000000;"></i>
+                        Compras
+                     </button>
+                  </a>
+               </li>
+            </ul>
+         </div>
+      </div>
+   </div>
+   <!--------------------------------------------------------------------------------------------------------->
+   <!-- Account Form -->
+   <div class="container-fluid col-md-10 offset-md-1 offset-lg-2 py-md-3 px-lg-5 pg-md-2 py-2 ps-5 px-4">
+      <div class="px-md-5 mb-2">
+         <div class="card rounded-0">
+            <div class="container mt-3 py-2 px-4">
+               <h2 class="vogue">Datos de la Cuenta</h2>
+            </div>
+         </div>
+      </div>
+      <div class="px-md-5">
+         <div class="card rounded-0 p-4">
+
+            <!--Form -->
+            <form class="align-content-center" method="post" id="ai-form">
+               <div class="row">
+                  <div class="border-bottom">
+                     <div class="col-md-12 mb-3 mt-3 d-flex row">
+                        <div class="col-1">
+                           <label for="alias" class="form-label me-3"><strong> Alias </strong></label>
+                        </div>
+                        <div class="col-12 col-xxl-11">
+                           <input type="text" class="form-control rounded-0 border-custom-2" id="ai-alias" name="alias"
+                              value="Alexio" required>
+                        </div>
+                     </div>
+                  </div>
+
+                  <div class="border-bottom">
+                     <div class="col-md-12 mb-3 mt-3  d-flex row">
+                        <div class="col-xxl-1 col-12">
+                           <label for="correo" class="form-label me-3" place><strong> Correo
+                                 Electrónico</strong></label>
+                        </div>
+                        <div class="col-12 col-xxl-11">
+                           <input type="text" class="form-control rounded-0 border-custom-2" id="ai-email" name="correo"
+                              required value="al.silvab@duocuc.cl">
+                        </div>
+                     </div>
+                  </div>
+                  <div class="border-bottom">
+                     <div class="col-md-12 mb-3 mt-3 d-flex row">
+                        <div class="col-12 col-xxl-1">
+                           <label for="password" class="form-label me-3"><strong> Modificar Contraseña</strong></label>
+                        </div>
+                        <div class="col-12 col-xxl-11">
+                           <input type="password" class="form-control rounded-0 border-custom-2" id="ai-password"
+                              name="password" required value="Papite3185*">
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <p class="warnings mt-2" id="ai-w"></p>
+               <button class="btn btn-dark rounded-0 mt-3" type="submit">Guardar</button>
+            </form>
+
+         </div>
+      </div>
+   </div>
+
+   <!-- Bootstrap JS -->
+   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+      integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+      crossorigin="anonymous"></script>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+      integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+      crossorigin="anonymous"></script>
+   <!-- JQuery -->
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="/js/ai_jq.js"></script>
+   <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+   <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+</body>
+
+</html>

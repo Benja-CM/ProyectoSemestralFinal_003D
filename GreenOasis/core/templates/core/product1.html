@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tijeras de Podar</title>
+    <!-- Bootstrap y CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="/Style.css">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Vogue">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=TT Moons">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet">
+    <style>
+        .input-group-prepend,
+        .input-group-append {
+            display: flex;
+        }
+
+        .input-group-prepend .btn,
+        .input-group-append .btn {
+            padding: .375rem .75rem;
+            font-size: 1rem;
+            line-height: 1.5;
+            border-radius: 1px;
+            border-color: #000;
+            color: #000;
+        }
+
+        .input-group-prepend .btn:focus,
+        .input-group-append .btn:focus {
+            outline: 0;
+            box-shadow: none;
+            border-color: #000000;
+        }
+
+        .form-control {
+            border-radius: 0;
+        }
+    </style>
+</head>
+
+<body style="padding-top: 100px;">
+    <!-- Nav bar sin cuenta -->
+    <nav class="navbar navbar-expand-xl navbar-light bg-white border-bottom" style="z-index: 5;">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/Index.html">
+                <img src="/img/Logo.png" alt="Logo" class="logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/Index.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/ong.html">Suscripción</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Categorías
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="/search.html">Herramientas de Cultivo</a></li>
+                            <li><a class="dropdown-item" href="/search2.html">Tierra</a></li>
+                            <li><a class="dropdown-item" href="/search1.html">Maceteros</a></li>
+                            <li><a class="dropdown-item" href="/search3.html">Plantas</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="/search4.html">Ver Todo</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item flex-grow-1">
+                        <form class="d-flex flex-grow-1" action="/search.html">
+                            <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar">
+                            <button class="btn btn-outline-success rounded-0" type="submit">Buscar</button>
+                        </form>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDerecho"
+                            aria-controls="offcanvasRight">Iniciar sesión</a>
+                    </li>
+
+                    <!--OFFCANVAS LOGIN-->
+                    <div class="offcanvas offcanvas-end mmenu" tabindex="-1" id="offcanvasDerecho"
+                        aria-labelledby="offcanvasRightLabel">
+                        <div class="offcanvas-header">
+                            <h4 class="offcanvas-title vogue" id="offcanvasRightLabel">Bienvenido De Nuevo </h4>
+                            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+                                aria-label="Close"></button>
+                        </div>
+                        <hr>
+                        <div class="offcanvas-body">
+                            <form action="/profile.html" method="get">
+                                <!-- Email  -->
+                                <div class="form-outline mb-4">
+                                    <input type="email" id="Email_imp" class="form-control rounded-0 border-custom-1" />
+                                    <label class="form-label" for="Email_imp_label">Correo electronico</label>
+                                </div>
+                                <!-- Contraseña -->
+                                <div class="form-outline mb-4">
+                                    <input type="password" id="Password_imp"
+                                        class="form-control rounded-0 border-custom-1" />
+                                    <label class="form-label" for="Password_imp_label">Contraseña</label>
+                                </div>
+                                <div class="row mb-4">
+                                    <div class="col d-flex justify-content-center">
+                                        <!-- Checkbox -->
+                                        <div class="form-check">
+                                            <input class="form-check-input rounded-0 custom-checkbox" type="checkbox"
+                                                value="" id="form2Example31" />
+                                            <label class="form-check-label" for="form2Example31">Recuérdame</label>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <a class="link-hover" href="Password_ol.html">Olvidaste tu contraseña</a>
+                                    </div>
+                                </div>
+                                <div class="d-flex gap-2">
+                                    <button type="submit" class="btn btn-dark rounded-0 btn-custom btn-lg w-50"
+                                        id="Ingresar_imp" disabled>Ingresar</button>
+                                    <button type="button"
+                                        class="btn rounded-0 btn-custom-1 border-custom-1 btn-lg w-50 btn-hover"
+                                        data-bs-dismiss="modal">
+                                        <a href="create_acc.html">
+                                            Registrarme
+                                        </a>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!--FIN DEL OFF CANVAS PARA MOVERLO-->
+                    <li class="nav-item">
+                        <a class="nav-link" href="/cart.html">
+                            <i class="bi bi-cart-fill"></i> Carrito
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!--------------------------------------------------------------------------------------------------------->
+    <div class="container my-4">
+        <div class="row justify-content-around">
+            <div class="col-md-6">
+                <img src="/img/prod1.jpg" class="img-fluid border-custom-1">
+            </div>
+            <div class="col-md-6 pt-md-0 pt-4">
+                <p class="letter-gray title-15">24 vendidos</p>
+                <hr>
+                <h1 class="vogue">Tijeras de Podar</h1>
+                <br>
+                <h1 class="font-weight-bold ttmoons">$9.990 CLP</h1>
+                <hr>
+                <form>
+                    <div class="form-group">
+                        <label for="cantidad">Cantidad</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <button class="btn btn-outline-dark rounded-0" type="button"
+                                    id="restarCantidad">-</button>
+                            </div>
+                            <input type="number" class="form-control rounded-0 text-center border-custom-1"
+                                id="cantidad" placeholder="1" min="1" value="1" required>
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-dark rounded-0" type="button"
+                                    id="sumarCantidad">+</button>
+                            </div>
+                        </div>
+                        <hr>
+                        <a type="button" href="/cart.html" class="btn btn-custom rounded-0">Agregar al carrito</a>
+                        <button type="button" class="btn btn-custom-1 rounded-0 border-custom-1">Comprar ahora</button>
+                </form>
+            </div>
+        </div>
+        <div class="pt-3">
+            <hr>
+        </div>
+        <div class="row pt-4">
+            <div class="col-12 pt-5">
+                <h1 class="vogue text-center">Descripción del Producto</h1>
+            </div>
+            <div class="col-12 justify-content-center pt-5" style="text-align: justify;">
+                <p>
+                    Las tijeras de podar son herramientas imprescindibles para cualquier jardinero o entusiasta del
+                    cuidado de plantas y árboles. Estas tijeras están diseñadas para cortar ramas y tallos de plantas de
+                    manera precisa y limpia, lo que ayuda a mantener una apariencia saludable y estética en los jardines
+                    y huertos.
+                    <br>
+                    Nuestras tijeras de podar están fabricadas con materiales de alta calidad, lo que garantiza su
+                    durabilidad y resistencia. La cuchilla está hecha de acero inoxidable, lo que las hace resistentes a
+                    la oxidación y fácil de limpiar. El mango está hecho de materiales antideslizantes que proporcionan
+                    un agarre cómodo y seguro, incluso cuando las manos están húmedas o mojadas.
+                    <br>
+                    <br>
+                    Estas tijeras de podar son ideales para cortar ramas y tallos de hasta 2,5 centímetros de diámetro,
+                    y su diseño compacto y ligero las hace fáciles de usar incluso en lugares de difícil acceso. Además,
+                    su tamaño las hace ideales para llevarlas contigo mientras viajas o vas de camping.
+                    <br>
+                    Si estás buscando unas tijeras de podar de calidad y duraderas, no busques más. Nuestras tijeras de
+                    podar son la herramienta perfecta para cualquier tarea de poda en tu jardín o huerto.
+                </p>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white py-4 border-footer-custom">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-4">
+                    <h4 class="text-uppercase mb-4 ttmoons-black">Oasis Verde</h4>
+                </div>
+            </div>
+            <div class="row justify-content-center d-md-none">
+                <div class="col-12">
+                    <h5 class="text-uppercase mb-0 title-15 letter-gray">Contactanos</h5>
+                    <ul class="list-unstyled mt-4 vogue">
+                        <li>Instagram</li>
+                        <li>Facebook</li>
+                    </ul>
+                    <h5 class="text-uppercase mb-0 title-15 letter-gray mt-4">Sobre nosotros</h5>
+                    <ul class="list-unstyled mt-4 vogue">
+                        <li><a href="#">Quiénes somos</a></li>
+                        <li><a href="#">Nuestros valores</a></li>
+                        <li><a href="#">Política de privacidad</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row justify-content-center d-none d-md-flex">
+                <div class="col-6 col-md-2">
+                    <h5 class="text-uppercase mb-0 title-15 letter-gray">Contactanos</h5>
+                    <ul class="list-unstyled mt-4 vogue">
+                        <li>Instagram</li>
+                        <li>Facebook</li>
+                    </ul>
+                </div>
+                <div class="col-6 col-md-2">
+                    <h5 class="text-uppercase mb-0 title-15 letter-gray">Sobre nosotros</h5>
+                    <ul class="list-unstyled mt-4 vogue">
+                        <li><a href="#">Política de privacidad</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script>
+        const inputCantidad = document.getElementById('cantidad');
+        const btnSumarCantidad = document.getElementById('sumarCantidad');
+        const btnRestarCantidad = document.getElementById('restarCantidad');
+
+        btnSumarCantidad.addEventListener('click', () => {
+            inputCantidad.stepUp();
+        });
+
+        btnRestarCantidad.addEventListener('click', () => {
+            inputCantidad.stepDown();
+        });
+    </script>
+    <!-- JQuery -->
+    <script src="/js/lg_jq.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+        crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/XwpS9aJ7U8U2tG2"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity></script>
+</body>
+
+</html>

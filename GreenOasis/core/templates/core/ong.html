@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sonrisas para Niños</title>
+  <!-- Bootstrap y CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="/Style.css">
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Vogue">
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=TT Moons">
+  <script src="https://kit.fontawesome.com/2d6d5bfb49.js" crossorigin="anonymous"></script>
+  
+</head>
+
+<body style="padding-top: 75px;">
+  <!-- Nav bar sin cuenta -->
+  <nav class="navbar navbar-expand-xl navbar-light bg-white border-bottom" style="z-index: 5;">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/Index.html">
+        <img src="/img/Logo.png" alt="Logo" class="logo">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/Index.html">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/ong.html">Suscripción</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              Categorías
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="/search.html">Herramientas de Cultivo</a></li>
+              <li><a class="dropdown-item" href="/search2.html">Tierra</a></li>
+              <li><a class="dropdown-item" href="/search1.html">Maceteros</a></li>
+              <li><a class="dropdown-item" href="/search3.html">Plantas</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="/search4.html">Ver Todo</a></li>
+            </ul>
+          </li>
+        </ul>
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item flex-grow-1">
+            <form class="d-flex flex-grow-1" action="search.html">
+              <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar">
+              <button class="btn btn-outline-success rounded-0" type="submit">Buscar</button>
+            </form>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDerecho"
+              aria-controls="offcanvasRight">Iniciar sesión</a>
+          </li>
+          <!--OFFCANVAS LOGIN-->
+          <div class="offcanvas offcanvas-end mmenu" tabindex="-1" id="offcanvasDerecho"
+            aria-labelledby="offcanvasRightLabel">
+            <div class="offcanvas-header">
+              <h4 class="offcanvas-title vogue" id="offcanvasRightLabel">Bienvenido De Nuevo </h4>
+              <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <hr>
+            <div class="offcanvas-body">
+              <form action="/profile.html" method="get">
+                <!-- Email  -->
+                <div class="form-outline mb-4">
+                  <input type="email" id="Email_imp" class="form-control rounded-0 border-custom-1" />
+                  <label class="form-label" for="Email_imp_label">Correo electronico</label>
+                </div>
+                <!-- Contraseña -->
+                <div class="form-outline mb-4">
+                  <input type="password" id="Password_imp" class="form-control rounded-0 border-custom-1" />
+                  <label class="form-label" for="Password_imp_label">Contraseña</label>
+                </div>
+                <div class="row mb-4">
+                  <div class="col d-flex justify-content-center">
+                    <!-- Checkbox -->
+                    <div class="form-check">
+                      <input class="form-check-input rounded-0 custom-checkbox" type="checkbox" value=""
+                        id="form2Example31" />
+                      <label class="form-check-label" for="form2Example31">Recuérdame</label>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <a class="link-hover" href="Password_ol.html">Olvidaste tu contraseña</a>
+                  </div>
+                </div>
+                <div class="d-flex gap-2">
+                  <button type="submit" class="btn btn-dark rounded-0 btn-custom btn-lg w-50" id="Ingresar_imp"
+                    disabled>Ingresar</button>
+                  <button type="button" class="btn rounded-0 btn-custom-1 border-custom-1 btn-lg w-50 btn-hover"
+                    data-bs-dismiss="modal">
+                    <a href="create_acc.html">
+                      Registrarme
+                    </a>
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+          <!--FIN DEL OFF CANVAS PARA MOVERLO-->
+
+          <li class="nav-item">
+            <a class="nav-link" href="/cart.html">
+              <i class="bi bi-cart-fill"></i> Carrito
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!--------------------------------------------------------------------------------------------------------->
+  <!-- Main Content -->
+  <div class="container-fluid px-md-5 pb-5" style="text-align: justify;">
+    <div class="text-center pt-4 pb-md-0 pb-3">
+      <h2 class="vogue">Sonrisas para Niños</h2>
+    </div>
+    <div class="px-md-5 pt-md-3">
+      <p class="px-md-3">La ONG "Sonrisas para Niños" es una organización sin fines de lucro orientada a mejorar
+        la calidad de
+        vida de los niños. Su misión es proporcionar acceso a servicios básicos, educación y atención médica a
+        los niños más vulnerables en comunidades de bajos recursos.</p>
+    </div>
+    <div class="text-center py-md-3">
+      <button type="button" class="btn history-btn-1 rounded-0 btn-lg px-4 my-4">¡QUIERO APORTAR!</button>
+    </div>
+    <div class="px-md-5 pt-md-3">
+      <p class="px-md-3">Si decides realizar aportes de forma mensual recibiras un descuento en todas tus compras.
+      </p>
+    </div>
+    <div class="text-center py-md-3 py-4">
+      <img src="img/ong.png" alt="ong" class="img-fluid">
+    </div>
+    <div class="px-md-5 pt-md-3">
+      <p class="px-md-3">La organización también busca fomentar el desarrollo emocional y psicológico de los niños
+        a través de actividades lúdicas y programas de apoyo. Con el compromiso y la dedicación de sus
+        voluntarios y colaboradores, "Sonrisas para Niños" se esfuerza por brindar un futuro mejor y más
+        brillante para los niños más necesitados.
+      </p>
+    </div>
+  </div>
+  <!--------------------------------------------------------------------------------------------------------->
+  <!-- Footer -->
+  <footer class="bg-white py-4 border-footer-custom">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-md-4">
+          <h4 class="text-uppercase mb-4 ttmoons-black">Oasis Verde</h4>
+        </div>
+      </div>
+      <div class="row justify-content-center d-md-none">
+        <div class="col-12">
+          <h5 class="text-uppercase mb-0 title-15 letter-gray">Contactanos</h5>
+          <ul class="list-unstyled mt-4 vogue">
+            <li>Instagram</li>
+            <li>Facebook</li>
+          </ul>
+          <h5 class="text-uppercase mb-0 title-15 letter-gray mt-4">Sobre nosotros</h5>
+          <ul class="list-unstyled mt-4 vogue">
+            <li><a href="#">Política de privacidad</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="row justify-content-center d-none d-md-flex">
+        <div class="col-6 col-md-2">
+          <h5 class="text-uppercase mb-0 title-15 letter-gray">Contactanos</h5>
+          <ul class="list-unstyled mt-4 vogue">
+            <li>Instagram</li>
+            <li>Facebook</li>
+          </ul>
+        </div>
+        <div class="col-6 col-md-2">
+          <h5 class="text-uppercase mb-0 title-15 letter-gray">Sobre nosotros</h5>
+          <ul class="list-unstyled mt-4 vogue">
+            <li><a href="#">Quiénes somos</a></li>
+            <li><a href="#">Nuestros valores</a></li>
+            <li><a href="#">Política de privacidad</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- Bootstrap JS -->
+  <!-- JQuery -->
+  <script src="/js/lg_jq.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+    integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+    integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+    crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+</body>
+
+</html>
