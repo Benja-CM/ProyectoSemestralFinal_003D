@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
+{% load static %}
+
 
 <head>
     <meta charset="UTF-8">
@@ -9,7 +11,7 @@
     <!-- Bootstrap y CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="/Style.css">
+    <link rel="stylesheet" href="{% static 'core/css/Style.css' %}">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Vogue">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=TT Moons">
     <!-- JavaScript Bundle with Popper -->
@@ -51,8 +53,8 @@
     <!-- Nav bar sin cuenta -->
     <nav class="navbar navbar-expand-xl navbar-light bg-white border-bottom" style="z-index: 5;">
         <div class="container-fluid">
-            <a class="navbar-brand" href="/Index.html">
-                <img src="/img/Logo.png" alt="Logo" class="logo">
+            <a class="navbar-brand" href="">
+                <img src="{% static 'core/img/Logo.png' %}" alt="Logo" class="logo">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -61,10 +63,10 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/Index.html">Inicio</a>
+                        <a class="nav-link active" aria-current="page" href="">Inicio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/ong.html">Suscripción</a>
+                        <a class="nav-link" href="">Suscripción</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -72,20 +74,20 @@
                             Categorías
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="/search.html">Herramientas de Cultivo</a></li>
-                            <li><a class="dropdown-item" href="/search2.html">Tierra</a></li>
-                            <li><a class="dropdown-item" href="/search1.html">Maceteros</a></li>
-                            <li><a class="dropdown-item" href="/search3.html">Plantas</a></li>
+                            <li><a class="dropdown-item" href="">Herramientas de Cultivo</a></li>
+                            <li><a class="dropdown-item" href="">Tierra</a></li>
+                            <li><a class="dropdown-item" href="">Maceteros</a></li>
+                            <li><a class="dropdown-item" href="">Plantas</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="/search4.html">Ver Todo</a></li>
+                            <li><a class="dropdown-item" href="">Ver Todo</a></li>
                         </ul>
                     </li>
                 </ul>
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <li class="nav-item flex-grow-1">
-                        <form class="d-flex flex-grow-1" action="/search.html">
+                        <form class="d-flex flex-grow-1" action="cart.html">
                             <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar">
                             <button class="btn btn-outline-success rounded-0" type="submit">Buscar</button>
                         </form>
@@ -127,7 +129,7 @@
                                         </div>
                                     </div>
                                     <div class="col">
-                                        <a class="link-hover" href="Password_ol.html">Olvidaste tu contraseña</a>
+                                        <a class="link-hover" href="">Olvidaste tu contraseña</a>
                                     </div>
                                 </div>
                                 <div class="d-flex gap-2">
@@ -136,7 +138,7 @@
                                     <button type="button"
                                         class="btn rounded-0 btn-custom-1 border-custom-1 btn-lg w-50 btn-hover"
                                         data-bs-dismiss="modal">
-                                        <a href="create_acc.html">
+                                        <a href="{% url 'pss_fg' %}">
                                             Registrarme
                                         </a>
                                     </button>
@@ -146,7 +148,7 @@
                     </div>
                     <!--FIN DEL OFF CANVAS PARA MOVERLO-->
                     <li class="nav-item">
-                        <a class="nav-link" href="/cart.html">
+                        <a class="nav-link" href="{% url 'cart' %}">
                             <i class="bi bi-cart-fill"></i> Carrito
                         </a>
                     </li>
@@ -158,7 +160,7 @@
     <div class="container my-4">
         <div class="row justify-content-around">
             <div class="col-md-6">
-                <img src="/img/prod1.jpg" class="img-fluid border-custom-1">
+                <img src="{% static 'core/img/prod1.jpg' %}" class="img-fluid border-custom-1">
             </div>
             <div class="col-md-6 pt-md-0 pt-4">
                 <p class="letter-gray title-15">24 vendidos</p>
@@ -183,7 +185,7 @@
                             </div>
                         </div>
                         <hr>
-                        <a type="button" href="/cart.html" class="btn btn-custom rounded-0">Agregar al carrito</a>
+                        <a type="button" href="" class="btn btn-custom rounded-0">Agregar al carrito</a>
                         <button type="button" class="btn btn-custom-1 rounded-0 border-custom-1">Comprar ahora</button>
                 </form>
             </div>
@@ -274,7 +276,7 @@
         });
     </script>
     <!-- JQuery -->
-    <script src="/js/lg_jq.js"></script>
+    <script src="{% static 'core/js/lg_jq.js' %}"></script>
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
         integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
