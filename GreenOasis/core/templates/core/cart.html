@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
+{% load static %}
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,7 +9,7 @@
     <!-- Bootstrap y CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="Style.css">
+    <link rel="stylesheet" href="{% static 'core/css/Style.css' %}">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Vogue">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=TT Moons">
     <script src="https://kit.fontawesome.com/2d6d5bfb49.js" crossorigin="anonymous"></script>
@@ -19,8 +19,8 @@
      <!-- Nav bar con cuenta -->
      <nav class="navbar navbar-expand-xl navbar-light bg-white border-bottom" style="z-index: 5;">
         <div class="container-fluid">
-            <a class="navbar-brand" href="Index.html">
-                <img src="/img/Logo.png" alt="Logo" class="logo">
+            <a class="navbar-brand" href="">
+                <img src="{% static 'core/img/Logo.png' %}" alt="Logo" class="logo">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -29,10 +29,10 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="Index.html">Inicio</a>
+                        <a class="nav-link active" aria-current="page" href="">Inicio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="ong.html">Suscripción</a>
+                        <a class="nav-link" href="">Suscripción</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -40,14 +40,14 @@
                             Categorías
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="/search.html">Herramientas de Cultivo</a></li>
-                            <li><a class="dropdown-item" href="/search2.html">Tierra</a></li>
-                            <li><a class="dropdown-item" href="/search1.html">Maceteros</a></li>
-                            <li><a class="dropdown-item" href="/search3.html">Plantas</a></li>
+                            <li><a class="dropdown-item" href="">Herramientas de Cultivo</a></li>
+                            <li><a class="dropdown-item" href="">Tierra</a></li>
+                            <li><a class="dropdown-item" href="">Maceteros</a></li>
+                            <li><a class="dropdown-item" href="">Plantas</a></li>
                             <li>
                               <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="/search4.html">Ver Todo</a></li>
+                            <li><a class="dropdown-item" href="">Ver Todo</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -64,17 +64,17 @@
                             Alejandro
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="/profile.html">Mi Perfil</a></li>
-                            <li><a class="dropdown-item" href="/profile_conf/h_buy.html">Mis Compras</a></li>
+                            <li><a class="dropdown-item" href="">Mi Perfil</a></li>
+                            <li><a class="dropdown-item" href="">Mis Compras</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
                             </li>
-                            <li><a class="dropdown-item" href="Index.html">Cerrar sesión</a></li>
+                            <li><a class="dropdown-item" href="">Cerrar sesión</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/cart.html">
+                        <a class="nav-link" href="">
                             <i class="bi bi-cart-fill"></i> Carrito
                         </a>
                     </li>
@@ -176,7 +176,7 @@
                                     <tr>
                                         <td>
                                             <div class="col-1 text-end">
-                                                <a type="button" href="/conf_pago.html"
+                                                <a type="button" href=""
                                                     class="btn btn-custom rounded-0 btn-lg px-md-5">Comprar</a>
                                             </div>
                                         </td>

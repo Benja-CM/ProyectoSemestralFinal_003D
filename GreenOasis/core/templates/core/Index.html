@@ -25,7 +25,7 @@
 	<!-- Nav bar sin cuenta -->
 	<nav class="navbar navbar-expand-xl navbar-light bg-white border-bottom" style="z-index: 5;">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="/Index.html">
+			<a class="navbar-brand" href="">
 				<img src="{% static 'core/img/Logo.png' %}" alt="Logo" class="logo">
 			</a>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -35,10 +35,10 @@
 			<div class="collapse navbar-collapse" id="navbarNav">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 					<li class="nav-item">
-						<a class="nav-link active" aria-current="page" href="/Index.html">Inicio</a>
+						<a class="nav-link active" aria-current="page" href="">Inicio</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="/ong.html">Suscripción</a>
+						<a class="nav-link" href="">Suscripción</a>
 					</li>
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -46,14 +46,14 @@
 							Categorías
 						</a>
 						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<li><a class="dropdown-item" href="/search.html">Herramientas de Cultivo</a></li>
-							<li><a class="dropdown-item" href="/search2.html">Tierra</a></li>
-							<li><a class="dropdown-item" href="/search1.html">Maceteros</a></li>
-							<li><a class="dropdown-item" href="/search3.html">Plantas</a></li>
+							<li><a class="dropdown-item" href="">Herramientas de Cultivo</a></li>
+							<li><a class="dropdown-item" href="">Tierra</a></li>
+							<li><a class="dropdown-item" href="">Maceteros</a></li>
+							<li><a class="dropdown-item" href="">Plantas</a></li>
 							<li>
 								<hr class="dropdown-divider">
 							</li>
-							<li><a class="dropdown-item" href="/search4.html">Ver Todo</a></li>
+							<li><a class="dropdown-item" href="">Ver Todo</a></li>
 						</ul>
 					</li>
 				</ul>
@@ -101,7 +101,7 @@
 										</div>
 									</div>
 									<div class="col">
-										<a class="link-hover" href="Password_ol.html">Olvidaste tu contraseña</a>
+										<a class="link-hover" href="">Olvidaste tu contraseña</a>
 									</div>
 								</div>
 								<div class="d-flex gap-2">
@@ -110,7 +110,7 @@
 									<button type="button"
 										class="btn rounded-0 btn-custom-1 border-custom-1 btn-lg w-50 btn-hover"
 										data-bs-dismiss="modal">
-										<a href="create_acc.html">
+										<a href="{% url 'pss_fg' %}">
 											Registrarme
 										</a>
 									</button>
@@ -120,7 +120,7 @@
 					</div>
 					<!--FIN DEL OFF CANVAS PARA MOVERLO-->
 					<li class="nav-item">
-						<a class="nav-link" href="/cart.html">
+						<a class="nav-link" href="{% url 'cart' %}">
 							<i class="bi bi-cart-fill"></i> Carrito
 						</a>
 					</li>
@@ -140,7 +140,7 @@
 					Hermosas plantas que te <br> animan a ser creativo
 				</p>
 				<div class="py-2">
-					<a type="button" href="/search4.html" class="btn btn-dark btn-custom px-3 rounded-0">
+					<a type="button" href="" class="btn btn-dark btn-custom px-3 rounded-0">
 						Comprar ahora
 					</a>
 				</div>
@@ -179,27 +179,27 @@
 		<h1 class="text-center mt-5 py-5 mx-auto vogue title-35">Categorías</h1>
 		<div class="row mt-4">
 			<div class="col-md-3 col-sm-6 text-center">
-				<a href="/search.html">
+				<a href="">
 					<img src="{% static 'core/img/herramientas_de_jardin.jpeg' %}" alt="Imagen 1"
 						class="img-fluid h-75 opacity-hover">
 					<h4 class="text-center mt-3 vogue title-25">Herramientas de jardín</h4>
 				</a>
 			</div>
 			<div class="col-md-3 col-sm-6 text-center">
-				<a href="/search2.html">
+				<a href="">
 					<img src="{% static 'core/img/tierra.jpeg' %}" alt="Imagen 2" class="img-fluid h-75 opacity-hover">
 					<h4 class="text-center mt-3 vogue title-25">Tierra de abono</h4>
 				</a>
 			</div>
 			<div class="col-md-3 col-sm-6 text-center">
-				<a href="/search1.html">
+				<a href="">
 					<img src="{% static 'core/img/maceteros.jpeg' %}" alt="Imagen 3"
 						class="img-fluid h-75 opacity-hover">
 					<h4 class="text-center mt-3 vogue title-25">Maceteros</h4>
 				</a>
 			</div>
 			<div class="col-md-3 col-sm-6 text-center">
-				<a href="/search3.html">
+				<a href="">
 					<img src="{% static 'core/img/plantas_de_interior.jpeg' %}" alt="Imagen 4"
 						class="img-fluid h-75 opacity-hover">
 					<h4 class="text-center mt-3 vogue title-25">Plantas de interior</h4>
@@ -214,7 +214,7 @@
 		<div class="row text-center">
 			<div class="col-md-3 col-sm-6 mb-4">
 				<h2 class="vogue title-35">Productos Destacados</h2>
-				<a href="/search4.html" class="vogue rounded-0 py-1 px-4 btn-custom-2 btn-hover">Ver todos</a>
+				<a href="" class="vogue rounded-0 py-1 px-4 btn-custom-2 btn-hover">Ver todos</a>
 			</div>
 			<div class="col-md-3 col-sm-6 mb-4 ">
 				<a href="{% url 'producto' %}">
@@ -226,7 +226,7 @@
 				</div>
 			</div>
 			<div class="col-md-3 col-sm-6 mb-4">
-				<a href="Productos/product2.html">
+				<a href="">
 					<img src="{% static 'core/img/prod2.jpg' %}" alt="Imagen 2" class="img-fluid opacity-hover"
 						style="width: 75%;"></a>
 				<div>
@@ -235,7 +235,7 @@
 				</div>
 			</div>
 			<div class="col-md-3 col-sm-6 mb-4">
-				<a href="Productos/product3.html"><img src="{% static 'core/img/prod3.jpg' %}" alt="Imagen 3"
+				<a href=""><img src="{% static 'core/img/prod3.jpg' %}" alt="Imagen 3"
 						class="img-fluid opacity-hover" style="width: 75%;"></a>
 				<div>
 					<h5 class="mt-3">Pistola Riego Plástica con Gatillo Trasero 100S</h5>
@@ -246,7 +246,7 @@
 		</div>
 		<div class="row text-center">
 			<div class="col-md-3 col-sm-6 mb-4">
-				<a href="Productos/product4.html"><img src="{% static 'core/img/prod4.jpg' %}" alt="Imagen 4"
+				<a href=""><img src="{% static 'core/img/prod4.jpg' %}" alt="Imagen 4"
 						class="img-fluid opacity-hover" style="width: 75%;"></a>
 				<div>
 					<h5 class="mt-3">Aspersor de Riego Rectangular</h5>
@@ -255,7 +255,7 @@
 				</div>
 			</div>
 			<div class="col-md-3 col-sm-6 mb-4">
-				<a href="Productos/product5.html"><img src="{% static 'core/img/prod5.jpg' %}" alt="Imagen 5"
+				<a href=""><img src="{% static 'core/img/prod5.jpg' %}" alt="Imagen 5"
 						class="img-fluid opacity-hover " style="width: 75%;"></a>
 				<div>
 					<h5 class="mt-3">Rodilleras para Jardín Ultra-light</h5>
@@ -263,7 +263,7 @@
 				</div>
 			</div>
 			<div class="col-md-3 col-sm-6 mb-4">
-				<a href="Productos/product6.html"><img src="{% static 'core/img/prod6.jpg' %}" alt="Imagen 6"
+				<a href=""><img src="{% static 'core/img/prod6.jpg' %}" alt="Imagen 6"
 						class="img-fluid opacity-hover" style="width: 75%;"></a>
 				<div>
 					<h5 class="mt-3">Fertilizante para Rosas</h5>
@@ -271,7 +271,7 @@
 				</div>
 			</div>
 			<div class="col-md-3 col-sm-6 mb-4">
-				<a href="Productos/product7.html"><img src="{% static 'core/img/prod7.jpg' %}" alt="Imagen 7"
+				<a href=""><img src="{% static 'core/img/prod7.jpg' %}" alt="Imagen 7"
 						class="img-fluid opacity-hover" style="width: 75%;"></a>
 				<div>
 					<h5 class="mt-3">Macetero Biodegradable Mediano Rojo</h5>
@@ -323,7 +323,7 @@
 	</footer>
 
 	<!-- JQuery -->
-	<script src="% static 'core/js/lg_jq.js'%"></script>
+	<script src="% static 'core/js/lg_jq.js' %"></script>
 	<!-- Bootstrap JS -->
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
 		integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
