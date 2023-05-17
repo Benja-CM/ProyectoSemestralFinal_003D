@@ -4,6 +4,9 @@ from django.shortcuts import render
 def index(request):
     return render(request, 'core/Index.html')
 
+def ong(request):
+    return render(request, 'core/ong.html')
+
 def product(request):
     return render(request, 'core/product1.html')
 
