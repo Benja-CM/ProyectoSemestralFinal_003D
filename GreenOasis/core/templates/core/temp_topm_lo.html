@@ -61,6 +61,7 @@
 				<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 					<li class="nav-item flex-grow-1">
 						<form class="d-flex flex-grow-1" action="cart.html">
+							{% csrf_token %}
 							<input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar">
 							<button class="btn btn-outline-success rounded-0" type="submit">Buscar</button>
 						</form>
@@ -81,6 +82,7 @@
 						<hr>
 						<div class="offcanvas-body">
 							<form action="{% url 'profile' %}" method="get">
+								{% csrf_token %}
 								<!-- Email  -->
 								<div class="form-outline mb-4">
 									<input type="email" id="Email_imp" class="form-control rounded-0 border-custom-1" />
@@ -129,13 +131,13 @@
 			</div>
 		</div>
 	</nav>
-	<!--------------------------------------------------------------------------------------------------------->
+	<!-- ----------------------------------------------------------------------------------------------------- -->
     {% block title %}
     {% endblock title %}
 
     {% block body %}
     {% endblock body %}
-	<!--------------------------------------------------------------------------------------------------------->
+	<!-- ----------------------------------------------------------------------------------------------------- -->
     {% block foot %}
     {% endblock foot %}
     

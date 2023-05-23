@@ -36,8 +36,8 @@ $(document).ready(function () {
     }
 
     /* Validacion descripcion */
-    if (desc.trim().length < 4 || desc.trim().length > 20) {
-      msj += "La descripción debe ser entre 4 y 20 carácteres<br>";
+    if (desc.trim().length < 4 || desc.trim().length > 1250) {
+      msj += "La descripción debe ser entre 4 y 1250 carácteres<br>";
       $("#sa-desc").removeClass("is-valid").addClass("is-invalid");
       enviar = true;
     } else {

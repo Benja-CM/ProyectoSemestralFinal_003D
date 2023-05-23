@@ -24,6 +24,7 @@
 	<div class="container col-md-5 col-sm-8 col-10 card rounded-0 p-md-4 mt-5 p-3 ttjenevers">
 		<h2 class="vogue">Crear cuenta</h2>
 		<form action="profile.html" method="post" id="pp-form">
+			{% csrf_token %}
 			<div class="form-group mb-3">
 				<label for="nombre">Alias:</label>
 				<input type="text" class="form-control rounded-0 border-custom-2" placeholder="Ingrese su nombre"

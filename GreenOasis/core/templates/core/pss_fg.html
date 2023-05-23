@@ -23,6 +23,7 @@
 	<div class="container col-md-5 col-sm-8 col-10 card rounded-0 p-md-4 mt-5 p-3 ttjenevers">
 		<h2 class="vogue">He olvidado mi contraseña</h2>
 		<form>
+			{% csrf_token %}
 			<div class="form-group mb-2">
 				<label for="email">Email: </label>
 				<input type="email" class="form-control rounded-0 border-custom-2" id="po-email"
