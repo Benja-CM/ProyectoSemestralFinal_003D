@@ -1,7 +1,6 @@
 $(document).ready(function () {
     /* Validaciones del formulario 1 */
     $("#pi-form").submit(function (e) {
-        e.preventDefault();
         var rut = $("#pi-rut").val();
         var nombre = $("#pi-nombre").val();
         var apellido = $("#pi-apellido").val();
@@ -92,6 +91,8 @@ $(document).ready(function () {
         /* Enviar Form */
         if (enviar) {
             $("#pi-w").html(msj);
+            e.preventDefault();
+
         }
         else {
             $("#pi-w").html("Guardado");
@@ -100,7 +101,6 @@ $(document).ready(function () {
 
     /* Validaciones del formulario 2 */
     $("#pi-form2").submit(function (a) {
-        a.preventDefault();
         var calle = $("#pi-calle").val();
         var nro = $("#pi-numero").val();
         var region = $("#pi-regiones").val();
@@ -190,6 +190,8 @@ $(document).ready(function () {
         /* Enviar Form */
         if (enviar) {
             $("#pi-w2").html(msj);
+            a.preventDefault();
+
         }
         else {
             $("#pi-w2").html("Guardado");

@@ -1,7 +1,7 @@
 $(document).ready(function() {
     /* Validación de formulario */
     $("#pp-form").submit(function(e) {
-        e.preventDefault();
+        
     
         var alias       = $("#ca-nombre").val();
         var email       = $("#ca-email").val();
@@ -65,10 +65,11 @@ $(document).ready(function() {
         // Enviar \\
         if (enviar) {
             $("#ca-w").html(msj);
+            e.preventDefault();
         }
         else {
             $("#ca-w").html("Guardado");
-            e.preventDefault();
+            
         }
     });
     

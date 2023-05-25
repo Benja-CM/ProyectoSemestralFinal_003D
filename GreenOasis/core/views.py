@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from .models import Usuario, Producto, Direccion, Comuna, Region
 
 # Create your views here.
 def index(request):
@@ -8,6 +9,7 @@ def ong(request):
     return render(request, 'core/ong.html')
 
 def product(request):
+   
     return render(request, 'core/product1.html')
 
 def profile(request):
@@ -54,3 +56,29 @@ def vent_ing(request):
 
 def vent_list(request):
     return render(request, 'core/vent_list.html')
+
+
+#REGISTRO DE INFORMACION DEL USUARIO
+def registrarInfUS(request):
+    rut_u      = request.POST['rut']
+    nombre_u   = request.POST['nombre']
+    apellido_u = request.POST['apellido']
+    telefono_u = request.POST['telefono']
+
+    
+    
+    Usuario.objects.create(us_rut = rut_u, us_nombre = nombre_u, us_apellido = apellido_u, 
+                            us_telefono = telefono_u)
+    
+
+# #REGISTRO DE PRODUCTOS
+# def resgistrarProducto(request):
+#     id_prod     = request.POST['']
+#     prod_nom    = request.POST['']
+#     prod_descripción = request.POST['']
+#     prod_precio = request.POST['']
+#     prod_stock  = request.POST['']
+#     prod_imagen = request.FILES['']
+#     categoria   = request.POST['']
+
+# Producto.objects.create()

@@ -1,6 +1,5 @@
 $(document).ready(function () {
   $("#sa-form").submit(function (e) {
-    e.preventDefault();
     var id = $("#sa-id").val();
     var nombre = $("#sa-nombre").val();
     var desc = $("#sa-desc").val();
@@ -72,17 +71,19 @@ $(document).ready(function () {
 
     /* Validacion de stock */
     if (cat === 'Seleccione una categoría') {
-        msj += "Debe seleccionar una categoría<br>";
-        $("#sa-cat").removeClass('is-valid').addClass('is-invalid');
-        enviar = true;
+      msj += "Debe seleccionar una categoría<br>";
+      $("#sa-cat").removeClass('is-valid').addClass('is-invalid');
+      enviar = true;
     }
     else {
-        $("#sa-cat").removeClass('is-invalid').addClass('is-valid');
+      $("#sa-cat").removeClass('is-invalid').addClass('is-valid');
     }
 
     /* Enviar Form */
     if (enviar) {
       $("#sa-w").html(msj);
+      e.preventDefault();
+
     } else {
       $("#sa-w").html("Guardado");
     }

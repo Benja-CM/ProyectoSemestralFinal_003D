@@ -14,7 +14,7 @@ class Usuario(models.Model):
     us_apellido = models.CharField(max_length=20, blank=False, verbose_name='Apellido de Usuario')
     us_telefono = models.CharField(max_length=12, blank=False, verbose_name='Telefono de Usuario')
     rol         = models.ForeignKey(Rol, on_delete=models.CASCADE)
-    us_correo   = models.CharField(max_length=25, blank=False, verbose_name='Correo de Usuario')
+    us_correo   = models.CharField(max_length=35, blank=False, verbose_name='Correo de Usuario')
     us_clave    = models.CharField(max_length=20, blank=False, verbose_name='Clave de Usuario')
     def __str__(self) -> str:
         return self.us_nombre

@@ -1,20 +1,19 @@
-$(document).ready(function() {
+$(document).ready(function () {
     /* Validación de formulario */
-    $("#pp-form").submit(function(e) {
-        e.preventDefault();
+    $("#pp-form").submit(function (e) {
 
-        var nro_tarjeta     = $("#pp-nroTarjeta").val();
-        var fch_vencMes     = $("#pp-fecVencMes").val();
-        var fch_vencAnio    = $("#pp-fecVencAnio").val();
-        var cod_seguridad   = $("#pp-codigo").val();
+        var nro_tarjeta = $("#pp-nroTarjeta").val();
+        var fch_vencMes = $("#pp-fecVencMes").val();
+        var fch_vencAnio = $("#pp-fecVencAnio").val();
+        var cod_seguridad = $("#pp-codigo").val();
 
         var msj = "";
         let enviar = false;
 
         // Validar cantidad de digitos en el número de tarjeta
-        nro_tarjeta = nro_tarjeta.replaceAll(" ",""); // eliminar espacios en blanco
+        nro_tarjeta = nro_tarjeta.replaceAll(" ", ""); // eliminar espacios en blanco
         if (nro_tarjeta.length != 16) {
-            msj +="La tarjeta debe tener 16 digitos<br>";
+            msj += "La tarjeta debe tener 16 digitos<br>";
             $("#pp-nroTarjeta").removeClass('is-valid').addClass('is-invalid');
             enviar = true;
         }
@@ -37,7 +36,7 @@ $(document).ready(function() {
             $("#pp-codigo").removeClass('is-invalid').addClass('is-valid');
         }
         else {
-            if(cod_seguridad.trim().length < 5){
+            if (cod_seguridad.trim().length < 5) {
                 msj += "El codigo de seguridad debe tener 3 o más digitos<br>";
             }
             else {
@@ -46,10 +45,12 @@ $(document).ready(function() {
             $("#pp-codigo").removeClass('is-valid').addClass('is-invalid');
             enviar = true;
         }
-        
+
         // Enviar \\
         if (enviar) {
             $("#pp-w").html(msj);
+            e.preventDefault();
+
         }
         else {
             $("#pp-w").html("Guardado");
@@ -58,9 +59,9 @@ $(document).ready(function() {
 
     });
 
-    $("#pp-nroTarjeta").on("focusout", function() {
+    $("#pp-nroTarjeta").on("focusout", function () {
         var nro_tarjeta = $(this).val();
-        nro_tarjeta = nro_tarjeta.replaceAll(" ",""); // eliminar espacios en blanco
+        nro_tarjeta = nro_tarjeta.replaceAll(" ", ""); // eliminar espacios en blanco
 
         // formatear la tarjeta con espacios cada cuatro digitos
         nro_tarjeta = nro_tarjeta.replace(/(\d{4})/g, '$1 ').trim();
@@ -68,8 +69,8 @@ $(document).ready(function() {
         // establecer el valor del campo con la tarjeta formateada
         $(this).val(nro_tarjeta);
     });
-    
-    $("#pp-fecVencMes").on("focusout", function() {
+
+    $("#pp-fecVencMes").on("focusout", function () {
         var fch_vencMes = $(this).val();
         fch_vencMes = parseInt(fch_vencMes);
 
@@ -93,8 +94,7 @@ $(document).ready(function() {
     document.getElementById("pp-fecVencAnio").setAttribute("min", minY);
 
     document.querySelector(".intNumber").addEventListener("keypress", function (evt) {
-        if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57)
-        {
+        if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57) {
             evt.preventDefault();
         }
     });

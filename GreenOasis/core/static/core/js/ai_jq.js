@@ -1,6 +1,6 @@
 $(document).ready(function () {
     $("#ai-form").submit(function (e) {
-        e.preventDefault();
+        
 
         var alias = $("#ai-alias").val();
         var email = $("#ai-email").val();
@@ -96,6 +96,7 @@ $(document).ready(function () {
 
         if (enviar) {
             $("#ai-w").html(msj);
+            e.preventDefault();
         } else {
             $("#ai-w").html("Guardado");
         }
