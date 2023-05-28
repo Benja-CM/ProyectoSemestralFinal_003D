@@ -1,8 +1,10 @@
 from django.contrib import admin
-from .models import Rol, Usuario, Categoria, Producto, Region, Comuna, Direccion, Estado, Compra, Detalle
+from .models import Rol, Tarjeta, Credencial, Usuario, Categoria, Producto, Region, Comuna, Direccion, Estado, Compra, Detalle 
 # Register your models here.
 
 admin.site.register(Rol)
+admin.site.register(Tarjeta)
+admin.site.register(Credencial)
 admin.site.register(Usuario)
 admin.site.register(Categoria)
 admin.site.register(Producto)

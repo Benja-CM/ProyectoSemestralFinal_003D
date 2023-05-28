@@ -60,38 +60,38 @@ def vent_list(request):
 
 # INGRESAR DE INFORMACION DEL USUARIO
 def registrarInfUS(request):
-    rut_u      = request.POST['rut']
-    nombre_u   = request.POST['nombre']
-    apellido_u = request.POST['apellido']
-    telefono_u = request.POST['telefono']
+    rut_u       = request.POST['rut']
+    nombre_u    = request.POST['nombre']
+    apellido_u  = request.POST['apellido']
+    telefono_u  = request.POST['telefono']
 
     Usuario.objects.create(us_rut = rut_u, us_nombre = nombre_u, us_apellido = apellido_u, 
                         us_telefono = telefono_u)
     
 # INGRESAR INFORMACION DE CUENTA
 def registrarInfAC(request):
-    alias_u    = request.POST['alias']
-    correo_u   = request.POST['correo']
-    password_u = request.POST['password']
+    alias_u     = request.POST['alias']
+    correo_u    = request.POST['correo']
+    password_u  = request.POST['password']
 
     Credencial.objects.create(c_alias = alias_u, c_correo = correo_u, c_password = password_u)
 
 # INGRESAR INFORMACION DE COMPRA
 def registrarInfPC(request):
-    tarjeta_pch  = request.POST['rut']
-    fch_pch   = request.POST['nombre']
-    cvv_pch = request.POST['apellido']
+    tarjeta_pch = request.POST['n_tarjeta']
+    fch_pch     = request.POST['f_venc']
+    cvv_pch     = request.POST['cds']
 
-    Tarjeta.objects.create(t_numero = tarjeta_pch, t_fvenc = tarjeta_pch, t_cvv = tarjeta_pch)
+    Tarjeta.objects.create(t_numero = tarjeta_pch, t_fvenc = fch_pch, t_cvv = cvv_pch)
 
 # INGRESAR DE PRODUCTOS
 def resgistrarProducto(request):
-    pr_nom    = request.POST['nombre']
+    pr_nom      = request.POST['nombre']
     pr_descripcion = request.POST['desc']
-    pr_precio = request.POST['precio']
-    pr_stock  = request.POST['stock']
-    pr_imagen = request.FILES['imagen']
-    pr_cat   = request.POST['sa-cat']
+    pr_precio   = request.POST['precio']
+    pr_stock    = request.POST['stock']
+    pr_imagen   = request.FILES['imagen']
+    pr_cat      = request.POST['sa-cat']
 
     Producto.objects.create(prod_nom = pr_nom, prod_descripcion = pr_descripcion, prod_precio = pr_precio,
                         prod_stock = pr_stock, prod_imagen = pr_imagen, categoria = pr_cat)

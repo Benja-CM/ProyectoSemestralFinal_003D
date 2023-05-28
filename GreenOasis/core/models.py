@@ -6,7 +6,23 @@ class Rol(models.Model):
     rol_nom     = models.CharField(max_length=20, blank=False, verbose_name='Nombre de Rol')
     def __str__(self) -> str:
         return self.rol_nom
+    
+class Tarjeta(models.Model):
+    id_tarjeta  = models.AutoField(primary_key=True, verbose_name='ID de Tarjeta')
+    t_numero    = models.IntegerField(null=False, blank=False, verbose_name='Numero de Tarjeta')
+    t_fvenc     = models.IntegerField(null=False, blank=False, verbose_name='Fecha de Vencimiento de Tarjeta')
+    t_cvv       = models.IntegerField(null=False, blank=False, verbose_name='Codigo de Verificación de Tarjeta')
+    
 
+class Credencial(models.Model):
+    id_credencial = models.AutoField(primary_key=True, verbose_name='ID de Crendencial')
+    c_alias     = models.CharField(max_length=25, blank=False, verbose_name='Nombre del Alias')
+    c_correo    = models.CharField(max_length=25, blank=False, verbose_name='Correo para Credencial')
+    c_password  = models.CharField(max_length=21, blank=False, verbose_name='Clave para Crendencial')
+    
+    def __str__(self) -> str:
+        return self.c_alias
+    
 class Usuario(models.Model):
     id_usuario  = models.AutoField(primary_key=True, verbose_name='ID de Usuario')
     us_rut      = models.CharField(max_length=9, blank=False, verbose_name='Rut de Usuario')
@@ -14,8 +30,9 @@ class Usuario(models.Model):
     us_apellido = models.CharField(max_length=20, blank=False, verbose_name='Apellido de Usuario')
     us_telefono = models.CharField(max_length=12, blank=False, verbose_name='Telefono de Usuario')
     rol         = models.ForeignKey(Rol, on_delete=models.CASCADE)
-    us_correo   = models.CharField(max_length=35, blank=False, verbose_name='Correo de Usuario')
-    us_clave    = models.CharField(max_length=20, blank=False, verbose_name='Clave de Usuario')
+    tajeta      = models.ForeignKey(Tarjeta, on_delete=models.CASCADE)
+    credencial  = models.ForeignKey(Credencial, on_delete=models.CASCADE)
+    
     def __str__(self) -> str:
         return self.us_nombre
 
@@ -50,7 +67,7 @@ class Comuna(models.Model):
     def __str__(self) -> str:
         return self.com_nom
 
-class Direccion(models.Model): #Cambiar d con Mayus
+class Direccion(models.Model):
     id_dir      = models.AutoField(primary_key=True, verbose_name='ID de Dirección')
     dir_calle   = models.CharField(max_length=25, blank=False, verbose_name='Nombre de Calle')
     dir_numero  = models.IntegerField(null=False, blank=False)
