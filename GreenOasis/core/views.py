@@ -117,3 +117,9 @@ def resgistrarProducto(request):
     
     return redirect('vent_ing')
     
+def listadoProducto(request):
+    productos = Producto.objects.all()
+    contexto = {
+        'productos': productos
+    }
+    return render(request,'vent_list.html',contexto)

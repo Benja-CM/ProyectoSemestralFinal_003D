@@ -52,6 +52,7 @@ class Producto(models.Model):
     prod_stock  = models.IntegerField(null=False, blank=False)
     prod_imagen = models.ImageField(upload_to="Productos")
     categoria   = models.ForeignKey(Categoria, on_delete=models.CASCADE)
+    
     def __str__(self) -> str:
         return self.prod_nom
 
