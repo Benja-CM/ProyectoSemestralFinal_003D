@@ -27,7 +27,7 @@
       </div>
       <div class="px-md-5">
          <div class="card rounded-0 p-4">
-            <form class="align-content-center" method="post" id="pi-form">
+            <form action="{% url 'registrarInfUS' %}"  class="align-content-center" method="post" id="pi-form">
                {% csrf_token %}
                <div class="row">
                   <div class="border-bottom">

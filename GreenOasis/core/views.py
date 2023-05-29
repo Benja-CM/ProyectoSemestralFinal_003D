@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
-from .models import Usuario, Producto, Direccion, Comuna, Region, Credencial, Tarjeta
+from django.core.exceptions import ObjectDoesNotExist
+from django.db import transaction
+from .models import Rol, Usuario, Producto, Direccion, Comuna, Region, Credencial, Tarjeta
 
 # Create your views here.
 def index(request):
@@ -59,22 +61,34 @@ def vent_list(request):
 
 
 # INGRESAR DE INFORMACION DEL USUARIO
+@transaction.atomic
 def registrarInfUS(request):
     rut_u       = request.POST['rut']
     nombre_u    = request.POST['nombre']
     apellido_u  = request.POST['apellido']
     telefono_u  = request.POST['telefono']
 
-    Usuario.objects.create(us_rut = rut_u, us_nombre = nombre_u, us_apellido = apellido_u, 
-                        us_telefono = telefono_u)
+    with transaction.atomic():
+        registrarCU = Credencial.objects.latest('id_credencial')
+        registrarTarjeta = Tarjeta.objects.latest('id_tarjeta')
+
+        Usuario.objects.create(us_rut=rut_u, us_nombre=nombre_u, us_apellido=apellido_u, 
+                               us_telefono=telefono_u, tarjeta=registrarTarjeta, credencial=registrarCU)
+        
+    return redirect('p_info')
     
 # INGRESAR INFORMACION DE CUENTA
 def registrarInfAC(request):
     alias_u     = request.POST['alias']
-    correo_u    = request.POST['correo']
+    correo_u    = request.POST['email']
     password_u  = request.POST['password']
+    rol_u       = 1
+    
+    role        = Rol.objects.get(id_rol = rol_u)
 
-    Credencial.objects.create(c_alias = alias_u, c_correo = correo_u, c_password = password_u)
+    Credencial.objects.create(c_alias = alias_u, c_correo = correo_u, c_password = password_u, rol = role)
+    
+    return redirect('index')
 
 # INGRESAR INFORMACION DE COMPRA
 def registrarInfPC(request):
@@ -95,3 +109,13 @@ def resgistrarProducto(request):
 
     Producto.objects.create(prod_nom = pr_nom, prod_descripcion = pr_descripcion, prod_precio = pr_precio,
                         prod_stock = pr_stock, prod_imagen = pr_imagen, categoria = pr_cat)
+    
+def registrarTarjeta(request):
+    tar_numero  = request.POST['n_tarjeta']
+    tar1_fvenc  = request.POST['f1_venc']
+    tar2_fvenc  = request.POST['f2_venc']
+    tar_cvv     = request.POST['cds']
+    
+    Tarjeta.objects.create(t_numero = tar_numero, t_fvenc = tar1_fvenc + '/' + tar2_fvenc, t_cvv = tar_cvv)
+    
+    return redirect('p_pch')

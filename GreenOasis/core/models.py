@@ -9,28 +9,30 @@ class Rol(models.Model):
     
 class Tarjeta(models.Model):
     id_tarjeta  = models.AutoField(primary_key=True, verbose_name='ID de Tarjeta')
-    t_numero    = models.IntegerField(null=False, blank=False, verbose_name='Numero de Tarjeta')
-    t_fvenc     = models.IntegerField(null=False, blank=False, verbose_name='Fecha de Vencimiento de Tarjeta')
+    t_numero    = models.CharField(max_length=20, blank=False, verbose_name='Numero de Tarjeta')
+    t_fvenc     = models.CharField(max_length=20, blank=False, verbose_name='Fecha de Vencimiento de Tarjeta')
     t_cvv       = models.IntegerField(null=False, blank=False, verbose_name='Codigo de Verificación de Tarjeta')
     
+    def __str__(self) -> str:
+        return self.t_numero
 
 class Credencial(models.Model):
     id_credencial = models.AutoField(primary_key=True, verbose_name='ID de Crendencial')
     c_alias     = models.CharField(max_length=25, blank=False, verbose_name='Nombre del Alias')
     c_correo    = models.CharField(max_length=25, blank=False, verbose_name='Correo para Credencial')
     c_password  = models.CharField(max_length=21, blank=False, verbose_name='Clave para Crendencial')
+    rol         = models.ForeignKey(Rol, on_delete=models.CASCADE)
     
     def __str__(self) -> str:
         return self.c_alias
     
 class Usuario(models.Model):
     id_usuario  = models.AutoField(primary_key=True, verbose_name='ID de Usuario')
-    us_rut      = models.CharField(max_length=9, blank=False, verbose_name='Rut de Usuario')
+    us_rut      = models.CharField(max_length=12, blank=False, verbose_name='Rut de Usuario')
     us_nombre   = models.CharField(max_length=20, blank=False, verbose_name='Nombre de Usuario')
     us_apellido = models.CharField(max_length=20, blank=False, verbose_name='Apellido de Usuario')
-    us_telefono = models.CharField(max_length=12, blank=False, verbose_name='Telefono de Usuario')
-    rol         = models.ForeignKey(Rol, on_delete=models.CASCADE)
-    tajeta      = models.ForeignKey(Tarjeta, on_delete=models.CASCADE)
+    us_telefono = models.CharField(max_length=15, blank=False, verbose_name='Telefono de Usuario')
+    tarjeta     = models.ForeignKey(Tarjeta, on_delete=models.CASCADE)
     credencial  = models.ForeignKey(Credencial, on_delete=models.CASCADE)
     
     def __str__(self) -> str:

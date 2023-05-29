@@ -1,7 +1,8 @@
 """Core URL Configuration"""
 from django.contrib import admin
 from django.urls import path, include
-from .views import index, product, profile, cart, search, conf_pago, create_acc, h_buy, h_prod1, p_acc, p_info, p_pch, pss_fg, vent_edit, vent_ing, vent_list, ong
+from .views import index, product, profile, cart, search, conf_pago, create_acc, h_buy, h_prod1, p_acc, p_info
+from .views import p_pch, pss_fg, vent_edit, vent_ing, vent_list, ong, registrarInfUS, registrarInfAC, registrarTarjeta
 
 urlpatterns = [
     path('', index, name='index'),
@@ -21,4 +22,7 @@ urlpatterns = [
     path('vent_edit/', vent_edit, name='vent_edit'),
     path('vent_ing/', vent_ing, name='vent_ing'),
     path('vent_list/', vent_list, name='vent_list'),
+    path('registrarInfUS/', registrarInfUS, name="registrarInfUS"),
+    path('registrarInfAC/', registrarInfAC, name="registrarInfAC"),
+    path('registrarTarjeta/', registrarTarjeta, name='registrarTarjeta'),
 ]
