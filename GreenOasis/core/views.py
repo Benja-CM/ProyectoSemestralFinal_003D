@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import transaction
-from .models import Rol, Usuario, Producto, Direccion, Comuna, Region, Credencial, Tarjeta
+from .models import Rol, Usuario, Producto, Direccion, Comuna, Region, Credencial, Tarjeta, Categoria
 
 # Create your views here.
 def index(request):
@@ -90,13 +90,16 @@ def registrarInfAC(request):
     
     return redirect('index')
 
-# INGRESAR INFORMACION DE COMPRA
-def registrarInfPC(request):
-    tarjeta_pch = request.POST['n_tarjeta']
-    fch_pch     = request.POST['f_venc']
-    cvv_pch     = request.POST['cds']
-
-    Tarjeta.objects.create(t_numero = tarjeta_pch, t_fvenc = fch_pch, t_cvv = cvv_pch)
+# INGRESAR INFORMACION DE TAJETA
+def registrarTarjeta(request):
+    tar_numero  = request.POST['n_tarjeta']
+    tar1_fvenc  = request.POST['f1_venc']
+    tar2_fvenc  = request.POST['f2_venc']
+    tar_cvv     = request.POST['cds']
+    
+    Tarjeta.objects.create(t_numero = tar_numero, t_fvenc = tar1_fvenc + '/' + tar2_fvenc, t_cvv = tar_cvv)
+    
+    return redirect('p_pch')
 
 # INGRESAR DE PRODUCTOS
 def resgistrarProducto(request):
@@ -107,15 +110,10 @@ def resgistrarProducto(request):
     pr_imagen   = request.FILES['imagen']
     pr_cat      = request.POST['sa-cat']
 
+    registroCat = Categoria.objects.get(id_cat = pr_cat)
+
     Producto.objects.create(prod_nom = pr_nom, prod_descripcion = pr_descripcion, prod_precio = pr_precio,
-                        prod_stock = pr_stock, prod_imagen = pr_imagen, categoria = pr_cat)
+                        prod_stock = pr_stock, prod_imagen = pr_imagen, categoria = registroCat)
     
-def registrarTarjeta(request):
-    tar_numero  = request.POST['n_tarjeta']
-    tar1_fvenc  = request.POST['f1_venc']
-    tar2_fvenc  = request.POST['f2_venc']
-    tar_cvv     = request.POST['cds']
+    return redirect('vent_ing')
     
-    Tarjeta.objects.create(t_numero = tar_numero, t_fvenc = tar1_fvenc + '/' + tar2_fvenc, t_cvv = tar_cvv)
-    
-    return redirect('p_pch')

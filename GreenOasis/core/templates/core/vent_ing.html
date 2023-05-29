@@ -27,10 +27,10 @@
         </div>
         <div class="px-md-5">
             <div class="card rounded-0 p-4">
-                <form class="align-content-center" id="sa-form" enctype="multipart/form-data">
+                <form action="{% url 'resgistrarProducto' %}" method="post" class="align-content-center" id="sa-form" enctype="multipart/form-data" >
                     {% csrf_token %}
                     <div class="row">
-                        <div class="border-bottom">
+<!--                         <div class="border-bottom">
                             <div class="col-md-12 mb-3 mt-3 d-flex row">
                                 <div class="col-1">
                                     <label for="ID" class="form-label me-3"><strong> ID </strong></label>
@@ -40,7 +40,7 @@
                                         name="ID" placeholder="" required>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="border-bottom">
                             <div class="col-md-12 mb-3 mt-3  d-flex row">
                                 <div class="col-xxl-1 col-12">

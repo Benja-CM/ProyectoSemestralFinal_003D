@@ -1,6 +1,5 @@
 $(document).ready(function () {
   $("#sa-form").submit(function (e) {
-    var id = $("#sa-id").val();
     var nombre = $("#sa-nombre").val();
     var desc = $("#sa-desc").val();
     var precio = $("#sa-precio").val();
@@ -9,14 +8,6 @@ $(document).ready(function () {
 
     var msj = "";
     let enviar = false;
-
-    /* Validacion de ID */
-    if (/^[0-9]{4}$/.test(id) == false) {
-      msj +=
-        "El ID debe poseer solo 4 dígitos y no puede contener ni letras ni ningún otro carácter que no sea un número natural<br>";
-      $("#sa-id").removeClass("is-valid").addClass("is-invalid");
-      enviar = true;
-    }
 
     /* Validacion nombre */
     if (nombre.trim().length < 4 || nombre.trim().length > 20) {
