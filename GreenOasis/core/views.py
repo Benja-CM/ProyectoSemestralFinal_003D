@@ -53,11 +53,50 @@ def pss_fg(request):
 def vent_edit(request):
     return render(request, 'core/vent_edit.html')
 
+def vent_editDato(request,id):
+    categorias = Categoria.objects.all()
+    producto = Producto.objects.get(id_prod = id)
+    contexto = {
+        "datos": producto,
+        "listaCategorias": categorias
+    }
+    
+    return render(request, 'core/vent_edit.html')
+
+def actualizarProducto(request):
+    id      = request.POST['ID']
+    nombre  = request.POST['nombre']
+    descripcion = request.POST['desc']
+    precio  = request.POST['precio']
+    stock   = request.POST['stock']
+    imagen  = request.FILE['imagen']
+    categoria   = request.POST['categoria']
+
+    producto = Producto.objest.get(id_prod = id)
+    producto.prod_nom = nombre
+    producto.prod_descripcion = descripcion
+    producto.prod_precio = precio
+    producto.prod_stock = stock
+    producto.prod_imagen = imagen
+    
+    registroCategoria = Categoria.objects.get(id_cat = categoria)
+    producto.categoria = registroCategoria
+    
+    producto.save()
+    
+    return redirect('listado')
+
+
 def vent_ing(request):
     return render(request, 'core/vent_ing.html')
 
 def vent_list(request):
-    return render(request, 'core/vent_list.html')
+    productos = Producto.objects.all()
+
+    contexto = {
+        "listado": productos
+    }
+    return render(request, 'core/vent_list.html',contexto)
 
 
 # INGRESAR DE INFORMACION DEL USUARIO
@@ -115,13 +154,10 @@ def resgistrarProducto(request):
     Producto.objects.create(prod_nom = pr_nom, prod_descripcion = pr_descripcion, prod_precio = pr_precio,
                         prod_stock = pr_stock, prod_imagen = pr_imagen, categoria = registroCat)
     
-    return redirect('vent_ing')
-    
-def listadoProducto(request):
-    productos = Producto.objects.all()
+    return redirect('vent_list')
 
-    contexto = {
-        "listado": productos
-    }
+def eliminarProducto(request,id):
+    producto = Producto.objects.get(id_prod = id)
+    producto.delete()
     
-    return render(request, 'core/vent_list.html', contexto)
+    return redirect('vent_list')

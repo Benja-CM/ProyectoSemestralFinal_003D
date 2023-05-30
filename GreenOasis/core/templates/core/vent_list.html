@@ -27,6 +27,7 @@
 					<td>Stock</td>
 					<td>Imagen</td>
 					<td>Categoria</td>
+					<td>Opciones</td>
 				</tr>
 		
 				{% for p in listado %}
@@ -36,17 +37,19 @@
 					<td>{{ p.prod_descripcion }}</td>
 					<td>{{ p.prod_precio }}</td>
 					<td>{{ p.prod_stock }}</td>
+
 					<td>
 		
 						<img src="p.prod_imagen.url" alt="No foto">
 		
 					</td>
+
 					<td>{{ p.categoria.cat_nom }}</td>
+
 					<td>
-						<a href="" class="btn btn-primary">Modificar</a><br>
-						<a href="" class="btn btn-danger">Eliminar</a>
+						<a href="{% url 'actualizarProducto' %}" class="btn btn-primary">Modificar</a><br>
+						<a href="{% url 'eliminarProducto' p.id_prod %}" class="btn btn-danger">Eliminar</a>
 					</td>
-		
 				</tr>
 				{% endfor %}
 			</table>
@@ -54,6 +57,7 @@
 	</div>
 	{% endblock body %}
 </body>
+
 <!--
 						<div class="card rounded-0 p-4 mb-2">
 							<div class="row">

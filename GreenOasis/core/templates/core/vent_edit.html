@@ -37,7 +37,7 @@
                                 </div>
                                 <div class="col-12 col-xxl-11">
                                     <input type="text" class="form-control rounded-0 border-custom-2" id="sa-id"
-                                        name="ID" placeholder="2345" readonly>
+                                        name="ID" values="{{datos.id_prod}}" placeholder="2345" readonly>
                                 </div>
                             </div>
                         </div>
@@ -48,7 +48,7 @@
                                 </div>
                                 <div class="col-12 col-xxl-11">
                                     <input type="text" class="form-control rounded-0 border-custom-2" id="sa-nombre"
-                                        name="nombre" value="Tijeras de Podar" required>
+                                        name="nombre" values="{{datos.prod_nom}}" value="Tijeras de Podar" required>
                                 </div>
                             </div>
                         </div>
@@ -59,7 +59,7 @@
                                 </div>
                                 <div class="col-12 col-xxl-11">
                                     <input type="text" class="form-control rounded-0 border-custom-2" id="sa-desc"
-                                        name="desc" value="" required>
+                                        name="desc" values="{{datos.prod_descripcion}}" value="" required>
                                 </div>
                             </div>
                         </div>
@@ -70,7 +70,7 @@
                                 </div>
                                 <div class="col-12 col-xxl-11">
                                     <input type="number" class="form-control rounded-0 border-custom-2" id="sa-precio"
-                                        name="precio" value="9990" required>
+                                        name="precio" values="{{datos.prod_precio}}" value="9990" required>
                                 </div>
                             </div>
                         </div>
@@ -81,7 +81,7 @@
                                 </div>
                                 <div class="col-12 col-xxl-11">
                                     <input type="number" class="form-control rounded-0 border-custom-2" id="sa-stock"
-                                        name="stock" value="15" required>
+                                        name="stock" values="{{datos.prod_stock}}" value="15" required>
                                 </div>
                             </div>
                         </div>
@@ -104,11 +104,12 @@
                                 <div class="col-12 col-xxl-11">
                                     <select class="form-select rounded-0 border-custom-2" id="sa-cat" name="categoria"
                                         required>
-                                        <option value="">Seleccione una categoría</option>
-                                        <option selected value="1">Herramientas de Cultivo</option>
-                                        <option value="2">Tierra</option>
-                                        <option value="3">Maceteros</option>
-                                        <option value="4">Plantas</option>
+                                        {% for c in listaCategorias %}
+                                            {% if c.id_cat == datos.categoria.id_cat %}
+                                                <option value="{{% c.id_cat %}}" selected>{{% c.cat_nom %}}</option>
+                                            {% else %}
+                                                <option value="{{% c.id_cat %}}">{{% c.cat_nom %}}</option>
+                                            {% endif %}
                                     </select>
                                 </div>
                             </div>
