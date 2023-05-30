@@ -2,7 +2,7 @@
 from django.contrib import admin
 from django.urls import path, include
 from .views import index, product, profile, cart, search, conf_pago, create_acc, h_buy, h_prod1, p_acc, p_info, p_pch, pss_fg, vent_edit
-from .views import vent_ing, vent_list, ong, registrarInfUS, registrarInfAC, registrarTarjeta, resgistrarProducto, listadoProducto
+from .views import vent_ing, vent_list, ong, registrarInfUS, registrarInfAC, registrarTarjeta, resgistrarProducto
 
 urlpatterns = [
     path('', index, name='index'),
@@ -26,5 +26,4 @@ urlpatterns = [
     path('registrarInfAC/', registrarInfAC, name="registrarInfAC"),
     path('registrarTarjeta/', registrarTarjeta, name='registrarTarjeta'),
     path('resgistrarProducto/', resgistrarProducto, name='resgistrarProducto'),
-    path('listadoProducto/', listadoProducto, name='listadoProducto'),
 ]

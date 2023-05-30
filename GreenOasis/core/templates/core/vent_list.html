@@ -18,38 +18,43 @@
 			</div>
 		</div>
 		<div class="px-md-5">
-			<table>
-				<thead>
-					<tr>
-						<th>ID </th>
-						<th>Nombre </th>
-						<th>Descripcion </th>
-						<th>Precio </th>
-						<th>Stock </th>
-						<th>Imagen </th>
-						<th>Categoria </th>
-					</tr>
-				</thead>
-
-				<tbody>
-					{% for p in productos %}
-					<tr>
-						
-						<td>{{ p.id_prod }}</td>
-						<td>{{ p.prod_nom }}</td>
-						<td>{{ p.prod_descripcion }}</td>
-						<td>{{ p.prod_precio }}</td>
-						<td>{{ p.prod_stock }}</td>
-						
-						<td>
-							
-							<img src="{{ p.prod_imagen.url }}" alt="No foto">
-							
-						</td>
-						
-						<td>{{ p.categoria.cat_nom }}</td>
-
-						<!--
+			<table border="1">
+				<tr>
+					<td>ID</td>
+					<td>Nombre</td>
+					<td>Descripcion</td>
+					<td>Precio</td>
+					<td>Stock</td>
+					<td>Imagen</td>
+					<td>Categoria</td>
+				</tr>
+		
+				{% for p in listado %}
+				<tr>
+					<td>{{ p.id_prod }}</td>
+					<td>{{ p.prod_nom }}</td>
+					<td>{{ p.prod_descripcion }}</td>
+					<td>{{ p.prod_precio }}</td>
+					<td>{{ p.prod_stock }}</td>
+					<td>
+		
+						<img src="p.prod_imagen.url" alt="No foto">
+		
+					</td>
+					<td>{{ p.categoria.cat_nom }}</td>
+					<td>
+						<a href="" class="btn btn-primary">Modificar</a><br>
+						<a href="" class="btn btn-danger">Eliminar</a>
+					</td>
+		
+				</tr>
+				{% endfor %}
+			</table>
+		</div>
+	</div>
+	{% endblock body %}
+</body>
+<!--
 						<div class="card rounded-0 p-4 mb-2">
 							<div class="row">
 								<div class="border-bottom">
@@ -74,12 +79,5 @@
 							</div>
 						</div>
 						-->
-					</tr>
-					{% endfor %}
-				</tbody>
-			</table>
-		</div>
-	</div>
-	<!-- {% endblock body %} -->
-</body>
+
 </html>
