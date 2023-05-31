@@ -50,10 +50,7 @@ def p_pch(request):
 def pss_fg(request):
     return render(request, 'core/pss_fg.html')
 
-def vent_edit(request):
-    return render(request, 'core/vent_edit.html')
-
-def vent_editDato(request,id):
+def vent_edit(request, id):
     categorias = Categoria.objects.all()
     producto = Producto.objects.get(id_prod = id)
     contexto = {
@@ -61,7 +58,14 @@ def vent_editDato(request,id):
         "listaCategorias": categorias
     }
     
-    return render(request, 'core/vent_edit.html')
+    return render(request, 'core/vent_edit.html', contexto)
+
+def vent_list(request):
+    productos = Producto.objects.all()
+    contexto = {
+        "listado": productos
+    }
+    return render(request, 'core/vent_list.html',contexto)
 
 def actualizarProducto(request):
     id      = request.POST['ID']
@@ -84,20 +88,10 @@ def actualizarProducto(request):
     
     producto.save()
     
-    return redirect('listado')
-
+    return redirect('vent_list')
 
 def vent_ing(request):
     return render(request, 'core/vent_ing.html')
-
-def vent_list(request):
-    productos = Producto.objects.all()
-
-    contexto = {
-        "listado": productos
-    }
-    return render(request, 'core/vent_list.html',contexto)
-
 
 # INGRESAR DE INFORMACION DEL USUARIO
 @transaction.atomic
@@ -141,7 +135,7 @@ def registrarTarjeta(request):
     return redirect('p_pch')
 
 # INGRESAR DE PRODUCTOS
-def resgistrarProducto(request):
+def registrarProducto(request):
     pr_nom      = request.POST['nombre']
     pr_descripcion = request.POST['desc']
     pr_precio   = request.POST['precio']

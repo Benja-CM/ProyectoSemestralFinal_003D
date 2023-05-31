@@ -27,7 +27,7 @@
         </div>
         <div class="px-md-5">
             <div class="card rounded-0 p-4">
-                <form class="align-content-center" enctype="multipart/form-data">
+                <form action="{% url 'actualizarProducto' %}" method="POST" class="align-content-center" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="row">
                         <div class="border-bottom">
@@ -37,7 +37,7 @@
                                 </div>
                                 <div class="col-12 col-xxl-11">
                                     <input type="text" class="form-control rounded-0 border-custom-2" id="sa-id"
-                                        name="ID" values="{{datos.id_prod}}" placeholder="2345" readonly>
+                                        name="ID" value="{{ datos.id_prod }}" readonly>
                                 </div>
                             </div>
                         </div>
@@ -48,7 +48,7 @@
                                 </div>
                                 <div class="col-12 col-xxl-11">
                                     <input type="text" class="form-control rounded-0 border-custom-2" id="sa-nombre"
-                                        name="nombre" values="{{datos.prod_nom}}" value="Tijeras de Podar" required>
+                                        name="nombre" value="{{ datos.prod_nom }}" required>
                                 </div>
                             </div>
                         </div>
@@ -59,7 +59,7 @@
                                 </div>
                                 <div class="col-12 col-xxl-11">
                                     <input type="text" class="form-control rounded-0 border-custom-2" id="sa-desc"
-                                        name="desc" values="{{datos.prod_descripcion}}" value="" required>
+                                        name="desc" value="{{datos.prod_descripcion}}" required>
                                 </div>
                             </div>
                         </div>
@@ -70,7 +70,7 @@
                                 </div>
                                 <div class="col-12 col-xxl-11">
                                     <input type="number" class="form-control rounded-0 border-custom-2" id="sa-precio"
-                                        name="precio" values="{{datos.prod_precio}}" value="9990" required>
+                                        name="precio" value="{{datos.prod_precio}}" required>
                                 </div>
                             </div>
                         </div>
@@ -81,7 +81,7 @@
                                 </div>
                                 <div class="col-12 col-xxl-11">
                                     <input type="number" class="form-control rounded-0 border-custom-2" id="sa-stock"
-                                        name="stock" values="{{datos.prod_stock}}" value="15" required>
+                                        name="stock" value="{{datos.prod_stock}}" required>
                                 </div>
                             </div>
                         </div>
@@ -106,10 +106,11 @@
                                         required>
                                         {% for c in listaCategorias %}
                                             {% if c.id_cat == datos.categoria.id_cat %}
-                                                <option value="{{% c.id_cat %}}" selected>{{% c.cat_nom %}}</option>
+                                                <option value="{{ c.id_cat }}" selected>{{ c.cat_nom }}</option>
                                             {% else %}
-                                                <option value="{{% c.id_cat %}}">{{% c.cat_nom %}}</option>
+                                                <option value="{{ c.id_cat }}">{{ c.cat_nom }}</option>
                                             {% endif %}
+                                        {% endfor %}
                                     </select>
                                 </div>
                             </div>
