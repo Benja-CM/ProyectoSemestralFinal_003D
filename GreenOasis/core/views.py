@@ -63,6 +63,7 @@ def vent_ing(request):
     print("Valor de id_prod:", contexto)
     return render(request, 'core/temp_pr.html', contexto) """
 
+# PERMITE EDITAR UN PRODUCTO SELECCIONADO DE LA LISTA
 def vent_edit(request, id):
     categorias = Categoria.objects.all()
     producto = Producto.objects.get(id_prod = id)
@@ -73,6 +74,7 @@ def vent_edit(request, id):
     
     return render(request, 'core/vent_edit.html', contexto)
 
+# LISTA LOS PRODUCTOS DE LA BASE DE DATOS
 def vent_list(request):
     productos = Producto.objects.all()
     contexto = {
@@ -80,16 +82,33 @@ def vent_list(request):
     }
     return render(request, 'core/vent_list.html',contexto)
 
+# LISTA LOS PRODUCTOS DE LA BASE DE DATOS
+def index(request):
+    productos = Producto.objects.all()
+    contexto = {
+        "listado": productos
+    }
+    return render(request, 'core/Index.html',contexto)
+
+# LISTA LOS PRODUCTOS DE LA BASE DE DATOS
+def search(request):
+    productos = Producto.objects.all()
+    contexto = {
+        "listado": productos
+    }
+    return render(request, 'core/search.html',contexto)
+
+# ACTUALIZACION DE LA INFORMACION A LA BASE DE DATOS
 def actualizarProducto(request):
     id      = request.POST['ID']
     nombre  = request.POST['nombre']
     descripcion = request.POST['desc']
     precio  = request.POST['precio']
     stock   = request.POST['stock']
-    imagen  = request.FILE['imagen']
+    imagen  = request.FILES['imagen']
     categoria   = request.POST['categoria']
 
-    producto = Producto.objest.get(id_prod = id)
+    producto = Producto.objects.get(id_prod = id)
     producto.prod_nom = nombre
     producto.prod_descripcion = descripcion
     producto.prod_precio = precio
@@ -160,8 +179,18 @@ def registrarProducto(request):
     
     return redirect('vent_list')
 
+# ELIMINAR PRODUCTOS DE LA BASE DE DATOS
 def eliminarProducto(request,id):
     producto = Producto.objects.get(id_prod = id)
     producto.delete()
     
     return redirect('vent_list')
+
+# MUESTRA LA INFORMACION DEL PRODUCTO
+def product1(request, id):
+    producto = Producto.objects.get(id_prod = id)
+    contexto = {
+        "p": producto
+    }
+    
+    return render(request, 'core/product1.html', contexto)

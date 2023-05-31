@@ -1,13 +1,13 @@
 """Core URL Configuration"""
 from django.contrib import admin
 from django.urls import path, include
-from .views import index, product, profile, cart, search, conf_pago, create_acc, h_buy, h_prod1, p_acc, p_info, p_pch, pss_fg, vent_edit
+from .views import index, product1, profile, cart, search, conf_pago, create_acc, h_buy, h_prod1, p_acc, p_info, p_pch, pss_fg, vent_edit
 from .views import vent_ing, vent_list, ong, registrarInfUS, registrarInfAC, registrarTarjeta, registrarProducto, eliminarProducto
 from .views import actualizarProducto
 
 urlpatterns = [
     path('', index, name='index'),
-    path('product1/', product, name='producto'),
+    path('product1/<int:id>/', product1, name='product1'),
     path('profile/', profile, name='profile'),
     path('ong/', ong, name='ong'),
     path('cart/', cart, name='cart'),

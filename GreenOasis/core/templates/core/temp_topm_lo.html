@@ -26,7 +26,7 @@
 	<!-- Nav bar sin cuenta -->
 	<nav class="navbar navbar-expand-xl navbar-light bg-white border-bottom" style="z-index: 5;">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="">
+			<a class="navbar-brand" href="{% url 'index' %}">
 				<img src="{% static 'core/img/Logo.png' %}" alt="Logo" class="logo">
 			</a>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -59,7 +59,7 @@
 				</ul>
 				<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 					<li class="nav-item flex-grow-1">
-						<form class="d-flex flex-grow-1" action="cart.html">
+						<form class="d-flex flex-grow-1" action="{% url 'search' %}">
 							{% csrf_token %}
 							<input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar">
 							<button class="btn btn-outline-success rounded-0" type="submit">Buscar</button>

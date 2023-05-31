@@ -98,67 +98,17 @@
 				<h2 class="vogue title-35">Productos Destacados</h2>
 				<a href="" class="vogue rounded-0 py-1 px-4 btn-custom-2 btn-hover">Ver todos</a>
 			</div>
+			{% for p in listado|slice:":7" %}
 			<div class="col-md-3 col-sm-6 mb-4 ">
-				<a href="{% url 'producto' %}">
-					<img src="{% static 'core/img/prod1.jpg' %}" alt="Imagen 1" class="img-fluid opacity-hover"
+				<a href="{% url 'product1' p.id_prod %}">
+					<img src="{{ p.prod_imagen.url }}" alt="Imagen 1" class="img-fluid opacity-hover"
 						style="width: 75%;"></a>
 				<div>
-					<h5 class="mt-3">Tijeras de podar</h5>
-					<h5 class="ttmoons">$9.990 CLP</h5>
+					<h5 class="mt-3">{{ p.prod_nom }}</h5>
+					<h5 class="ttmoons">${{ p.prod_precio }} CLP</h5>
 				</div>
 			</div>
-			<div class="col-md-3 col-sm-6 mb-4">
-				<a href="">
-					<img src="{% static 'core/img/prod2.jpg' %}" alt="Imagen 2" class="img-fluid opacity-hover"
-						style="width: 75%;"></a>
-				<div>
-					<h5 class="mt-3">Pala Manual FiberComp® 100S</h5>
-					<h5 class="ttmoons">$6.490 CLP</h5>
-				</div>
-			</div>
-			<div class="col-md-3 col-sm-6 mb-4">
-				<a href=""><img src="{% static 'core/img/prod3.jpg' %}" alt="Imagen 3" class="img-fluid opacity-hover"
-						style="width: 75%;"></a>
-				<div>
-					<h5 class="mt-3">Pistola Riego Plástica con Gatillo Trasero 100S</h5>
-					<h5 class="ttmoons">$9.990 CLP</h4>
-				</div>
-			</div>
-		</div>
-		<div class="row text-center">
-			<div class="col-md-3 col-sm-6 mb-4">
-				<a href=""><img src="{% static 'core/img/prod4.jpg' %}" alt="Imagen 4" class="img-fluid opacity-hover"
-						style="width: 75%;"></a>
-				<div>
-					<h5 class="mt-3">Aspersor de Riego Rectangular</h5>
-					<h5 class="ttmoons">$28.480 CLP</h5>
-					<br>
-				</div>
-			</div>
-			<div class="col-md-3 col-sm-6 mb-4">
-				<a href=""><img src="{% static 'core/img/prod5.jpg' %}" alt="Imagen 5" class="img-fluid opacity-hover "
-						style="width: 75%;"></a>
-				<div>
-					<h5 class="mt-3">Rodilleras para Jardín Ultra-light</h5>
-					<h5 class="ttmoons">$18.990 CLP</h5>
-				</div>
-			</div>
-			<div class="col-md-3 col-sm-6 mb-4">
-				<a href=""><img src="{% static 'core/img/prod6.jpg' %}" alt="Imagen 6" class="img-fluid opacity-hover"
-						style="width: 75%;"></a>
-				<div>
-					<h5 class="mt-3">Fertilizante para Rosas</h5>
-					<h5 class="ttmoons">$12.000 CLP</h5>
-				</div>
-			</div>
-			<div class="col-md-3 col-sm-6 mb-4">
-				<a href=""><img src="{% static 'core/img/prod7.jpg' %}" alt="Imagen 7" class="img-fluid opacity-hover"
-						style="width: 75%;"></a>
-				<div>
-					<h5 class="mt-3">Macetero Biodegradable Mediano Rojo</h5>
-					<h5 class="ttmoons">$8.000 CLP</h5>
-				</div>
-			</div>
+			{% endfor %}
 		</div>
 	</div>
 	{% endblock body %}
@@ -209,7 +159,8 @@
 
 	<!-- JQuery -->
 	{% block js %}
-	{% comment %} <script src="{% static 'core/js/lg_jq.js' %}"></script>  {% endcomment %}
+	{% comment %}
+	<script src="{% static 'core/js/lg_jq.js' %}"></script> {% endcomment %}
 	{% endblock js %}
 </body>
 

@@ -162,14 +162,14 @@
     <div class="container my-4">
         <div class="row justify-content-around">
             <div class="col-md-6">
-                <img src="{% static 'core/img/prod1.jpg' %}" class="img-fluid border-custom-1">
+                <img src="{{ p.prod_imagen.url }}" class="img-fluid border-custom-1">
             </div>
             <div class="col-md-6 pt-md-0 pt-4">
-                <p class="letter-gray title-15">24 vendidos</p>
+                <p class="letter-gray title-15">{{ p.prod_stock }} En Stock</p>
                 <hr>
-                <h1 class="vogue">Tijeras de Podar</h1>
+                <h1 class="vogue">{{ p.prod_nom }}</h1>
                 <br>
-                <h1 class="font-weight-bold ttmoons">$9.990 CLP</h1>
+                <h1 class="font-weight-bold ttmoons">${{ p.prod_precio }} CLP</h1>
                 <hr>
                 <form>
                     {% csrf_token %}
@@ -201,25 +201,7 @@
                 <h1 class="vogue text-center">Descripción del Producto</h1>
             </div>
             <div class="col-12 justify-content-center pt-5" style="text-align: justify;">
-                <p>
-                    Las tijeras de podar son herramientas imprescindibles para cualquier jardinero o entusiasta del
-                    cuidado de plantas y árboles. Estas tijeras están diseñadas para cortar ramas y tallos de plantas de
-                    manera precisa y limpia, lo que ayuda a mantener una apariencia saludable y estética en los jardines
-                    y huertos.
-                    <br>
-                    Nuestras tijeras de podar están fabricadas con materiales de alta calidad, lo que garantiza su
-                    durabilidad y resistencia. La cuchilla está hecha de acero inoxidable, lo que las hace resistentes a
-                    la oxidación y fácil de limpiar. El mango está hecho de materiales antideslizantes que proporcionan
-                    un agarre cómodo y seguro, incluso cuando las manos están húmedas o mojadas.
-                    <br>
-                    <br>
-                    Estas tijeras de podar son ideales para cortar ramas y tallos de hasta 2,5 centímetros de diámetro,
-                    y su diseño compacto y ligero las hace fáciles de usar incluso en lugares de difícil acceso. Además,
-                    su tamaño las hace ideales para llevarlas contigo mientras viajas o vas de camping.
-                    <br>
-                    Si estás buscando unas tijeras de podar de calidad y duraderas, no busques más. Nuestras tijeras de
-                    podar son la herramienta perfecta para cualquier tarea de poda en tu jardín o huerto.
-                </p>
+                <p>{{ p.prod_descripcion }}</p>
             </div>
         </div>
     </div>
