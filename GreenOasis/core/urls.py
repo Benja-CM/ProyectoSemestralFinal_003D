@@ -20,14 +20,14 @@ urlpatterns = [
     path('p_info/', p_info, name='p_info'),
     path('p_pch/', p_pch, name='p_pch'),
     path('pss_fg/', pss_fg, name='pss_fg'),
-    path('vent_edit/<int:id>', vent_edit, name='vent_edit'),
+    path('vent_edit/<int:id>/', vent_edit, name='vent_edit'),
     path('vent_ing/', vent_ing, name='vent_ing'),
     path('vent_list/', vent_list, name='vent_list'),
     path('registrarInfUS/', registrarInfUS, name="registrarInfUS"),
     path('registrarInfAC/', registrarInfAC, name="registrarInfAC"),
     path('registrarTarjeta/', registrarTarjeta, name='registrarTarjeta'),
     path('registrarProducto/', registrarProducto, name='registrarProducto'),
-    path('eliminarProducto/<int:id>', eliminarProducto, name='eliminarProducto'),
-    path('actualizarProducto', actualizarProducto, name='actualizarProducto'),
+    path('eliminarProducto/<int:id>/', eliminarProducto, name='eliminarProducto'),
+    path('actualizarProducto/', actualizarProducto, name='actualizarProducto'),
     
 ]

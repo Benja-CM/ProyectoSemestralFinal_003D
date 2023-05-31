@@ -43,10 +43,9 @@
                             Categorías
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="">Herramientas de Cultivo</a></li>
-                            <li><a class="dropdown-item" href="">Tierra</a></li>
-                            <li><a class="dropdown-item" href="">Maceteros</a></li>
-                            <li><a class="dropdown-item" href="">Plantas</a></li>
+                            {% for c in listaCategorias %}
+                            <li><a class="dropdown-item" href="{% url 'search' %}">{{ c.cat_nom }}</a></li>
+                            {% endfor %}
                             <li>
                                 <hr class="dropdown-divider">
                             </li>

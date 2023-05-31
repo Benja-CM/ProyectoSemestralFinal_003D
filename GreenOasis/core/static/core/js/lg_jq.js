@@ -1,3 +1,4 @@
+/* 
 $(document).ready(function () {
 
     $('#Email_imp').focusout(function(event) {
@@ -51,3 +52,4 @@ $(document).ready(function () {
     });
 
 });
+ */

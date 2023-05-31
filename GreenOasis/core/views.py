@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.core.exceptions import ObjectDoesNotExist
+from django.shortcuts import get_object_or_404
 from django.db import transaction
 from .models import Rol, Usuario, Producto, Direccion, Comuna, Region, Credencial, Tarjeta, Categoria
 
@@ -50,6 +51,18 @@ def p_pch(request):
 def pss_fg(request):
     return render(request, 'core/pss_fg.html')
 
+def vent_ing(request):
+    return render(request, 'core/vent_ing.html')
+
+""" def temp_pr(request):
+    primer_producto = Producto.objects.first()
+
+    contexto = {
+        'id_prod': primer_producto.id_prod if primer_producto else None
+    }
+    print("Valor de id_prod:", contexto)
+    return render(request, 'core/temp_pr.html', contexto) """
+
 def vent_edit(request, id):
     categorias = Categoria.objects.all()
     producto = Producto.objects.get(id_prod = id)
@@ -89,9 +102,6 @@ def actualizarProducto(request):
     producto.save()
     
     return redirect('vent_list')
-
-def vent_ing(request):
-    return render(request, 'core/vent_ing.html')
 
 # INGRESAR DE INFORMACION DEL USUARIO
 @transaction.atomic

@@ -47,15 +47,14 @@
 							Categorías
 						</a>
 						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<li><a class="dropdown-item" href="">Herramientas de Cultivo</a></li>
-							<li><a class="dropdown-item" href="">Tierra</a></li>
-							<li><a class="dropdown-item" href="">Maceteros</a></li>
-							<li><a class="dropdown-item" href="">Plantas</a></li>
-							<li>
-								<hr class="dropdown-divider">
-							</li>
-							<li><a class="dropdown-item" href="">Ver Todo</a></li>
-						</ul>
+                            {% for c in listaCategorias %}
+                            <li><a class="dropdown-item" href="{% url 'search' %}">{{ c.cat_nom }}</a></li>
+                            {% endfor %}
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="{% url 'search' %}">Ver Todo</a></li>
+                        </ul>
 					</li>
 				</ul>
 				<ul class="navbar-nav ms-auto mb-2 mb-lg-0">

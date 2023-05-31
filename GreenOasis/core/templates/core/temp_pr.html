@@ -43,10 +43,9 @@
                             Categorías
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="">Herramientas de Cultivo</a></li>
-                            <li><a class="dropdown-item" href="">Tierra</a></li>
-                            <li><a class="dropdown-item" href="">Maceteros</a></li>
-                            <li><a class="dropdown-item" href="">Plantas</a></li>
+                            {% for c in listaCategorias %}
+                            <li><a class="dropdown-item" href="{% url 'search' %}">{{ c.cat_nom }}</a></li>
+                            {% endfor %}
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
@@ -128,7 +127,6 @@
                             <div class="collapse" id="dashboard-collapse">
                                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small ms-4">
                                     <li><a href="{% url 'vent_ing' %}" class="link-dark rounded">Agregar</a></li>
-                                    <li><a href="{% url 'vent_edit' 1 %}" class="link-dark rounded">Modificar </a></li>
                                     <li><a href="{% url 'vent_list' %}" class="link-dark rounded">Lista</a></li>
                                 </ul>
                             </div>
@@ -210,9 +208,8 @@
                         <div class="collapse" id="dashboard-collapse">
                             <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small ms-4">
                                 <li><a href="{% url 'vent_ing' %}" class="link-dark rounded">Agregar</a></li>
-                                <li><a href="{% url 'vent_edit' 1 %}" class="link-dark rounded">Modificar </a></li>
                                 <li><a href="{% url 'vent_list' %}" class="link-dark rounded">Lista</a></li>
-                            </ul>
+                                </ul>
                         </div>
                     </li>
                     <li class="mb-1">
