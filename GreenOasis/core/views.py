@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
-from django.core.exceptions import ObjectDoesNotExist
-from django.shortcuts import get_object_or_404
+from django.contrib.auth.models import User
 from django.db import transaction
-from .models import Rol, Usuario, Producto, Direccion, Comuna, Region, Credencial, Tarjeta, Categoria
+from django.contrib import messages
+from django.contrib.auth.hashers import check_password
+from django.contrib.auth import authenticate,login, logout
+from .models import Rol, Usuario, Producto, Direccion, Comuna, Region, Categoria
 
 # Create your views here.
 def index(request):
@@ -130,38 +132,25 @@ def registrarInfUS(request):
     apellido_u  = request.POST['apellido']
     telefono_u  = request.POST['telefono']
 
-    with transaction.atomic():
-        registrarCU = Credencial.objects.latest('id_credencial')
-        registrarTarjeta = Tarjeta.objects.latest('id_tarjeta')
-
-        Usuario.objects.create(us_rut=rut_u, us_nombre=nombre_u, us_apellido=apellido_u, 
-                               us_telefono=telefono_u, tarjeta=registrarTarjeta, credencial=registrarCU)
+    Usuario.objects.filter().update(us_rut=rut_u, us_nombre=nombre_u, us_apellido=apellido_u, 
+                            us_telefono=telefono_u)
         
     return redirect('p_info')
     
 # INGRESAR INFORMACION DE CUENTA
 def registrarInfAC(request):
-    alias_u     = request.POST['alias']
-    correo_u    = request.POST['email']
-    password_u  = request.POST['password']
-    rol_u       = 1
-    
-    role        = Rol.objects.get(id_rol = rol_u)
+    alias_u = request.POST['alias']
+    correo_u = request.POST['email']
+    password_u = request.POST['password']
+    rol_u = 1
+    role = Rol.objects.get(id_rol=rol_u)
 
-    Credencial.objects.create(c_alias = alias_u, c_correo = correo_u, c_password = password_u, rol = role)
-    
+    Usuario.objects.create(c_alias=alias_u, c_correo=correo_u, c_password=password_u, rol=role)
+    user = User.objects.create_user(username=alias_u, email=correo_u, password=password_u)
+    user.is_active = True
+    user.is_staff = False
+    user.save()
     return redirect('index')
-
-# INGRESAR INFORMACION DE TAJETA
-def registrarTarjeta(request):
-    tar_numero  = request.POST['n_tarjeta']
-    tar1_fvenc  = request.POST['f1_venc']
-    tar2_fvenc  = request.POST['f2_venc']
-    tar_cvv     = request.POST['cds']
-    
-    Tarjeta.objects.create(t_numero = tar_numero, t_fvenc = tar1_fvenc + '/' + tar2_fvenc, t_cvv = tar_cvv)
-    
-    return redirect('p_pch')
 
 # INGRESAR DE PRODUCTOS
 def registrarProducto(request):
@@ -194,3 +183,36 @@ def product1(request, id):
     }
     
     return render(request, 'core/product1.html', contexto)
+   
+def iniciar_sesion(request):
+    print("1")
+    user1 = request.POST['email']
+    pass1 = request.POST['password']
+    try:
+        print(f"1- {user1}")
+        user = User.objects.get(username = user1)
+    except User.DoesNotExist:
+        print("3")
+        messages.error(request, 'El usuario o la contraseña son incorrectos')
+        return redirect('index')
+
+    pass_valid = check_password(pass1, user.password)
+    print("4")
+    if not pass_valid:
+        messages.error(request, 'El usuario o la contraseña son incorrectos')
+        return redirect('index')
+    
+    user2 = Usuario.objects.get(c_alias=user1, c_password=pass1)
+    user = authenticate(request, username=user1, password=pass1)
+    
+    if user is not None:
+        login(request, user)
+        print("2")
+        if user2.rol.id_rol == 1:
+            return redirect('profile')
+        # else:    (esto es para cuando la vista de administrador nos falta esa pagina)
+        #     contexto = {"usuario": correo2}
+        #     return render(request, '.html', contexto)
+    else:
+        print("8")
+    
