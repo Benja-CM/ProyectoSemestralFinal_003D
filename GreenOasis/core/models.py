@@ -19,7 +19,7 @@ class Usuario(models.Model):
     rol         = models.ForeignKey(Rol, on_delete=models.CASCADE)
     
     def __str__(self) -> str:
-        return self.us_rut
+        return self.c_correo
 
 class Categoria(models.Model):
     id_cat      = models.AutoField(primary_key=True, verbose_name='ID de Categoria')
@@ -38,6 +38,8 @@ class Producto(models.Model):
     
     def __str__(self) -> str:
         return self.prod_nom
+
+# NO MODIFICAR ARRIBA POR DIOS SANTO
 
 class Region(models.Model):
     id_region   = models.AutoField(primary_key=True, verbose_name='ID de Region')

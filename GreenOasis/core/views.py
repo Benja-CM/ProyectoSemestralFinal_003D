@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
-from django.db import transaction
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import check_password
-from django.contrib.auth import authenticate,login, logout
+from django.contrib.auth import authenticate, login, logout
 from .models import Rol, Usuario, Producto, Direccion, Comuna, Region, Categoria
 
 # Create your views here.
@@ -14,9 +14,9 @@ def ong(request):
     return render(request, 'core/ong.html')
 
 def product(request):
-   
     return render(request, 'core/product1.html')
 
+@login_required
 def profile(request):
     return render(request, 'core/profile.html')
 
@@ -56,16 +56,8 @@ def pss_fg(request):
 def vent_ing(request):
     return render(request, 'core/vent_ing.html')
 
-""" def temp_pr(request):
-    primer_producto = Producto.objects.first()
-
-    contexto = {
-        'id_prod': primer_producto.id_prod if primer_producto else None
-    }
-    print("Valor de id_prod:", contexto)
-    return render(request, 'core/temp_pr.html', contexto) """
-
 # PERMITE EDITAR UN PRODUCTO SELECCIONADO DE LA LISTA
+@login_required
 def vent_edit(request, id):
     categorias = Categoria.objects.all()
     producto = Producto.objects.get(id_prod = id)
@@ -77,6 +69,7 @@ def vent_edit(request, id):
     return render(request, 'core/vent_edit.html', contexto)
 
 # LISTA LOS PRODUCTOS DE LA BASE DE DATOS
+@login_required
 def vent_list(request):
     productos = Producto.objects.all()
     contexto = {
@@ -92,13 +85,19 @@ def index(request):
     }
     return render(request, 'core/Index.html',contexto)
 
-# LISTA LOS PRODUCTOS DE LA BASE DE DATOS
-def search(request):
-    productos = Producto.objects.all()
+# FILTRO DE PRODUCTOS EN FUNCION DE CATEGORIA
+def search(request, categoria_id):
+    if categoria_id == 5:
+        productos = Producto.objects.all()
+    else:
+        productos = Producto.objects.filter(categoria=categoria_id)
+
     contexto = {
-        "listado": productos
+        'listado': productos
     }
-    return render(request, 'core/search.html',contexto)
+
+    return render(request, 'core/search.html', contexto)
+
 
 # ACTUALIZACION DE LA INFORMACION A LA BASE DE DATOS
 def actualizarProducto(request):
@@ -125,17 +124,22 @@ def actualizarProducto(request):
     return redirect('vent_list')
 
 # INGRESAR DE INFORMACION DEL USUARIO
-@transaction.atomic
+@login_required
 def registrarInfUS(request):
-    rut_u       = request.POST['rut']
-    nombre_u    = request.POST['nombre']
-    apellido_u  = request.POST['apellido']
-    telefono_u  = request.POST['telefono']
+    rut_u = request.POST['rut']
+    nombre_u = request.POST['nombre']
+    apellido_u = request.POST['apellido']
+    telefono_u = request.POST['telefono']
 
-    Usuario.objects.filter().update(us_rut=rut_u, us_nombre=nombre_u, us_apellido=apellido_u, 
-                            us_telefono=telefono_u)
-        
+    # Actualizar el usuario actual
+    Usuario.objects.filter(c_alias=request.user.username).update(
+        us_rut=rut_u,
+        us_nombre=nombre_u,
+        us_apellido=apellido_u,
+        us_telefono=telefono_u
+    )
     return redirect('p_info')
+        
     
 # INGRESAR INFORMACION DE CUENTA
 def registrarInfAC(request):
@@ -153,6 +157,7 @@ def registrarInfAC(request):
     return redirect('index')
 
 # INGRESAR DE PRODUCTOS
+@login_required
 def registrarProducto(request):
     pr_nom      = request.POST['nombre']
     pr_descripcion = request.POST['desc']
@@ -169,6 +174,7 @@ def registrarProducto(request):
     return redirect('vent_list')
 
 # ELIMINAR PRODUCTOS DE LA BASE DE DATOS
+@login_required
 def eliminarProducto(request,id):
     producto = Producto.objects.get(id_prod = id)
     producto.delete()
@@ -183,7 +189,8 @@ def product1(request, id):
     }
     
     return render(request, 'core/product1.html', contexto)
-   
+
+# PERMITE INICIAR SESION EN LA PAGINA   
 def iniciar_sesion(request):
     print("1")
     user1 = request.POST['email']
@@ -216,3 +223,6 @@ def iniciar_sesion(request):
     else:
         print("8")
     
+def cerrar_sesion(request):
+    logout(request)
+    return redirect('index')

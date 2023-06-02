@@ -61,27 +61,27 @@
 		<h1 class="text-center mt-5 py-5 mx-auto vogue title-35">Categorías</h1>
 		<div class="row mt-4">
 			<div class="col-md-3 col-sm-6 text-center">
-				<a href="{% url 'search' %}">
+				<a href="{% url 'search' categoria_id=2 %}">
 					<img src="{% static 'core/img/herramientas_de_jardin.jpeg' %}" alt="Imagen 1"
 						class="img-fluid h-75 opacity-hover">
 					<h4 class="text-center mt-3 vogue title-25">Herramientas de jardín</h4>
 				</a>
 			</div>
 			<div class="col-md-3 col-sm-6 text-center">
-				<a href="">
+				<a href="{% url 'search' categoria_id=1 %}">
 					<img src="{% static 'core/img/tierra.jpeg' %}" alt="Imagen 2" class="img-fluid h-75 opacity-hover">
 					<h4 class="text-center mt-3 vogue title-25">Tierra de abono</h4>
 				</a>
 			</div>
 			<div class="col-md-3 col-sm-6 text-center">
-				<a href="">
+				<a href="{% url 'search' categoria_id=3 %}">
 					<img src="{% static 'core/img/maceteros.jpeg' %}" alt="Imagen 3"
 						class="img-fluid h-75 opacity-hover">
 					<h4 class="text-center mt-3 vogue title-25">Maceteros</h4>
 				</a>
 			</div>
 			<div class="col-md-3 col-sm-6 text-center">
-				<a href="">
+				<a href="{% url 'search' categoria_id=4 %}">
 					<img src="{% static 'core/img/plantas_de_interior.jpeg' %}" alt="Imagen 4"
 						class="img-fluid h-75 opacity-hover">
 					<h4 class="text-center mt-3 vogue title-25">Plantas de interior</h4>

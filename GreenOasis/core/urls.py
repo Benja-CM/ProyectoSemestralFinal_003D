@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.urls import path, include
 from .views import index, product1, profile, cart, search, conf_pago, create_acc, h_buy, h_prod1, p_acc, p_info, p_pch, pss_fg, vent_edit
 from .views import vent_ing, vent_list, ong, registrarInfUS, registrarInfAC, registrarProducto, eliminarProducto
-from .views import actualizarProducto, iniciar_sesion
+from .views import actualizarProducto, iniciar_sesion, cerrar_sesion
 
 urlpatterns = [
     path('', index, name='index'),
@@ -11,7 +11,7 @@ urlpatterns = [
     path('profile/', profile, name='profile'),
     path('ong/', ong, name='ong'),
     path('cart/', cart, name='cart'),
-    path('search/', search, name='search'),
+    path('search/<int:categoria_id>/', search, name='search'),
     path('conf_pago/', conf_pago, name='conf_pago'),
     path('create_acc/', create_acc, name='create_acc'),
     path('h_buy/', h_buy, name='h_buy'),
@@ -29,4 +29,5 @@ urlpatterns = [
     path('eliminarProducto/<int:id>/', eliminarProducto, name='eliminarProducto'),
     path('actualizarProducto/', actualizarProducto, name='actualizarProducto'),
     path('iniciar_sesion/', iniciar_sesion, name='iniciar_sesion'),
+    path('cerrar_sesion/', cerrar_sesion, name='cerrar_sesion'),
 ]
