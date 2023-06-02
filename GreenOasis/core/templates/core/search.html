@@ -29,14 +29,13 @@
                     </div>
                     <div>
                         <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 ttmoons ms-4">
-                            <li><a class="link-dark rounded" href="">Herramientas de Cultivo</a></li>
-                            <li><a class="link-dark rounded" href="">Tierra</a></li>
-                            <li><a class="link-dark rounded" href="">Maceteros</a></li>
-                            <li><a class="link-dark rounded" href="">Plantas</a></li>
+                            {% for c in listaCategorias %}
+                            	<li><a class="dropdown-item" href="{% url 'search' c.id_cat %}">{{ c.cat_nom }}</a></li>
+                            {% endfor %}
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="link-dark rounded" href="">Ver Todo</a></li>
+                            <li><a class="link-dark rounded" href="{% url 'search' 5 %}">Ver Todo</a></li>
                         </ul>
                     </div>
                 </div>
