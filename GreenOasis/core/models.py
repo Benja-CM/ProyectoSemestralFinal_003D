@@ -40,6 +40,7 @@ class Producto(models.Model):
         return self.prod_nom
 
 # NO MODIFICAR ARRIBA POR DIOS SANTO
+# QUE SÍ QUE SÍ
 
 class Region(models.Model):
     id_region   = models.AutoField(primary_key=True, verbose_name='ID de Region')
@@ -60,27 +61,22 @@ class Direccion(models.Model):
     dir_calle   = models.CharField(max_length=25, blank=False, verbose_name='Nombre de Calle')
     dir_numero  = models.IntegerField(null=False, blank=False)
     dir_cod_postal = models.IntegerField(null=False, blank=False)
-    usuario      = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    usuario     = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     comuna      = models.ForeignKey(Comuna, on_delete=models.CASCADE)
 
-class Estado(models.Model):
-    id_estado   = models.AutoField(primary_key=True, verbose_name='ID de Estado')
-    est_nombre  = models.CharField(max_length=20, blank=False, verbose_name='Nombre de Estado')
+# NO SE COMO HACERLO
 
 class Compra(models.Model):
     id_compra   = models.AutoField(primary_key=True, verbose_name='ID de Compra')
     usuario     = models.ForeignKey(Usuario, on_delete=models.CASCADE)
-    cop_fechcom = models.DateField(null=False, blank=False)
-    cop_fech_desp = models.DateField(null=False, blank=False)
-    cop_fech_entr = models.DateField(null=False, blank=False)
-    estado      = models.ForeignKey(Estado, on_delete=models.CASCADE)
-    com_cost_envio = models.IntegerField(null=False, blank=False) #Debe venir de la tabla Comuna
-    cop_total   = models.IntegerField(null=False, blank=False)
-    cop_carrito = models.BooleanField(null=False, blank=False)
-
+    cop_fechcom = models.DateField()
+    cop_fech_entr  = models.DateField()
+    com_cost_envio = models.IntegerField() #Debe venir de la tabla Comuna
+    cop_total   = models.IntegerField()
+    
 class Detalle(models.Model):
-    id_detalle  = models.AutoField(primary_key=True, verbose_name='ID de Compra')
-    compra      = models.ForeignKey(Compra, on_delete=models.CASCADE)
+    id_detalle  = models.AutoField(primary_key=True, verbose_name='ID de Detalle')
+    compra     = models.ForeignKey(Compra, on_delete=models.CASCADE)
     producto    = models.ForeignKey(Producto, on_delete=models.CASCADE)
     de_cantidad = models.IntegerField(null=False, blank=False)
     de_subtotal = models.IntegerField(null=False, blank=False)

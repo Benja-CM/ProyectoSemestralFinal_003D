@@ -1,10 +1,10 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth import authenticate, login, logout
-from .models import Rol, Usuario, Producto, Direccion, Comuna, Region, Categoria
+from .models import Rol, Usuario, Producto, Direccion, Comuna, Region, Categoria, Detalle, Compra
 
 # Create your views here.
 def index(request):
@@ -228,3 +228,13 @@ def cerrar_sesion(request):
     logout(request)
     return redirect('index')
 
+def registrarDetalle(request, producto_id, precio):
+    usuario = request.user.username
+    compra = Compra.objects.filter(usuario = usuario)
+    producto = Producto.objects.get(id_prod = producto_id)
+    dr_cantidad = request.POST['cantidad']
+    dr_subtotal = precio * dr_cantidad
+    
+    Detalle.objects.create(id_compra = compra.id_compra, producto = producto, de_cantidad = dr_cantidad, de_subtotal = dr_subtotal)
+    
+    return redirect('search')

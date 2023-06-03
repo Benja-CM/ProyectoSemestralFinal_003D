@@ -59,7 +59,7 @@
                 <br>
                 <h1 class="font-weight-bold ttmoons">${{ p.prod_precio }} CLP</h1>
                 <hr>
-                <form>
+                <form action="{% url 'registrarDetalle' p.id_prod p.prod_precio %}" method="post">
                     {% csrf_token %}
                     <div class="form-group">
                         <label for="cantidad">Cantidad</label>
@@ -69,7 +69,7 @@
                                     id="restarCantidad">-</button>
                             </div>
                             <input type="number" class="form-control rounded-0 text-center border-custom-1"
-                                id="cantidad" placeholder="1" min="1" value="1" required>
+                                id="cant" name="cantidad" placeholder="1" min="1" value="1" required>
                             <div class="input-group-append">
                                 <button class="btn btn-outline-dark rounded-0" type="button"
                                     id="sumarCantidad">+</button>
