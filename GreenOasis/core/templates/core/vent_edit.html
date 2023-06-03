@@ -169,7 +169,7 @@
         <div class="px-md-5">
             <div class="card rounded-0 p-4">
                 <form action="{% url 'actualizarProducto' %}" method="POST" class="align-content-center"
-                    enctype="multipart/form-data">
+                    enctype="multipart/form-data" id=sa-form>
                     {% csrf_token %}
                     <div class="row">
                         <div class="border-bottom">
@@ -233,7 +233,7 @@
                                     <label for="imagen" class="me-3"><strong>Seleccionar imagen:</strong></label>
                                 </div>
                                 <div class="col-12 col-xxl-11">
-                                    <input type="file" id="imagen" class="rounded-0 border-custom-2" name="imagen"
+                                    <input type="file" id="sa-img" class="rounded-0 border-custom-2" name="imagen" accept="image/*"
                                         required>
                                 </div>
                             </div>

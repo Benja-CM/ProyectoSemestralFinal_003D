@@ -29,7 +29,7 @@ class Categoria(models.Model):
 
 class Producto(models.Model):
     id_prod     = models.AutoField(primary_key=True, verbose_name='ID de Producto')
-    prod_nom    = models.CharField(max_length=20, blank=False, verbose_name='Nombre de Producto')
+    prod_nom    = models.CharField(max_length=120, blank=False, verbose_name='Nombre de Producto')
     prod_descripcion = models.TextField(blank=False)
     prod_precio = models.IntegerField(null=False, blank=False)
     prod_stock  = models.IntegerField(null=False, blank=False)

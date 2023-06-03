@@ -119,6 +119,7 @@ def actualizarProducto(request):
     registroCategoria = Categoria.objects.get(id_cat = categoria)
     producto.categoria = registroCategoria
     
+    messages.add_message(request, messages.SUCCESS, '¡El producto se ha modificado exitosamente!')
     producto.save()
     
     return redirect('vent_list')
@@ -226,3 +227,4 @@ def iniciar_sesion(request):
 def cerrar_sesion(request):
     logout(request)
     return redirect('index')
+

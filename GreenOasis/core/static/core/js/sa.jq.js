@@ -5,13 +5,16 @@ $(document).ready(function () {
     var precio = $("#sa-precio").val();
     var stock = $("#sa-stock").val();
     var cat = $("#sa-cat").val();
+    var img = $("#sa-img").val();
+
+    var allowedExtensions = ["jpg", "jpeg", "png", "gif"];
 
     var msj = "";
     let enviar = false;
 
     /* Validacion nombre */
-    if (nombre.trim().length < 4 || nombre.trim().length > 20) {
-      msj += "El nombre debe ser entre 4 y 20 carácteres<br>";
+    if (nombre.trim().length < 4 || nombre.trim().length > 120) {
+      msj += "El nombre debe ser entre 4 y 120 carácteres<br>";
       $("#sa-nombre").removeClass("is-valid").addClass("is-invalid");
       enviar = true;
     } else {
@@ -68,6 +71,20 @@ $(document).ready(function () {
     }
     else {
       $("#sa-cat").removeClass('is-invalid').addClass('is-valid');
+    }
+
+    // Obtener la extensión del archivo
+    var extension = img.substring(img.lastIndexOf('.') + 1).toLowerCase();
+
+    // Verificar si la extensión coincide con una imagen permitida
+    if (allowedExtensions.indexOf(extension) === -1) {
+      // No es una imagen válida
+      msj += "Debe seleccionar un archivo tipo imagen<br>";
+      enviar = true;
+      $("#sa-img").removeClass('is-valid').addClass('is-invalid');
+    } else {
+      // Es una imagen válida
+      $("#sa-img").removeClass('is-invalid').addClass('is-valid');
     }
 
     /* Enviar Form */

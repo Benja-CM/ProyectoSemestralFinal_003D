@@ -108,6 +108,20 @@ a {
     /* quita el subrayado */
 }
 
+input::file-selector-button {
+    color: #008000;
+    padding: 0.4em;
+    border: 1px solid #008000;
+  	background-color: #ffffff;
+}
+
+input[type="file"]::file-selector-button:hover {
+    background-color: #008000;
+    border: 1px solid #008000;
+    color: #ffffff;
+    cursor:pointer;
+  }
+
 .vogue {
     font-family: 'Vogue';
 }
