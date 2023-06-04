@@ -98,8 +98,29 @@ def search(request, categoria_id):
 
     return render(request, 'core/search.html', contexto)
 
+# ACTUALIZAR DE INFORMACION DE LA CUENTA
+@login_required
+def actualizarCuenta(request):
+    correo_c = request.POST['correo']
+    password_c = request.POST['password']
 
-# ACTUALIZACION DE LA INFORMACION A LA BASE DE DATOS
+    # Actualizar el usuario actual
+    Usuario.objects.filter(c_alias=request.user.username).update(
+        c_correo=correo_c,
+        c_password=password_c,
+    )
+    messages.add_message(request, messages.SUCCESS, '¡Su información se ha modificado exitosamente!')
+    return redirect('userAcc')
+
+# VISUALIZA LA INFO DE LA CUENTA
+def userAcc(request):
+    usuario = Usuario.objects.get(c_alias=request.user.username) 
+    context = {
+        'usuario': usuario
+    }
+    return render(request, 'core/p_acc.html', context)
+
+# ACTUALIZACION DEL PRODUCTO A LA BASE DE DATOS
 def actualizarProducto(request):
     id      = request.POST['ID']
     nombre  = request.POST['nombre']
@@ -139,8 +160,16 @@ def registrarInfUS(request):
         us_apellido=apellido_u,
         us_telefono=telefono_u
     )
-    return redirect('p_info')
+    messages.add_message(request, messages.SUCCESS, '¡Su información se ha modificado exitosamente!')
+    return redirect('userInfo')
         
+# VISUALIZA LA INFO DEL USUARIO
+def userInfo(request):
+    usuario = Usuario.objects.get(c_alias=request.user.username) 
+    context = {
+        'usuario': usuario
+    }
+    return render(request, 'core/p_info.html', context)
     
 # INGRESAR INFORMACION DE CUENTA
 def registrarInfAC(request):
@@ -193,19 +222,16 @@ def product1(request, id):
 
 # PERMITE INICIAR SESION EN LA PAGINA   
 def iniciar_sesion(request):
-    print("1")
     user1 = request.POST['email']
     pass1 = request.POST['password']
     try:
-        print(f"1- {user1}")
         user = User.objects.get(username = user1)
     except User.DoesNotExist:
-        print("3")
+        print(1)
         messages.error(request, 'El usuario o la contraseña son incorrectos')
         return redirect('index')
 
     pass_valid = check_password(pass1, user.password)
-    print("4")
     if not pass_valid:
         messages.error(request, 'El usuario o la contraseña son incorrectos')
         return redirect('index')
@@ -215,7 +241,6 @@ def iniciar_sesion(request):
     
     if user is not None:
         login(request, user)
-        print("2")
         if user2.rol.id_rol == 1:
             return redirect('profile')
         # else:    (esto es para cuando la vista de administrador nos falta esa pagina)

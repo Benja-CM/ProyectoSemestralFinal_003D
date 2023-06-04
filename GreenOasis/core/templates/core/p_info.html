@@ -43,38 +43,38 @@
                      </button>
                      <div class="collapse" id="home-collapse">
                         <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small ms-4">
-                           <li><a href="{% url 'p_info' %}" class="link-dark rounded">Personal</a></li>
-                           <li><a href="{% url 'p_acc' %}" class="link-dark rounded">Cuenta</a></li>
-                           </li>
-                           <li><a href="{% url 'ong' %}" class="link-dark rounded">ONG</a></li>
-                        </ul>
-                     </div>
+                           <li><a href="{% url 'userInfo' %}" class="link-dark rounded">Personal</a></li>
+                           <li><a href="{% url 'userAcc' %}" class="link-dark rounded">Cuenta</a></li>
                   </li>
-                  <li class="mb-1">
-                     <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
-                        data-bs-target="#dashboard-collapse" aria-expanded="false">
-                        <i class="fa-sharp fa-solid fa-clipboard me-1" style="color: #000000;"></i>
-                        Ventas
-                     </button>
-                     <div class="collapse" id="dashboard-collapse">
-                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small ms-4">
-                           <li><a href="{% url 'vent_ing' %}" class="link-dark rounded">Agregar</a></li>
-                           <li><a href="{% url 'vent_list' %}" class="link-dark rounded">Lista</a></li>
-                        </ul>
-                     </div>
-                  </li>
-                  <li class="mb-1">
-                     <a href="{% url 'h_buy' %}">
-                        <button class="btn btn-toggle rounded">
-                           <i class="fa-sharp fa-solid fa-bag-shopping" style="color: #000000;"></i>
-                           Compras
-                        </button>
-                     </a>
-                  </li>
+                  <li><a href="{% url 'ong' %}" class="link-dark rounded">ONG</a></li>
                </ul>
             </div>
+            </li>
+            <li class="mb-1">
+               <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
+                  data-bs-target="#dashboard-collapse" aria-expanded="false">
+                  <i class="fa-sharp fa-solid fa-clipboard me-1" style="color: #000000;"></i>
+                  Ventas
+               </button>
+               <div class="collapse" id="dashboard-collapse">
+                  <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small ms-4">
+                     <li><a href="{% url 'vent_ing' %}" class="link-dark rounded">Agregar</a></li>
+                     <li><a href="{% url 'vent_list' %}" class="link-dark rounded">Lista</a></li>
+                  </ul>
+               </div>
+            </li>
+            <li class="mb-1">
+               <a href="{% url 'h_buy' %}">
+                  <button class="btn btn-toggle rounded">
+                     <i class="fa-sharp fa-solid fa-bag-shopping" style="color: #000000;"></i>
+                     Compras
+                  </button>
+               </a>
+            </li>
+            </ul>
          </div>
       </div>
+   </div>
    </div>
    <!-- Version Movil -->
    <div
@@ -123,37 +123,37 @@
                   </button>
                   <div class="collapse" id="home-collapse">
                      <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small ms-4">
-                        <li><a href="{% url 'p_info' %}" class="link-dark rounded">Personal</a></li>
-                        <li><a href="{% url 'p_acc' %}" class="link-dark rounded">Cuenta</a></li>
-                        </li>
-                        <li><a href="{% url 'ong' %}" class="link-dark rounded">ONG</a></li>
-                     </ul>
-                  </div>
+                        <li><a href="{% url 'userInfo' %}" class="link-dark rounded">Personal</a></li>
+                        <li><a href="{% url 'userAcc' %}" class="link-dark rounded">Cuenta</a></li>
                </li>
-               <li class="mb-1">
-                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
-                     data-bs-target="#dashboard-collapse" aria-expanded="false">
-                     <i class="fa-sharp fa-solid fa-clipboard" style="color: #000000;"></i>
-                     Ventas
-                  </button>
-                  <div class="collapse" id="dashboard-collapse">
-                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small ms-4">
-                        <li><a href="{% url 'vent_ing' %}" class="link-dark rounded">Agregar</a></li>
-                        <li><a href="{% url 'vent_list' %}" class="link-dark rounded">Lista</a></li>
-                     </ul>
-                  </div>
-               </li>
-               <li class="mb-1">
-                  <a href="{% url 'h_buy' %}">
-                     <button class="btn btn-toggle rounded">
-                        <i class="fa-sharp fa-solid fa-bag-shopping" style="color: #000000;"></i>
-                        Compras
-                     </button>
-                  </a>
-               </li>
+               <li><a href="{% url 'ong' %}" class="link-dark rounded">ONG</a></li>
             </ul>
          </div>
+         </li>
+         <li class="mb-1">
+            <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
+               data-bs-target="#dashboard-collapse" aria-expanded="false">
+               <i class="fa-sharp fa-solid fa-clipboard" style="color: #000000;"></i>
+               Ventas
+            </button>
+            <div class="collapse" id="dashboard-collapse">
+               <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small ms-4">
+                  <li><a href="{% url 'vent_ing' %}" class="link-dark rounded">Agregar</a></li>
+                  <li><a href="{% url 'vent_list' %}" class="link-dark rounded">Lista</a></li>
+               </ul>
+            </div>
+         </li>
+         <li class="mb-1">
+            <a href="{% url 'h_buy' %}">
+               <button class="btn btn-toggle rounded">
+                  <i class="fa-sharp fa-solid fa-bag-shopping" style="color: #000000;"></i>
+                  Compras
+               </button>
+            </a>
+         </li>
+         </ul>
       </div>
+   </div>
    </div>
    {% endblock title %}
    <!-- Account Form -->
@@ -177,7 +177,8 @@
                            <label for="rut" class="form-label me-3"><strong>RUT</strong></label>
                         </div>
                         <div class="col-12 col-xxl-11">
-                           <input type="text" class="form-control rounded-0 border-custom-2" id="pi-rut" name="rut" required>
+                           <input type="text" class="form-control rounded-0 border-custom-2" id="pi-rut" name="rut"
+                              value="{{ usuario.us_rut }}" required>
                         </div>
                      </div>
                   </div>
@@ -188,7 +189,7 @@
                         </div>
                         <div class="col-12 col-xxl-11">
                            <input type="text" class="form-control rounded-0 border-custom-2" id="pi-nombre"
-                              name="nombre" required>
+                              name="nombre" value="{{ usuario.us_nombre }}" required>
                         </div>
                      </div>
                   </div>
@@ -199,7 +200,7 @@
                         </div>
                         <div class="col-12 col-xxl-11">
                            <input type="text" class="form-control rounded-0 border-custom-2" id="pi-apellido"
-                              name="apellido" required>
+                              name="apellido" value="{{ usuario.us_apellido }}" required>
                         </div>
                      </div>
                   </div>
@@ -210,7 +211,7 @@
                         </div>
                         <div class="col-12 col-xxl-11">
                            <input type="tel" class="form-control rounded-0 border-custom-2" id="pi-telefono"
-                              name="telefono" required>
+                              name="telefono" value="{{ usuario.us_telefono }}" required>
                         </div>
                      </div>
                   </div>
@@ -218,6 +219,14 @@
                <p class="warnings mt-2" id="pi-w"></p>
                <button class="btn btn-dark rounded-0 mt-2" id="pi-b1" type="submit">Guardar</button>
             </form>
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert {{ message.tags }} alert-dismissible fade show mt-2" role="alert">
+               {{ message }}
+               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endfor %}
+            {% endif %}
          </div>
       </div>
       <div class="px-md-5 my-2">
@@ -238,7 +247,8 @@
                            <label for="calle" class="form-label me-3"><strong>Calle</strong></label>
                         </div>
                         <div class="col-12 col-xxl-11">
-                           <input type="text" class="form-control rounded-0 border-custom-2" id="pi-calle" name="calle" required>
+                           <input type="text" class="form-control rounded-0 border-custom-2" id="pi-calle" name="calle"
+                              required>
                         </div>
                      </div>
                   </div>

@@ -1,8 +1,5 @@
 $(document).ready(function () {
     $("#ai-form").submit(function (e) {
-        
-
-        var alias = $("#ai-alias").val();
         var email = $("#ai-email").val();
         var password = $("#ai-password").val();
 
@@ -10,20 +7,6 @@ $(document).ready(function () {
         let enviar = false;
         let pws = false;
 
-        //validacion de Alias
-        if (!ValidarAlias(alias)) {
-            msj += "Existen caracteres no válidos en el Alias<br>";
-            $("#ai-alias").removeClass('is-valid').addClass('is-invalid');
-            enviar = true;
-        }
-        if (alias.trim().length < 4 || alias.trim().length > 20) {
-            msj += "El Alias debe tener entre 4 y 20 caracteres<br>";
-            $("#ai-alias").removeClass('is-valid').addClass('is-invalid');
-            enviar = true;
-        }
-        else {
-            $("#ai-alias").removeClass('is-invalid').addClass('is-valid');
-        }
         //validacion de email
         if (!ValidarEmail(email)) {
             msj += "Ingrese un correo electrónico válido<br>";
@@ -92,24 +75,12 @@ $(document).ready(function () {
                 $("#ai-password").removeClass('is-invalid').addClass('is-valid');  
         }
 
-
-
         if (enviar) {
             $("#ai-w").html(msj);
             e.preventDefault();
-        } else {
-            $("#ai-w").html("Guardado");
         }
     });
 
-    //validacion de alias
-    function ValidarAlias(alias) {
-        var regex = /^[a-zA-Z0-9!@#\$%\^\&*\)\(+=._-]+$/; //Permite entrada de caracteres Especiales pero no Espacios
-        if (!regex.test(alias)) {
-            return false;
-        }
-        return true;
-    }
     //validacion de Email
     function ValidarEmail(email) {
         var regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

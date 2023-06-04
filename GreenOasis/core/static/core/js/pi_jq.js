@@ -94,9 +94,6 @@ $(document).ready(function () {
             e.preventDefault();
 
         }
-        else {
-            $("#pi-w").html("Guardado");
-        }
     });
 
     /* Validaciones del formulario 2 */

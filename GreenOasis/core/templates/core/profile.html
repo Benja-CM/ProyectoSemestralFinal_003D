@@ -41,8 +41,8 @@
                             </button>
                             <div class="collapse" id="home-collapse">
                                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small ms-4">
-                                    <li><a href="{% url 'p_info' %}" class="link-dark rounded">Personal</a></li>
-                                    <li><a href="{% url 'p_acc' %}" class="link-dark rounded">Cuenta</a></li>   
+                                    <li><a href="{% url 'userInfo' %}" class="link-dark rounded">Personal</a></li>
+                                    <li><a href="{% url 'userAcc' %}" class="link-dark rounded">Cuenta</a></li>   
                                     </li>
                                     <li><a href="{% url 'ong' %}" class="link-dark rounded">ONG</a></li>
                                 </ul>
@@ -121,8 +121,8 @@
                         </button>
                         <div class="collapse" id="home-collapse">
                             <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small ms-4">
-                                <li><a href="{% url 'p_info' %}" class="link-dark rounded">Personal</a></li>
-                                <li><a href="{% url 'p_acc' %}" class="link-dark rounded">Cuenta</a></li>
+                                <li><a href="{% url 'userInfo' %}" class="link-dark rounded">Personal</a></li>
+                                <li><a href="{% url 'userAcc' %}" class="link-dark rounded">Cuenta</a></li>
                                 </li>
                                 <li><a href="{% url 'ong' %}" class="link-dark rounded">ONG</a></li>
                             </ul>
@@ -166,7 +166,7 @@
             </div>
             <br>
             <div class="card rounded-0">
-                <a href="{% url 'p_info' %}">
+                <a href="{% url 'userInfo' %}">
                     <div class="row align-items-center p-4">
                         <div class="col-auto px-4">
                             <i class="fa-sharp fa-solid fa-circle-user fa-2xl" style="color: #000000;"></i>
@@ -177,7 +177,7 @@
                         </div>
                     </div>
                 </a>
-                <a href="{% url 'p_acc' %}">
+                <a href="{% url 'userAcc' %}">
                     <div class="row align-items-center p-4">
                         <div class="col-auto px-4">
                             <i class="fa-sharp fa-solid fa-gear fa-2xl" style="color: #000000;"></i>

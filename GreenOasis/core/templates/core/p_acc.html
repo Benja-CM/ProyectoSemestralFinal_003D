@@ -39,8 +39,8 @@
                      </button>
                      <div class="collapse" id="home-collapse">
                         <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small ms-4">
-                           <li><a href="{% url 'p_info' %}" class="link-dark rounded">Personal</a></li>
-                           <li><a href="{% url 'p_acc' %}" class="link-dark rounded">Cuenta</a></li>
+                           <li><a href="{% url 'userInfo' %}" class="link-dark rounded">Personal</a></li>
+                           <li><a href="{% url 'userAcc' %}" class="link-dark rounded">Cuenta</a></li>
                            </li>
                            <li><a href="{% url 'ong' %}" class="link-dark rounded">ONG</a></li>
                         </ul>
@@ -119,8 +119,8 @@
                   </button>
                   <div class="collapse" id="home-collapse">
                      <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small ms-4">
-                        <li><a href="{% url 'p_info' %}" class="link-dark rounded">Personal</a></li>
-                        <li><a href="{% url 'p_acc' %}" class="link-dark rounded">Cuenta</a></li>
+                        <li><a href="{% url 'userInfo' %}" class="link-dark rounded">Personal</a></li>
+                        <li><a href="{% url 'userAcc' %}" class="link-dark rounded">Cuenta</a></li>
                         </li>
                         <li><a href="{% url 'ong' %}" class="link-dark rounded">ONG</a></li>
                      </ul>
@@ -165,17 +165,17 @@
       <div class="px-md-5">
          <div class="card rounded-0 p-4">
             <!--Form -->
-            <form class="align-content-center" method="post" id="ai-form">
+            <form action="{% url 'actualizarCuenta' %}" class="align-content-center" method="post" id="ai-form">
                {% csrf_token %}
                <div class="row">
                   <div class="border-bottom">
                      <div class="col-md-12 mb-3 mt-3 d-flex row">
-                        <div class="col-1">
-                           <label for="alias" class="form-label me-3"><strong> Alias </strong></label>
+                        <div class="col-4">
+                           <label for="alias" class="form-label me-3"><strong> Nombre de Usuario </strong></label>
                         </div>
                         <div class="col-12 col-xxl-11">
                            <input type="text" class="form-control rounded-0 border-custom-2" id="ai-alias" name="alias"
-                           disabled>
+                           disabled value="{{ usuario.c_alias }}">
                         </div>
                      </div>
                   </div>
@@ -188,7 +188,7 @@
                         </div>
                         <div class="col-12 col-xxl-11">
                            <input type="text" class="form-control rounded-0 border-custom-2" id="ai-email" name="correo"
-                              required>
+                           value="{{ usuario.c_correo }}" required>
                         </div>
                      </div>
                   </div>
@@ -199,7 +199,7 @@
                         </div>
                         <div class="col-12 col-xxl-11">
                            <input type="password" class="form-control rounded-0 border-custom-2" id="ai-password"
-                              name="password" required>
+                              name="password" value="{{ usuario.c_password }}" required>
                         </div>
                      </div>
                   </div>
@@ -207,7 +207,14 @@
                <p class="warnings mt-2" id="ai-w"></p>
                <button class="btn btn-dark rounded-0 mt-3" type="submit">Guardar</button>
             </form>
-
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert {{ message.tags }} alert-dismissible fade show mt-2" role="alert">
+               {{ message }}
+               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endfor %}
+            {% endif %}
          </div>
       </div>
    </div>

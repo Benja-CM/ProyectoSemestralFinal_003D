@@ -12,6 +12,32 @@
 <body>
 	<!-- Main Banner -->
 	{% block title %}
+	{% if messages %}
+	<script>
+		$(document).ready(function () {
+			$('#popupMessage').modal('show');
+		});
+	</script>
+	<div class="modal fade" id="popupMessage" tabindex="-1" aria-labelledby="popupMessageLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="popupMessageLabel">Error en el Inicio de Sesión</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					{% for message in messages %}
+					<div class="alert {{ message.tags }} alert-dismissible fade show mt-2" role="alert">
+						{{ message }}
+					</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</div>
+	{% endif %}
+
+	<!-- WORKING ON IT -->
 	<div class="container-fluid mt-5 d-none d-md-block">
 		<div class="row mx-auto px-5 py-5">
 			<div class="col-md-8 my-auto px-5">
@@ -61,14 +87,14 @@
 		<h1 class="text-center mt-5 py-5 mx-auto vogue title-35">Categorías</h1>
 		<div class="row mt-4">
 			<div class="col-md-3 col-sm-6 text-center">
-				<a href="{% url 'search' categoria_id=2 %}">
+				<a href="{% url 'search' categoria_id=1 %}">
 					<img src="{% static 'core/img/herramientas_de_jardin.jpeg' %}" alt="Imagen 1"
 						class="img-fluid h-75 opacity-hover">
 					<h4 class="text-center mt-3 vogue title-25">Herramientas de jardín</h4>
 				</a>
 			</div>
 			<div class="col-md-3 col-sm-6 text-center">
-				<a href="{% url 'search' categoria_id=1 %}">
+				<a href="{% url 'search' categoria_id=2 %}">
 					<img src="{% static 'core/img/tierra.jpeg' %}" alt="Imagen 2" class="img-fluid h-75 opacity-hover">
 					<h4 class="text-center mt-3 vogue title-25">Tierra de abono</h4>
 				</a>
