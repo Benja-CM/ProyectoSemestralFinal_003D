@@ -238,7 +238,7 @@
       </div>
       <div class="px-md-5">
          <div class="card rounded-0 p-4">
-            <form action="{% url 'registrarInfUS' %}" class="align-content-center" id="pi-form2">
+            <form action="{% url 'registrarDir' %}" class="align-content-center" id="pi-form2" method="POST">
                {% csrf_token %}
                <div class="row">
                   <div class="border-bottom">
@@ -248,7 +248,7 @@
                         </div>
                         <div class="col-12 col-xxl-11">
                            <input type="text" class="form-control rounded-0 border-custom-2" id="pi-calle" name="calle"
-                              required>
+                           value="{{ direccion.dir_calle }}" required>
                         </div>
                      </div>
                   </div>
@@ -259,7 +259,7 @@
                         </div>
                         <div class="col-12 col-xxl-11">
                            <input type="text" class="form-control rounded-0 border-custom-2" id="pi-numero"
-                              name="numero" required>
+                              name="numero" value="{{ direccion.dir_numero }}" required>
                         </div>
                      </div>
                   </div>
@@ -294,7 +294,7 @@
                         </div>
                         <div class="col-12 col-xxl-11">
                            <input type="text" class="form-control rounded-0 border-custom-2" id="pi-codigo-postal"
-                              name="codigo-postal" required>
+                              name="codigo-postal" value="{{ direccion.dir_cod_postal }}" required>
                         </div>
                      </div>
                   </div>
