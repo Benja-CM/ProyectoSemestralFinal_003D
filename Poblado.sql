@@ -24,10 +24,10 @@ INSERT INTO core_region VALUES (15, 'Región de Magallanes y de la Antártica Ch
 INSERT INTO core_region VALUES (16, 'Región Metropolitana de Santiago');
 
 -- Tabla core_comuna
-INSERT INTO core_comuna VALUES (1, 'Arica', 1);
-INSERT INTO core_comuna VALUES (2, 'Camarones', 1);
-INSERT INTO core_comuna VALUES (3, 'Putre', 1);
-INSERT INTO core_comuna VALUES (4, 'General Lagos', 1);
+INSERT INTO core_comuna VALUES (1, 'Arica', 5, 1);
+INSERT INTO core_comuna VALUES (2, 'Camarones', 10, 1);
+INSERT INTO core_comuna VALUES (3, 'Putre', 100, 1);
+INSERT INTO core_comuna VALUES (4, 'General Lagos', 9000000, 1);
 
 INSERT INTO core_comuna VALUES (5, 'Iquique', 2);
 INSERT INTO core_comuna VALUES (6, 'Alto Hospicio', 2);
@@ -217,9 +217,9 @@ INSERT INTO core_comuna VALUES (179, 'Arauco', 10);
 INSERT INTO core_comuna VALUES (180, 'Cañete', 10);
 INSERT INTO core_comuna VALUES (181, 'Contulmo', 10);
 INSERT INTO core_comuna VALUES (182, 'Curanilahue', 10);
-INSERT INTO core_comuna VALUES (183, 'Los Álamos', 10);
+INSERT INTO core_comuna VALUES (183, 'Los �?lamos', 10);
 INSERT INTO core_comuna VALUES (184, 'Tirúa', 10);
-INSERT INTO core_comuna VALUES (185, 'Los Ángeles', 10);
+INSERT INTO core_comuna VALUES (185, 'Los �?ngeles', 10);
 INSERT INTO core_comuna VALUES (186, 'Antuco', 10);
 INSERT INTO core_comuna VALUES (187, 'Cabrero', 10);
 INSERT INTO core_comuna VALUES (188, 'Laja', 10);

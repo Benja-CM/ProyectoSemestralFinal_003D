@@ -34,76 +34,34 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    {% for d in listado %}
                                     <tr>
-                                        <td>Pala Manual FiberComp® 100S</td>
+                                        <td>{{ d.producto.prod_nom }}</td>
                                         <td>
-                                            <button type="button" class="btn btn-secondary btn-sm">
-                                                <i class="fa fa-minus"></i>
-                                            </button>
-                                            <span class="mx-2">1</span>
-                                            <button type="button" class="btn btn-secondary btn-sm">
-                                                <i class="fa fa-plus"></i>
-                                            </button>
+                                            <span class="mx-2">{{ d.de_cantidad }}</span>
                                         </td>
-                                        <td>$6.490 CLP</td>
-                                        <td>$6.490 CLP</td>
+                                        <td>{{ d.producto.prod_precio }}</td>
+                                        <td>{{ d.de_subtotal }}</td>
                                         <td>
-                                            <button type="button" class="btn btn-danger btn-sm">
+                                            <a type="button" href="{% url 'eliminarDetalle' d.id_detalle %}" class="btn btn-danger btn-sm">
                                                 <i class="fa fa-trash"></i>
-                                            </button>
+                                            </a>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td>Pistola Riego Plástica con Gatillo Trasero 100S</td>
-                                        <td>
-                                            <button type="button" class="btn btn-secondary btn-sm">
-                                                <i class="fa fa-minus"></i>
-                                            </button>
-                                            <span class="mx-2">1</span>
-                                            <button type="button" class="btn btn-secondary btn-sm">
-                                                <i class="fa fa-plus"></i>
-                                            </button>
-                                        </td>
-                                        <td>$11,689 CLP</td>
-                                        <td>$11,689 CLP</td>
-                                        <td>
-                                            <button type="button" class="btn btn-danger btn-sm">
-                                                <i class="fa fa-trash"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Tijeras de Podar</td>
-                                        <td>
-                                            <button type="button" class="btn btn-secondary btn-sm">
-                                                <i class="fa fa-minus"></i>
-                                            </button>
-                                            <span class="mx-2">1</span>
-                                            <button type="button" class="btn btn-secondary btn-sm">
-                                                <i class="fa fa-plus"></i>
-                                            </button>
-                                        </td>
-                                        <td>$ 12,689 CLP</td>
-                                        <td>$ 12,689 CLP</td>
-                                        <td>
-                                            <button type="button" class="btn btn-danger btn-sm">
-                                                <i class="fa fa-trash"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
+                                    {% endfor %}
                                 </tbody>
                                 <tfoot>
                                     <tr>
                                         <td colspan="3" class="text-end"><strong>Subtotal</strong></td>
-                                        <td colspan="2">$ 30,868 CLP</td>
+                                        <td colspan="2">$ {{ subtotal }} CLP</td>
                                     </tr>
                                     <tr>
                                         <td colspan="3" class="text-end"><strong>Impuesto</strong></td>
-                                        <td colspan="2">$ 5,864 CLP</td>
+                                        <td colspan="2">$ {{ impuesto }} CLP</td>
                                     </tr>
                                     <tr>
                                         <td colspan="3" class="text-end"><strong>Total</strong></td>
-                                        <td colspan="2">$ 36,732 CLP</td>
+                                        <td colspan="2">$ {{ total }} CLP</td>
                                     </tr>
                                     <tr>
                                         <td>

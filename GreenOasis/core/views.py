@@ -1,4 +1,5 @@
 from django.shortcuts import get_object_or_404, render, redirect
+from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -208,6 +209,9 @@ def registrarInfAC(request):
     user.is_active = True
     user.is_staff = False
     user.save()
+    
+    Compra.objects.create(usuario = Usuario.objects.get(c_alias=alias_u))
+    
     return redirect('index')
 
 # INGRESAR DE PRODUCTOS
@@ -277,13 +281,47 @@ def cerrar_sesion(request):
     logout(request)
     return redirect('index')
 
-def registrarDetalle(request, producto_id, precio):
-    usuario = request.user.username
-    compra = Compra.objects.filter(usuario = usuario)
-    producto = Producto.objects.get(id_prod = producto_id)
+#PERMITE REGISTRAR DETALLE ASOCIADO A USUARIO CONECTADO
+@login_required
+def registrarDetalle(request, id_prod, precio):
+    id_usuario = request.user.id
+    compra = Compra.objects.get(usuario = id_usuario-1)
+    producto = Producto.objects.get(id_prod = id_prod)
     dr_cantidad = request.POST['cantidad']
-    dr_subtotal = precio * dr_cantidad
+    dr_subtotal = precio * int(dr_cantidad)
     
-    Detalle.objects.create(id_compra = compra.id_compra, producto = producto, de_cantidad = dr_cantidad, de_subtotal = dr_subtotal)
+    Detalle.objects.create(compra = compra, producto = producto, de_cantidad = dr_cantidad, de_subtotal = dr_subtotal)
     
-    return redirect('search')
+    return redirect('search', 5)
+
+#PERMITE MOSTRAR TODOS LOS DETALLES DEL USUARIO
+@login_required
+def cart(request):
+    id_usuario = request.user.id
+    compra = Compra.objects.get(usuario = id_usuario-1)
+    detalle = Detalle.objects.filter(compra = compra)
+    
+    # Calcular subtotal
+    subtotal = sum(d.de_subtotal for d in detalle)
+
+    # Calcular impuesto
+    impuesto = round(subtotal * 0.19)
+
+    # Calcular total
+    total = subtotal + impuesto
+    
+    contexto = {
+        "listado": detalle,
+        "subtotal": subtotal,
+        "impuesto": impuesto,
+        "total": total
+    }
+    return render(request, 'core/cart.html',contexto)
+
+#PERMITE ELIMINAR UN DETALLE
+@login_required
+def eliminarDetalle(request,id):
+    detalle = Detalle.objects.get(id_detalle = id)
+    detalle.delete()
+    
+    return redirect('cart')

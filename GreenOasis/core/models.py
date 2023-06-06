@@ -69,14 +69,14 @@ class Direccion(models.Model):
 class Compra(models.Model):
     id_compra   = models.AutoField(primary_key=True, verbose_name='ID de Compra')
     usuario     = models.ForeignKey(Usuario, on_delete=models.CASCADE)
-    cop_fechcom = models.DateField()
-    cop_fech_entr  = models.DateField()
-    com_cost_envio = models.IntegerField() #Debe venir de la tabla Comuna
-    cop_total   = models.IntegerField()
+    cop_fechcom = models.DateField(null=True)
+    cop_fech_entr  = models.DateField(null=True)
+    com_cost_envio = models.IntegerField(null=True) #Debe venir de la tabla Comuna
+    cop_total   = models.IntegerField(null=True)
     
 class Detalle(models.Model):
     id_detalle  = models.AutoField(primary_key=True, verbose_name='ID de Detalle')
-    compra     = models.ForeignKey(Compra, on_delete=models.CASCADE)
+    compra      = models.ForeignKey(Compra, on_delete=models.CASCADE)
     producto    = models.ForeignKey(Producto, on_delete=models.CASCADE)
     de_cantidad = models.IntegerField(null=False, blank=False)
     de_subtotal = models.IntegerField(null=False, blank=False)
