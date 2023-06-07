@@ -46,6 +46,7 @@
                </ul>
             </div>
             </li>
+            {% if user.Usuario.rol == 2 %}
             <li class="mb-1">
                <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
                   data-bs-target="#dashboard-collapse" aria-expanded="false">
@@ -59,6 +60,7 @@
                   </ul>
                </div>
             </li>
+            {% endif %}
             <li class="mb-1">
                <a href="{% url 'h_buy' %}">
                   <button class="btn btn-toggle rounded">
@@ -86,9 +88,11 @@
       <div class="sidebar-icon" id="icon2">
          <i class="fa-sharp fa-solid fa-house" style="color: #000000;"></i>
       </div>
+      {% if user.Usuario.rol == 2 %}
       <div class="sidebar-icon" id="icon3">
          <i class="fa-sharp fa-solid fa-clipboard" style="color: #000000;"></i>
       </div>
+      {% endif %}
       <div class="sidebar-icon" id="icon4">
          <i class="fa-sharp fa-solid fa-bag-shopping" style="color: #000000;"></i>
       </div>
@@ -126,6 +130,7 @@
             </ul>
          </div>
          </li>
+         {% if user.Usuario.rol == 2 %}
          <li class="mb-1">
             <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
                data-bs-target="#dashboard-collapse" aria-expanded="false">
@@ -139,6 +144,7 @@
                </ul>
             </div>
          </li>
+         {% endif %}
          <li class="mb-1">
             <a href="{% url 'h_buy' %}">
                <button class="btn btn-toggle rounded">

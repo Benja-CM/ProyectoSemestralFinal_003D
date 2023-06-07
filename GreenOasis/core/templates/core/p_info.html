@@ -4,314 +4,313 @@
 {% load static %}
 
 <head>
-   <!-- JavaScript Bundle with Popper -->
-   {% block header %}
+    <!-- JavaScript Bundle with Popper -->
+    {% block header %}
 
-   {% endblock header %}
+    {% endblock header %}
 </head>
 
 <body>
-   {% block title %}
-   <style>
-      body {
-         padding-top: 75px;
-         background-color: #EDEDED;
-      }
-   </style>
-   <!-- Menu Lateral -->
-   <div class="container-fluid col-md-2 navbar-profile-color sidebar phs">
-      <div class="row">
-         <div>
-            <div class="pt-3 pb-2 mb-3 border-bottom justify-content-center">
-               <div
-                  class="d-flex align-items-center ms-2 pb-3 mb-3 link-dark text-decoration-none border-bottom text-center">
-                  <div class="d-flex align-content-center">
-                     <div class="col-auto">
-                        <i class="fa-solid fa-user me-2" style="color: #000000;"></i>
-                     </div>
-                     <div class="col">
-                        <h5> Mi Cuenta </h5>
-                     </div>
-                  </div>
-               </div>
-               <ul class="list-unstyled ps-0">
-                  <li class="mb-1">
-                     <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
-                        data-bs-target="#home-collapse" aria-expanded="false">
-                        <i class="fa-sharp fa-solid fa-house" style="color: #000000;"></i>
-                        General
-                     </button>
-                     <div class="collapse" id="home-collapse">
+    {% block title %}
+    <style>
+        body {
+            padding-top: 75px;
+            background-color: #EDEDED;
+        }
+    </style>
+    <!-- Menu Lateral -->
+    <div class="container-fluid col-md-2 navbar-profile-color sidebar phs">
+        <div class="row">
+            <div>
+                <div class="pt-3 pb-2 mb-3 border-bottom justify-content-center">
+                    <div
+                        class="d-flex align-items-center ms-2 pb-3 mb-3 link-dark text-decoration-none border-bottom text-center">
+                        <div class="d-flex align-content-center">
+                            <div class="col-auto">
+                                <i class="fa-solid fa-user me-2" style="color: #000000;"></i>
+                            </div>
+                            <div class="col">
+                                <h5> Mi Cuenta </h5>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="list-unstyled ps-0">
+                        <li class="mb-1">
+                            <button class="btn btn-toggle align-items-center rounded collapsed"
+                                data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="false">
+                                <i class="fa-sharp fa-solid fa-house" style="color: #000000;"></i>
+                                General
+                            </button>
+                            <div class="collapse" id="home-collapse">
+                                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small ms-4">
+                                    <li><a href="{% url 'userInfo' %}" class="link-dark rounded">Personal</a></li>
+                                    <li><a href="{% url 'userAcc' %}" class="link-dark rounded">Cuenta</a></li>
+                        </li>
+                        <li><a href="{% url 'ong' %}" class="link-dark rounded">ONG</a></li>
+                    </ul>
+                </div>
+                </li>
+                {% if user.Usuario.rol == 2 %}
+                <li class="mb-1">
+                    <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
+                        data-bs-target="#dashboard-collapse" aria-expanded="false">
+                        <i class="fa-sharp fa-solid fa-clipboard me-1" style="color: #000000;"></i>
+                        Ventas
+                    </button>
+                    <div class="collapse" id="dashboard-collapse">
                         <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small ms-4">
-                           <li><a href="{% url 'userInfo' %}" class="link-dark rounded">Personal</a></li>
-                           <li><a href="{% url 'userAcc' %}" class="link-dark rounded">Cuenta</a></li>
-                  </li>
-                  <li><a href="{% url 'ong' %}" class="link-dark rounded">ONG</a></li>
-               </ul>
+                            <li><a href="{% url 'vent_ing' %}" class="link-dark rounded">Agregar</a></li>
+                            <li><a href="{% url 'vent_list' %}" class="link-dark rounded">Lista</a></li>
+                        </ul>
+                    </div>
+                </li>
+                {% endif %}
+                <li class="mb-1">
+                    <a href="{% url 'h_buy' %}">
+                        <button class="btn btn-toggle rounded">
+                            <i class="fa-sharp fa-solid fa-bag-shopping" style="color: #000000;"></i>
+                            Compras
+                        </button>
+                    </a>
+                </li>
+                </ul>
             </div>
-            </li>
-            <li class="mb-1">
-               <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
-                  data-bs-target="#dashboard-collapse" aria-expanded="false">
-                  <i class="fa-sharp fa-solid fa-clipboard me-1" style="color: #000000;"></i>
-                  Ventas
-               </button>
-               <div class="collapse" id="dashboard-collapse">
-                  <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small ms-4">
-                     <li><a href="{% url 'vent_ing' %}" class="link-dark rounded">Agregar</a></li>
-                     <li><a href="{% url 'vent_list' %}" class="link-dark rounded">Lista</a></li>
-                  </ul>
-               </div>
-            </li>
-            <li class="mb-1">
-               <a href="{% url 'h_buy' %}">
-                  <button class="btn btn-toggle rounded">
-                     <i class="fa-sharp fa-solid fa-bag-shopping" style="color: #000000;"></i>
-                     Compras
-                  </button>
-               </a>
-            </li>
-            </ul>
-         </div>
-      </div>
-   </div>
-   </div>
-   <!-- Version Movil -->
-   <div
-      class="container-fluid sidebar col-1 mhs navbar-profile-color mb-3 align-items-center flex-column text-center pt-2 g-0">
-      <div class="sidebar-icon" id="menu">
-         <a data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
-            <i class="fa-solid fa-bars"></i>
-         </a>
-      </div>
-      <div class="sidebar-icon" id="Home">
-         <i class="fa-solid fa-user" style="color: #000000;"></i>
-      </div>
-      <div class="sidebar-icon" id="icon2">
-         <i class="fa-sharp fa-solid fa-house" style="color: #000000;"></i>
-      </div>
-      <div class="sidebar-icon" id="icon3">
-         <i class="fa-sharp fa-solid fa-clipboard" style="color: #000000;"></i>
-      </div>
-      <div class="sidebar-icon" id="icon4">
-         <i class="fa-sharp fa-solid fa-bag-shopping" style="color: #000000;"></i>
-      </div>
-   </div>
-   <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-      <div class="offcanvas-header">
-         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-      </div>
-      <div class="offcanvas-body">
-         <div class="pt-3 pb-2 mb-3 border-bottom">
-            <a href="#"
-               class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom text-center">
-               <div class="d-flex align-content-center">
-                  <div class="col-auto">
-                     <i class="fa-solid fa-user me-2" style="color: #000000;"></i>
-                  </div>
-                  <div class="col">
-                     <h5> Mi Cuenta </h5>
-                  </div>
-               </div>
+        </div>
+    </div>
+    </div>
+    <!-- Version Movil -->
+    <div
+        class="container-fluid sidebar col-1 mhs navbar-profile-color mb-3 align-items-center flex-column text-center pt-2 g-0">
+        <div class="sidebar-icon" id="menu">
+            <a data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+                <i class="fa-solid fa-bars"></i>
             </a>
-            <ul class="list-unstyled ps-0">
-               <li class="mb-1">
-                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
-                     data-bs-target="#home-collapse" aria-expanded="false">
-                     <i class="fa-sharp fa-solid fa-house" style="color: #000000;"></i>
-                     General
-                  </button>
-                  <div class="collapse" id="home-collapse">
-                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small ms-4">
-                        <li><a href="{% url 'userInfo' %}" class="link-dark rounded">Personal</a></li>
-                        <li><a href="{% url 'userAcc' %}" class="link-dark rounded">Cuenta</a></li>
-               </li>
-               <li><a href="{% url 'ong' %}" class="link-dark rounded">ONG</a></li>
-            </ul>
-         </div>
-         </li>
-         <li class="mb-1">
-            <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
-               data-bs-target="#dashboard-collapse" aria-expanded="false">
-               <i class="fa-sharp fa-solid fa-clipboard" style="color: #000000;"></i>
-               Ventas
-            </button>
-            <div class="collapse" id="dashboard-collapse">
-               <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small ms-4">
-                  <li><a href="{% url 'vent_ing' %}" class="link-dark rounded">Agregar</a></li>
-                  <li><a href="{% url 'vent_list' %}" class="link-dark rounded">Lista</a></li>
-               </ul>
+        </div>
+        <div class="sidebar-icon" id="Home">
+            <i class="fa-solid fa-user" style="color: #000000;"></i>
+        </div>
+        <div class="sidebar-icon" id="icon2">
+            <i class="fa-sharp fa-solid fa-house" style="color: #000000;"></i>
+        </div>
+        {% if user.Usuario.rol == 2 %}
+        <div class="sidebar-icon" id="icon3">
+            <i class="fa-sharp fa-solid fa-clipboard" style="color: #000000;"></i>
+        </div>
+        {% endif %}
+        <div class="sidebar-icon" id="icon4">
+            <i class="fa-sharp fa-solid fa-bag-shopping" style="color: #000000;"></i>
+        </div>
+    </div>
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+        <div class="offcanvas-header">
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="pt-3 pb-2 mb-3 border-bottom">
+                <a href="#"
+                    class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom text-center">
+                    <div class="d-flex align-content-center">
+                        <div class="col-auto">
+                            <i class="fa-solid fa-user me-2" style="color: #000000;"></i>
+                        </div>
+                        <div class="col">
+                            <h5> Mi Cuenta </h5>
+                        </div>
+                    </div>
+                </a>
+                <ul class="list-unstyled ps-0">
+                    <li class="mb-1">
+                        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
+                            data-bs-target="#home-collapse" aria-expanded="false">
+                            <i class="fa-sharp fa-solid fa-house" style="color: #000000;"></i>
+                            General
+                        </button>
+                        <div class="collapse" id="home-collapse">
+                            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small ms-4">
+                                <li><a href="{% url 'userInfo' %}" class="link-dark rounded">Personal</a></li>
+                                <li><a href="{% url 'userAcc' %}" class="link-dark rounded">Cuenta</a></li>
+                    </li>
+                    <li><a href="{% url 'ong' %}" class="link-dark rounded">ONG</a></li>
+                </ul>
             </div>
-         </li>
-         <li class="mb-1">
-            <a href="{% url 'h_buy' %}">
-               <button class="btn btn-toggle rounded">
-                  <i class="fa-sharp fa-solid fa-bag-shopping" style="color: #000000;"></i>
-                  Compras
-               </button>
-            </a>
-         </li>
-         </ul>
-      </div>
-   </div>
-   </div>
-   {% endblock title %}
-   <!-- Account Form -->
-   {% block body %}
-   <div class="container-fluid col-md-10 offset-md-1 offset-lg-2 py-md-3 px-lg-5 pg-md-2 py-2 ps-5 px-4">
-      <div class="px-md-5 mb-2">
-         <div class="card rounded-0">
-            <div class="container mt-3 py-2 px-4">
-               <h2 class="vogue">Mis Datos</h2>
-            </div>
-         </div>
-      </div>
-      <div class="px-md-5">
-         <div class="card rounded-0 p-4">
-            <form action="{% url 'registrarInfUS' %}" class="align-content-center" method="post" id="pi-form">
-               {% csrf_token %}
-               <div class="row">
-                  <div class="border-bottom">
-                     <div class="col-md-12 mb-3 mt-3 d-flex row">
-                        <div class="col-1">
-                           <label for="rut" class="form-label me-3"><strong>RUT</strong></label>
-                        </div>
-                        <div class="col-12 col-xxl-11">
-                           <input type="text" class="form-control rounded-0 border-custom-2" id="pi-rut" name="rut"
-                              value="{{ usuario.us_rut }}" required>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="border-bottom">
-                     <div class="col-md-12 mb-3 mt-3 d-flex row">
-                        <div class="col-1">
-                           <label for="nombre" class="form-label me-3"><strong>Nombre</strong></label>
-                        </div>
-                        <div class="col-12 col-xxl-11">
-                           <input type="text" class="form-control rounded-0 border-custom-2" id="pi-nombre"
-                              name="nombre" value="{{ usuario.us_nombre }}" required>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="border-bottom">
-                     <div class="col-md-12 mb-3 mt-3 d-flex row">
-                        <div class="col-1">
-                           <label for="apellido" class="form-label me-3"><strong>Apellido</strong></label>
-                        </div>
-                        <div class="col-12 col-xxl-11">
-                           <input type="text" class="form-control rounded-0 border-custom-2" id="pi-apellido"
-                              name="apellido" value="{{ usuario.us_apellido }}" required>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="border-bottom">
-                     <div class="col-md-12 mb-3 mt-3 d-flex row">
-                        <div class="col-1">
-                           <label for="telefono" class="form-label me-3"><strong>Teléfono</strong></label>
-                        </div>
-                        <div class="col-12 col-xxl-11">
-                           <input type="tel" class="form-control rounded-0 border-custom-2" id="pi-telefono"
-                              name="telefono" value="{{ usuario.us_telefono }}" required>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <p class="warnings mt-2" id="pi-w"></p>
-               <button class="btn btn-dark rounded-0 mt-2" id="pi-b1" type="submit">Guardar</button>
-            </form>
-            {% if messages %}
-            {% for message in messages %}
-            <div class="alert {{ message.tags }} alert-dismissible fade show mt-2" role="alert">
-               {{ message }}
-               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            {% endfor %}
+            </li>
+            {% if user.Usuario.rol == 2 %}
+            <li class="mb-1">
+                <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
+                    data-bs-target="#dashboard-collapse" aria-expanded="false">
+                    <i class="fa-sharp fa-solid fa-clipboard" style="color: #000000;"></i>
+                    Ventas
+                </button>
+                <div class="collapse" id="dashboard-collapse">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small ms-4">
+                        <li><a href="{% url 'vent_ing' %}" class="link-dark rounded">Agregar</a></li>
+                        <li><a href="{% url 'vent_list' %}" class="link-dark rounded">Lista</a></li>
+                    </ul>
+                </div>
+            </li>
             {% endif %}
-         </div>
-      </div>
-      <div class="px-md-5 my-2">
-         <div class="card rounded-0">
-            <div class="container mt-3 py-2 px-4">
-               <h2 class="vogue">Datos de Dirección</h2>
+            <li class="mb-1">
+                <a href="{% url 'h_buy' %}">
+                    <button class="btn btn-toggle rounded">
+                        <i class="fa-sharp fa-solid fa-bag-shopping" style="color: #000000;"></i>
+                        Compras
+                    </button>
+                </a>
+            </li>
+            </ul>
+        </div>
+    </div>
+    </div>
+    {% endblock title %}
+    <!-- Account Form -->
+    {% block body %}
+    <div class="container-fluid col-md-10 offset-md-1 offset-lg-2 py-md-3 px-lg-5 pg-md-2 py-2 ps-5 px-4">
+        <div class="px-md-5 mb-2">
+            <div class="card rounded-0">
+                <div class="container mt-3 py-2 px-4">
+                    <h2 class="vogue">Mis Datos</h2>
+                </div>
             </div>
-         </div>
-      </div>
-      <div class="px-md-5">
-         <div class="card rounded-0 p-4">
-            <form action="{% url '' %}" class="align-content-center" id="pi-form2" method="POST">
-               {% csrf_token %}
-               <div class="row">
-                  <div class="border-bottom">
-                     <div class="col-md-12 mb-3 mt-3 d-flex row">
-                        <div class="col-1">
-                           <label for="calle" class="form-label me-3"><strong>Calle</strong></label>
+        </div>
+        <div class="px-md-5">
+            <div class="card rounded-0 p-4">
+                <form action="{% url 'registrarInfUS' %}" class="align-content-center" method="post" id="pi-form">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="border-bottom">
+                            <div class="col-md-12 mb-3 mt-3 d-flex row">
+                                <div class="col-1">
+                                    <label for="rut" class="form-label me-3"><strong>RUT</strong></label>
+                                </div>
+                                <div class="col-12 col-xxl-11">
+                                    <input type="text" class="form-control rounded-0 border-custom-2" id="pi-rut"
+                                        name="rut" value="{{ usuario.us_rut }}" required>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-12 col-xxl-11">
-                           <input type="text" class="form-control rounded-0 border-custom-2" id="pi-calle" name="calle"
-                           value="{{ direccion.dir_calle }}" required>
+                        <div class="border-bottom">
+                            <div class="col-md-12 mb-3 mt-3 d-flex row">
+                                <div class="col-1">
+                                    <label for="nombre" class="form-label me-3"><strong>Nombre</strong></label>
+                                </div>
+                                <div class="col-12 col-xxl-11">
+                                    <input type="text" class="form-control rounded-0 border-custom-2" id="pi-nombre"
+                                        name="nombre" value="{{ usuario.us_nombre }}" required>
+                                </div>
+                            </div>
                         </div>
-                     </div>
-                  </div>
-                  <div class="border-bottom">
-                     <div class="col-md-12 mb-3 mt-3 d-flex row">
-                        <div class="col-1">
-                           <label for="numero" class="form-label me-3"><strong>Nro</strong></label>
+                        <div class="border-bottom">
+                            <div class="col-md-12 mb-3 mt-3 d-flex row">
+                                <div class="col-1">
+                                    <label for="apellido" class="form-label me-3"><strong>Apellido</strong></label>
+                                </div>
+                                <div class="col-12 col-xxl-11">
+                                    <input type="text" class="form-control rounded-0 border-custom-2" id="pi-apellido"
+                                        name="apellido" value="{{ usuario.us_apellido }}" required>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-12 col-xxl-11">
-                           <input type="text" class="form-control rounded-0 border-custom-2" id="pi-numero"
-                              name="numero" value="{{ direccion.dir_numero }}" required>
+                        <div class="border-bottom">
+                            <div class="col-md-12 mb-3 mt-3 d-flex row">
+                                <div class="col-1">
+                                    <label for="telefono" class="form-label me-3"><strong>Teléfono</strong></label>
+                                </div>
+                                <div class="col-12 col-xxl-11">
+                                    <input type="tel" class="form-control rounded-0 border-custom-2" id="pi-telefono"
+                                        name="telefono" value="{{ usuario.us_telefono }}" required>
+                                </div>
+                            </div>
                         </div>
-                     </div>
-                  </div>
-                  <div class="border-bottom">
-                     <div class="col-md-12 mb-3 mt-3 d-flex row align-items-start">
-                        <div class="col-1">
-                           <label for="region" class="form-label me-3"><strong>Región</strong></label>
+                    </div>
+                    <p class="warnings mt-2" id="pi-w"></p>
+                    <button class="btn btn-dark rounded-0 mt-2" id="pi-b1" type="submit">Guardar</button>
+                </form>
+                {% if messages %}
+                {% for message in messages %}
+                <div class="alert {{ message.tags }} alert-dismissible fade show mt-2" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+        <div class="px-md-5 my-2">
+            <div class="card rounded-0">
+                <div class="container mt-3 py-2 px-4">
+                    <h2 class="vogue">Datos de Dirección</h2>
+                </div>
+            </div>
+        </div>
+        <div class="px-md-5">
+            <div class="card rounded-0 p-4">
+                <form action="{% url 'registrarDir' %}" class="align-content-center" id="pi-form2" method="POST">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="border-bottom">
+                            <div class="col-md-12 mb-3 mt-3 d-flex row">
+                                <div class="col-1">
+                                    <label for="calle" class="form-label me-3"><strong>Calle</strong></label>
+                                </div>
+                                <div class="col-12 col-xxl-11">
+                                    <input type="text" class="form-control rounded-0 border-custom-2" id="pi-calle"
+                                        name="calle" value="{{ direccion.dir_calle }}" required>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-12 col-xxl-11">
-                           <select class="form-select rounded-0 border-custom-2" id="pi-regiones" name="region"
-                              required>
-                           </select>
+                        <div class="border-bottom">
+                            <div class="col-md-12 mb-3 mt-3 d-flex row">
+                                <div class="col-1">
+                                    <label for="numero" class="form-label me-3"><strong>Nro</strong></label>
+                                </div>
+                                <div class="col-12 col-xxl-11">
+                                    <input type="text" class="form-control rounded-0 border-custom-2" id="pi-numero"
+                                        name="numero" value="{{ direccion.dir_numero }}" required>
+                                </div>
+                            </div>
                         </div>
-                     </div>
-                  </div>
-                  <div class="border-bottom">
-                     <div class="col-md-12 mb-3 mt-3 d-flex row">
-                        <div class="col-1">
-                           <label for="comuna" class="form-label me-3"><strong>Comuna</strong></label>
+                        <div class="border-bottom">
+                            <div class="col-md-12 mb-3 mt-3 d-flex row">
+                                <div class="col-1">
+                                    <label for="comuna" class="form-label me-3"><strong>Comuna</strong></label>
+                                </div>
+                                <div class="col-12 col-xxl-11">
+                                    <select class="form-select rounded-0 border-custom-2" id="pi-comunas" name="comuna"
+                                        required>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-12 col-xxl-11">
-                           <select class="form-select rounded-0 border-custom-2" id="pi-comunas" name="comuna" required>
-                           </select>
+                        <div class="border-bottom">
+                            <div class="col-md-12 mb-3 mt-3 d-flex row align-items-start">
+                                <div class="col-3">
+                                    <label for="codigo-postal" class="form-label me-3"><strong>Código
+                                            Postal</strong></label>
+                                </div>
+                                <div class="col-12 col-xxl-11">
+                                    <input type="text" class="form-control rounded-0 border-custom-2"
+                                        id="pi-codigo-postal" name="codigo-postal"
+                                        value="{{ direccion.dir_cod_postal }}" required>
+                                </div>
+                            </div>
                         </div>
-                     </div>
-                  </div>
-                  <div class="border-bottom">
-                     <div class="col-md-12 mb-3 mt-3 d-flex row align-items-start">
-                        <div class="col-1">
-                           <label for="codigo-postal" class="form-label me-3"><strong>Código
-                                 Postal</strong></label>
-                        </div>
-                        <div class="col-12 col-xxl-11">
-                           <input type="text" class="form-control rounded-0 border-custom-2" id="pi-codigo-postal"
-                              name="codigo-postal" value="{{ direccion.dir_cod_postal }}" required>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <p class="warnings mt-2" id="pi-w2"></p>
-               <button class="btn btn-dark rounded-0 mt-2" id="pi-b2" type="submit">Guardar</button>
-            </form>
-         </div>
-      </div>
-   </div>
-   {% endblock body %}
+                    </div>
+                    <p class="warnings mt-2" id="pi-w2"></p>
+                    <button class="btn btn-dark rounded-0 mt-2" id="pi-b2" type="submit">Guardar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% endblock body %}
 
-   <!-- JQuery -->
-   {% block js %}
-   <script src="{% static 'core/js/pi_jq.js' %}"></script>
-   <script src="https://code.jquery.com/jquery-3.6.0.min.js%22%3E"></script>
-   {% endblock js %}
+    <!-- JQuery -->
+    {% block js %}
+    <script src="{% static 'core/js/pi_jq.js' %}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js%22%3E"></script>
+    <script>
+        var comunaSeleccionada = "{{ comuna_seleccionada }}";
+    </script>
+    {% endblock js %}
 </body>
 
 </html>

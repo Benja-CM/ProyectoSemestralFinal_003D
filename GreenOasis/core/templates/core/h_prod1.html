@@ -22,9 +22,11 @@
         <div class="sidebar-icon mb-3" id="icon2">
             <i class="fa-sharp fa-solid fa-house fa-xl" style="color: #000000;"></i>
         </div>
-        <div class="sidebar-icon mb-3" id="icon3">
-            <i class="fa-sharp fa-solid fa-clipboard fa-xl" style="color: #000000;"></i>
+        {% if user.Usuario.rol == 2 %}
+        <div class="sidebar-icon" id="icon3">
+            <i class="fa-sharp fa-solid fa-clipboard" style="color: #000000;"></i>
         </div>
+        {% endif %}
         <div class="sidebar-icon mb-3" id="icon4">
             <i class="fa-sharp fa-solid fa-bag-shopping fa-xl" style="color: #000000;"></i>
         </div>
@@ -55,39 +57,39 @@
                         </button>
                         <div class="collapse" id="home-collapse">
                             <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small ms-4">
-                                <li><a href="{% url 'p_info' %}" class="link-dark rounded">Personal</a></li>
-                                <li><a href="{% url 'p_acc' %}" class="link-dark rounded">Cuenta</a></li>
-                                <li><a href="{% url 'p_pch' %}" class="link-dark rounded">Metodo de Pago</a>
-                                </li>
-                                <li><a href="{% url 'ong' %}" class="link-dark rounded">ONG</a></li>
-                            </ul>
-                        </div>
+                                <li><a href="{% url 'userInfo' %}" class="link-dark rounded">Personal</a></li>
+                                <li><a href="{% url 'userAcc' %}" class="link-dark rounded">Cuenta</a></li>
                     </li>
-                    <li class="mb-1">
-                        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
-                            data-bs-target="#dashboard-collapse" aria-expanded="false">
-                            <i class="fa-sharp fa-solid fa-clipboard" style="color: #000000;"></i>
-                            Ventas
-                        </button>
-                        <div class="collapse" id="dashboard-collapse">
-                            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small ms-4">
-                                <li><a href="{% url 'vent_ing' %}" class="link-dark rounded">Agregar</a></li>
-                                <li><a href="{% url 'vent_edit' %}" class="link-dark rounded">Modificar </a></li>
-                                <li><a href="{% url 'vent_list' %}" class="link-dark rounded">Lista</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="mb-1">
-                        <a href="{% url 'h_buy' %}">
-                            <button class="btn btn-toggle rounded">
-                                <i class="fa-sharp fa-solid fa-bag-shopping" style="color: #000000;"></i>
-                                Compras
-                            </button>
-                        </a>
-                    </li>
+                    <li><a href="{% url 'ong' %}" class="link-dark rounded">ONG</a></li>
                 </ul>
             </div>
+            </li>
+            {% if user.Usuario.rol == 2 %}
+            <li class="mb-1">
+                <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
+                    data-bs-target="#dashboard-collapse" aria-expanded="false">
+                    <i class="fa-sharp fa-solid fa-clipboard" style="color: #000000;"></i>
+                    Ventas
+                </button>
+                <div class="collapse" id="dashboard-collapse">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small ms-4">
+                        <li><a href="{% url 'vent_ing' %}" class="link-dark rounded">Agregar</a></li>
+                        <li><a href="{% url 'vent_list' %}" class="link-dark rounded">Lista</a></li>
+                    </ul>
+                </div>
+            </li>
+            {% endif %}
+            <li class="mb-1">
+                <a href="{% url 'h_buy' %}">
+                    <button class="btn btn-toggle rounded">
+                        <i class="fa-sharp fa-solid fa-bag-shopping" style="color: #000000;"></i>
+                        Compras
+                    </button>
+                </a>
+            </li>
+            </ul>
         </div>
+    </div>
     </div>
     {% endblock title %}
     <!--------------------------------------------------------------------------------------------------------->
@@ -164,4 +166,5 @@
     </div>
     {% endblock body %}
 </body>
+
 </html>

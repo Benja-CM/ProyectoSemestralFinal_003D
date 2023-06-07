@@ -42,29 +42,20 @@ class Producto(models.Model):
 # NO MODIFICAR ARRIBA POR DIOS SANTO
 # QUE SÍ QUE SÍ
 
-class Region(models.Model):
-    id_region   = models.AutoField(primary_key=True, verbose_name='ID de Region')
-    reg_nom     = models.CharField(max_length=50, blank=False, verbose_name='Nombre de Region')
-    def __str__(self) -> str:
-        return self.reg_nom
-
 class Comuna(models.Model):
     id_com   = models.AutoField(primary_key=True, verbose_name='ID de Comuna')
     com_nom     = models.CharField(max_length=50, blank=False, verbose_name='Nombre de Comuna')
-    com_cost_envio = models.IntegerField(null=False, blank=False) #Debe venir de la otra tabla
-    region      = models.ForeignKey(Region, on_delete=models.CASCADE)
+    com_cost_envio = models.IntegerField(null=True, blank=True) #Debe venir de la otra tabla
     def __str__(self) -> str:
         return self.com_nom
 
 class Direccion(models.Model):
     id_dir      = models.AutoField(primary_key=True, verbose_name='ID de Dirección')
-    dir_calle   = models.CharField(max_length=50, blank=False, verbose_name='Nombre de Calle')
-    dir_numero  = models.IntegerField(null=False, blank=False)
-    dir_cod_postal = models.IntegerField(null=False, blank=False)
+    dir_calle   = models.CharField(max_length=50, blank=True, verbose_name='Nombre de Calle')
+    dir_numero  = models.IntegerField(null=True, blank=True)
+    dir_cod_postal = models.IntegerField(null=True, blank=True)
     usuario     = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     comuna      = models.ForeignKey(Comuna, on_delete=models.CASCADE)
-
-# NO SE COMO HACERLO
 
 class Compra(models.Model):
     id_compra   = models.AutoField(primary_key=True, verbose_name='ID de Compra')

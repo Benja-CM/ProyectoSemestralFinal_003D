@@ -322,47 +322,25 @@ $(document).ready(function () {
 
     /* Web Service para obtener los datos de las regiones y comunas */
     /*$.getJSON("https://gist.githubusercontent.com/juanbrujo/0fd2f4d126b3ce5a95a7dd1f28b3d8dd/raw/b8575eb82dce974fd2647f46819a7568278396bd/comunas-regiones.json", function (data) {*/
-    $.getJSON("https://raw.githubusercontent.com/Alexandio/Practica_003D/main/comunas-regiones.php", function (data) {
-        console.log(data)
-        /* Script para los Select de comuna y region */
-        var iRegion = 0;
-        var htmlRegion = '<option value="sin-region">Seleccione región</option><option value="sin-region">--</option>';
+    $.getJSON("https://raw.githubusercontent.com/Alexandio/Practica_003D/main/comunas.php", function (data) {
         var htmlComunas = '<option value="sin-comuna">Seleccione comuna</option><option value="sin-comuna">--</option>';
 
-        jQuery.each(data.regiones, function () {
-            htmlRegion = htmlRegion + '<option value="' + data.regiones[iRegion].region + '">' + data.regiones[iRegion].region + '</option>';
-            iRegion++;
+        var santiagoRegion = data.regiones.find(function (region) {
+            return region.region === "Región Metropolitana de Santiago";
         });
 
-        jQuery('#pi-regiones').html(htmlRegion);
-        jQuery('#pi-comunas').html(htmlComunas);
-
-        jQuery('#pi-regiones').change(function () {
-            var iRegiones = 0;
-            var valorRegion = jQuery(this).val();
-            var htmlComuna = '<option value="sin-comuna">Seleccione comuna</option><option value="sin-comuna">--</option>';
-            jQuery.each(data.regiones, function () {
-                if (data.regiones[iRegiones].region == valorRegion) {
-                    var iComunas = 0;
-                    jQuery.each(data.regiones[iRegiones].comunas, function () {
-                        htmlComuna = htmlComuna + '<option value="' + data.regiones[iRegiones].comunas[iComunas] + '">' + data.regiones[iRegiones].comunas[iComunas] + '</option>';
-                        iComunas++;
-                    });
-                }
-                iRegiones++;
+        if (santiagoRegion) {
+            jQuery.each(santiagoRegion.comunas, function (index, comuna) {
+                htmlComunas += '<option value="' + comuna + '">' + comuna + '</option>';
             });
-            jQuery('#pi-comunas').html(htmlComuna);
-        });
+
+            // Establecer la opción seleccionada en el select
+            jQuery('#pi-comunas').html(htmlComunas).val(comunaSeleccionada);
+        }
+
         jQuery('#pi-comunas').change(function () {
-            if (jQuery(this).val() == 'sin-region') {
-                alert('seleccione Región');
-            } else if (jQuery(this).val() == 'sin-comuna') {
-                alert('seleccione Comuna');
-            }
-        });
-        jQuery('#pi-regiones').change(function () {
-            if (jQuery(this).val() == 'sin-region') {
-                alert('seleccione Región');
+            if (jQuery(this).val() == 'sin-comuna') {
+                alert('Seleccione una comuna');
             }
         });
     });

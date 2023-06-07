@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth import authenticate, login, logout
-from .models import Rol, Usuario, Producto, Direccion, Comuna, Region, Categoria, Detalle, Compra
+from .models import Rol, Usuario, Producto, Direccion, Comuna, Categoria, Detalle, Compra
 
 # Create your views here.
 def index(request):
@@ -165,34 +165,34 @@ def registrarInfUS(request):
     return redirect('userInfo')
 
 # INGRESAR DE DIRECCION DEL USUARIO
-""" @login_required
+@login_required
 def registrarDir(request):
-    usuariod = Usuario.objects.filter(c_alias=request.user.username)
+    usuariod = Usuario.objects.get(c_alias=request.user.username)
     d_calle = request.POST['calle']
     d_numero = request.POST['numero']
     d_comuna = request.POST['comuna']
     d_codigopostal = request.POST['codigo-postal']
 
-    dr_comuna = Comuna.objects.filter(com_nom = d_comuna)
+    dr_comuna = Comuna.objects.get(com_nom = d_comuna)
 
-    Direccion.objects.filter(usuario = usuariod.id_usuario).update(
+    Direccion.objects.filter(usuario = usuariod.id_usuario).update(   
         dir_calle=d_calle,
         dir_numero=d_numero,
-        comuna=1,
+        comuna=dr_comuna.id_com,
         dir_cod_postal=d_codigopostal,
         usuario = usuariod.id_usuario
     )
-
     messages.add_message(request, messages.SUCCESS, '¡Su información se ha modificado exitosamente!')
-    return redirect('userInfo') """
+    return redirect('userInfo') 
         
 # VISUALIZA LA INFO DEL USUARIO
 def userInfo(request):
     usuario = Usuario.objects.get(c_alias=request.user.username) 
-    direccion = Direccion.objects.filter(usuario = usuario.id_usuario) 
+    direccion = Direccion.objects.get(usuario = usuario.id_usuario) 
     context = {
         'usuario': usuario,
-        'direccion': direccion
+        'direccion': direccion,
+        'comuna_seleccionada': direccion.comuna
     }
     return render(request, 'core/p_info.html', context)
     
@@ -210,6 +210,7 @@ def registrarInfAC(request):
     user.is_staff = False
     user.save()
     
+    Direccion.objects.create(usuario = Usuario.objects.get(c_alias=alias_u), comuna = Comuna.objects.get(id_com=99))
     Compra.objects.create(usuario = Usuario.objects.get(c_alias=alias_u))
     
     return redirect('index')
