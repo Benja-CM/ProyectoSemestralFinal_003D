@@ -58,5 +58,6 @@ INSERT INTO core_comuna VALUES (49, 'El Monte', 3000);
 INSERT INTO core_comuna VALUES (50, 'Isla de Maipo', 3000);
 INSERT INTO core_comuna VALUES (51, 'Padre Hurtado', 3000);
 INSERT INTO core_comuna VALUES (52, 'Peñaflor', 3000);
+INSERT INTO core_comuna VALUES (99, '', 0);
 
 
