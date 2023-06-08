@@ -2,7 +2,7 @@
 from django.contrib import admin
 from django.urls import path, include
 from .views import index, product1, profile, cart, search, conf_pago, create_acc, h_buy, h_prod1, p_acc, p_info, p_pch, pss_fg, vent_edit
-from .views import vent_ing, vent_list, ong, registrarInfUS, registrarInfAC, registrarProducto, eliminarProducto, eliminarDetalle
+from .views import vent_ing, vent_list, ong, registrarInfUS, registrarInfAC, registrarProducto, eliminarProducto, eliminarDetalle, realizarCompra
 from .views import actualizarProducto, actualizarCuenta, iniciar_sesion, cerrar_sesion, registrarProducto, userInfo, userAcc, registrarDetalle, registrarDir
 
 urlpatterns = [
@@ -15,7 +15,7 @@ urlpatterns = [
     path('conf_pago/', conf_pago, name='conf_pago'),
     path('create_acc/', create_acc, name='create_acc'),
     path('h_buy/', h_buy, name='h_buy'),
-    path('h_prod1/', h_prod1, name='h_prod'),
+    path('h_prod1/<int:id_com>', h_prod1, name='h_prod'),
     path('p_acc/', p_acc, name='p_acc'),
     path('p_info/', p_info, name='p_info'),
     path('p_pch/', p_pch, name='p_pch'),
@@ -33,8 +33,9 @@ urlpatterns = [
     path('iniciar_sesion/', iniciar_sesion, name='iniciar_sesion'),
     path('cerrar_sesion/', cerrar_sesion, name='cerrar_sesion'),
     path('registrarProducto/<int:id_prod>/<int:precio>/', registrarProducto, name='registrarProducto'),
-    path('registrarDetalle/<int:id_detalle>/<int:precio>/', registrarDetalle, name='registrarDetalle'),
+    path('registrarDetalle/<int:id_prod>/<int:precio>/', registrarDetalle, name='registrarDetalle'),
     path('userInfo/', userInfo, name='userInfo'),
     path('userAcc/', userAcc, name='userAcc'),
     path('eliminarDetalle/<int:id>/', eliminarDetalle, name='eliminarDetalle'),
+    path('realizarCompra/<int:total>/', realizarCompra, name='realizarCompra'),
 ]

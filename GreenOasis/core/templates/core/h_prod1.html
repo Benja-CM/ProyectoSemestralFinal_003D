@@ -6,9 +6,15 @@
 <head>
 </head>
 
-<body class="profile-color" style="padding-top: 75px;">
+<body>
     <!-- Menu Lateral -->
     {% block title %}
+    <style>
+		body{
+			padding-top: 75px;
+			background-color: #EDEDED;
+		}
+	</style>
     <div
         class="container-fluid sidebar col-1 navbar-profile-color mb-3 align-items-center flex-column text-center pt-2 g-0">
         <div class="sidebar-icon mb-3 mt-2" id="menu">
@@ -101,10 +107,23 @@
                 <div class="mb-3">
                     <div class="card rounded-0 dh-title">
                         <div class="p-3">
-                            <div class="row mx-1">
-                                <h5 class="mb-0">Pala Manual FiberComp® 100S</h5>
-                                <p class="mb-0">1 Unidad</p>
+                            {% for p in listado %}
+                            <div class="row px-3">
+                                <div class="border-bottom">
+                                    <div class="row align-items-center py-2">
+                                        <div class="col-md-9 d-flex">
+                                            <img src="{{ p.producto.prod_imagen.url }}" alt="prod3"
+                                                class="img-search me-2 mt-md-auto mt-4">
+                                            <div class="col my-md-1">
+                                                <h5 class="mb-0 mt-3 vogue">{{ p.producto.prod_nom }}</h5>
+                                                <p class="mb-1 state-1 ttmoons">Cantidad: {{ p.de_cantidad }}</p>
+                                                <h5 class="mb-0 ttmoons">${{ p.producto.prod_precio }} CLP</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
@@ -113,10 +132,8 @@
                     <div class="card rounded-0">
                         <div class="p-3">
                             <div class="row mx-1 pb-1">
-                                <p class="mb-1 state-0">En Proceso</p>
-                                <h5 class="mb-2">En menos de 4 Días</h5>
-                                <p class="mb-0">Entregaremos tu paquete en Luis Martinez 6218, Conchalí,
-                                    Conchalí, RM (Metropolitana).</p>
+                                <h5 class="mb-2">Llega el {{ compra.cop_fech_entr|date:"d/m/Y" }}</h5>
+                                <p class="mb-0">Entregaremos tu paquete en {{direccion.dir_calle}} {{direccion.dir_numero}}, {{direccion.comuna}}.</p>
                             </div>
                             <hr>
                             <div class="ms-3">
@@ -132,13 +149,13 @@
                 <div class="p-4">
                     <div class="p-2 pt-5">
                         <h5>Detalle de la compra</h5>
-                        <p>2 de Marzo de 2023 | # 2000004054909764</p>
+                        <p>{{compra.cop_fechcom|date:"d/m/Y"}} | #{{compra.id_compra}}</p>
                     </div>
                     <hr>
                     <div class="p-2">
                         <div class="d-flex mb-1">
                             <div class="me-auto">Producto</div>
-                            <div>$ 9,189</div>
+                            <div>$ {{costo_envio}}</div>
                         </div>
                         <div class="d-flex mb-1">
                             <div class="me-auto">Descuento</div>
@@ -146,7 +163,7 @@
                         </div>
                         <div class="d-flex mb-1">
                             <div class="me-auto">Envío</div>
-                            <div>Gratis</div>
+                            <div>${{compra.com_cost_envio}}</div>
                         </div>
                     </div>
                     <hr>
@@ -154,8 +171,7 @@
                         <div class="d-flex mb-1">
                             <div class="me-auto">Total</div>
                             <div>
-                                <p class="mb-0 text-end">$6.490 CLP</p>
-                                <p>Redcompra **** 3966</p>
+                                <p class="mb-0 text-end">${{compra.cop_total}} CLP</p>
                             </div>
                         </div>
                     </div>

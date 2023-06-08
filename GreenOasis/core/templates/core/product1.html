@@ -76,6 +76,14 @@
                             </div>
                         </div>
                         <hr>
+                        {% if messages %}
+                        {% for message in messages %}
+                        <div class="alert {{ message.tags }} alert-dismissible fade show mt-2" role="alert">
+                            {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        {% endfor %}
+                        {% endif %}
                         <button type="submit" class="btn btn-custom rounded-0">Agregar al carrito</button>
                         <a type="button" href="" class="btn btn-custom-1 rounded-0 border-custom-1">Comprar ahora</a>
                 </form>

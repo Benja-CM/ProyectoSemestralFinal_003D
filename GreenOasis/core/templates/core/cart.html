@@ -60,17 +60,29 @@
                                         <td colspan="2">$ {{ impuesto }} CLP</td>
                                     </tr>
                                     <tr>
+                                        <td colspan="3" class="text-end"><strong>Costo de Envio</strong></td>
+                                        <td colspan="2">$ {{ costo_envio }} CLP</td>
+                                    </tr>
+                                    <tr>
                                         <td colspan="3" class="text-end"><strong>Total</strong></td>
                                         <td colspan="2">$ {{ total }} CLP</td>
                                     </tr>
                                     <tr>
                                         <td>
                                             <div class="col-1 text-end">
-                                                <a type="button" href=""
+                                                <a type="button" href="{% url 'realizarCompra' total %}"
                                                     class="btn btn-custom rounded-0 btn-lg px-md-5">Comprar</a>
                                             </div>
                                         </td>
                                     </tr>
+                                    {% if messages %}
+                                    {% for message in messages %}
+                                    <div class="alert {{ message.tags }} alert-dismissible fade show mt-2" role="alert">
+                                        {{ message }}
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                    {% endfor %}
+                                    {% endif %}
                                 </tfoot>
                             </table>
                         </div>

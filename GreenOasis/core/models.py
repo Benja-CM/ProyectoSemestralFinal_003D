@@ -60,10 +60,12 @@ class Direccion(models.Model):
 class Compra(models.Model):
     id_compra   = models.AutoField(primary_key=True, verbose_name='ID de Compra')
     usuario     = models.ForeignKey(Usuario, on_delete=models.CASCADE)
-    cop_fechcom = models.DateField(null=True)
-    cop_fech_entr  = models.DateField(null=True)
-    com_cost_envio = models.IntegerField(null=True) #Debe venir de la tabla Comuna
-    cop_total   = models.IntegerField(null=True)
+    cop_fechcom = models.DateField(null=True, blank=True)
+    cop_fech_entr  = models.DateField(null=True, blank=True)
+    com_cost_envio = models.IntegerField(null=True, blank=True) #Debe venir de la tabla Comuna
+    cop_total   = models.IntegerField(null=True, blank=True)
+    direccion   = models.ForeignKey(Direccion, on_delete=models.CASCADE)
+    cop_realizada  = models.BooleanField(default=False)
     
 class Detalle(models.Model):
     id_detalle  = models.AutoField(primary_key=True, verbose_name='ID de Detalle')

@@ -169,81 +169,29 @@
          </div>
       </div>
       <div class="px-md-3">
+         {% for c in listado reversed %}
          <div class="card rounded-0 p-3 mb-2">
             <div class="row">
                <div class="border-bottom">
                   <div class="row align-items-center p-2">
                      <div class="col-md-9 d-flex">
-                        <img src="{% static 'core/img/prod2.jpg' %}" alt="prod3" class="img-icon me-2 history-border">
+       {% comment %} <img src="{% static 'core/img/prod2.jpg' %}" alt="prod3" class="img-icon me-2 history-border"> {% endcomment %}
                         <div class="col">
-                           <p class="mb-0 state-2">En Proceso</p>
-                           <h5 class="mb-1">En menos de 4 Días</h5>
-                           <p class="mb-0">Pala Manual FiberComp® 100S</p>
+                           <p class="mb-0">Boleta N°: {{ c.id_compra }} </p>
+                           <h5 class="mb-1">Llega el {{ c.cop_fech_entr|date:"d/m/Y" }}</h5>
+                           <p class="mb-0">Compra realizada el {{ c.cop_fechcom|date:"d/m/Y" }}</p>
                         </div>
                      </div>
                      <div class="col-md-3 d-flex flex-column justify-content-end">
-                        <a href="" type="button" class="btn history-btn-1 rounded-0 btn-lg mb-1">
+                        <a href="{% url 'h_prod' c.id_compra %}" type="button" class="btn history-btn-1 rounded-0 btn-lg mb-1">
                            Ver compra
-                        </a>
-                        <a href="" type="button" class="btn history-btn-2 rounded-0 btn-lg btn-hover"
-                           data-bs-dismiss="modal">
-                           Volver a comprar
                         </a>
                      </div>
                   </div>
                </div>
             </div>
          </div>
-         <div class="card rounded-0 p-3 mb-2">
-            <div class="row">
-               <div class="border-bottom">
-                  <div class="row align-items-center p-2">
-                     <div class="col-md-9 d-flex">
-                        <img src="{% static 'core/img/prod3.jpg' %}" alt="prod2" class="img-icon me-2 history-border">
-                        <div class="col">
-                           <p class="mb-0 state-1">En Camino</p>
-                           <h5 class="mb-1">Antes del 11 de Abril</h5>
-                           <p class="mb-0">Pistola Riego Plástica con Gatillo Trasero 100S</p>
-                        </div>
-                     </div>
-                     <div class="col-md-3 d-flex flex-column justify-content-end">
-                        <a href="" type="button" class="btn history-btn-1 rounded-0 btn-lg mb-1">
-                           Ver compra
-                        </a>
-                        <a href="" type="button" class="btn history-btn-2 rounded-0 btn-lg btn-hover"
-                           data-bs-dismiss="modal">
-                           Volver a comprar
-                        </a>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-         <div class="card rounded-0 p-4 mb-2">
-            <div class="row">
-               <div class="border-bottom">
-                  <div class="row align-items-center p-2">
-                     <div class="col-md-9 d-flex">
-                        <img src="{% static 'core/img/prod1.jpg' %}" alt="prod1" class="img-icon me-2 history-border">
-                        <div class="col">
-                           <p class="mb-0 state-0">Entregado</p>
-                           <h5 class="mb-1">Llegó el 2 de Marzo</h5>
-                           <p class="mb-0">Tijeras de Podar</p>
-                        </div>
-                     </div>
-                     <div class="col-md-3 d-flex flex-column justify-content-end">
-                        <a href="{% url 'h_prod' %}" type="button" class="btn history-btn-1 rounded-0 btn-lg mb-1">
-                           Ver compra
-                        </a>
-                        <a href="" type="button" class="btn history-btn-2 rounded-0 btn-lg btn-hover"
-                           data-bs-dismiss="modal">
-                           Volver a comprar
-                        </a>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
+         {% endfor %}
       </div>
    </div>
    {% endblock body %}
