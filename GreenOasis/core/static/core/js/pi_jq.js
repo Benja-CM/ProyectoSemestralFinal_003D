@@ -24,79 +24,58 @@ $(document).ready(function () {
         }
 
         /* Validar Nombre */
-        if (nombre.trim().length < 3 || nombre.trim().length > 12) {
-            msj += "El nombre debe ser entre 3 y 12 carácteres<br>";
-            $("#pi-nombre").removeClass('is-valid').addClass('is-invalid');
-            enviar = true;
+        if (nombre.trim().length < 3 || nombre.trim().length > 20) {
+            msj += "El nombre debe ser entre 3 y 20 caracteres<br>";
             flag_nombre = true;
-        }
-        else {
-            if (flag_nombre == false){
-                $("#pi-nombre").removeClass('is-invalid').addClass('is-valid');
-            }
         }
 
         if (!validarNombre(nombre)) {
             msj += "El nombre no debe contener números<br>";
-            $("#pi-nombre").removeClass('is-valid').addClass('is-invalid');
-            enviar = true;
             flag_nombre = true;
-        }
-        else {
-            if (flag_nombre == false){
-                $("#pi-nombre").removeClass('is-invalid').addClass('is-valid');
-            }
         }
 
         var letra = nombre.charAt(0);
         if (!esMayuscula(letra)) {
             msj += "La primera letra del nombre debe ser mayúscula<br>";
-            $("#pi-nombre").removeClass('is-valid').addClass('is-invalid');
-            enviar = true;
             flag_nombre = true;
         }
-        else {
-            if (flag_nombre == false){
-                $("#pi-nombre").removeClass('is-invalid').addClass('is-valid');
-            }
+
+        if (flag_nombre) {
+            $("#pi-nombre").removeClass('is-valid').addClass('is-invalid');
+            enviar = true;
+        } else {
+            $("#pi-nombre").removeClass('is-invalid').addClass('is-valid');
+            nombre = nombre.trim();
+            $("#pi-nombre").val(nombre);
         }
 
         /* Validar Apellido */
-        if (apellido.trim().length < 3 || apellido.trim().length > 12) {
-            msj += "El apellido debe ser entre 3 y 12 carácteres<br>";
+        if (apellido.trim().length < 3 || apellido.trim().length > 20) {
+            msj += "El apellido debe ser entre 3 y 20 carácteres<br>";
             $("#pi-apellido").removeClass('is-valid').addClass('is-invalid');
-            enviar = true;
             flag_apellido = true;
-        }
-        else {
-            if (flag_apellido == false){
-                $("#pi-apellido").removeClass('is-invalid').addClass('is-valid');
-            }
         }
 
         if (!validarNombre(apellido)) {
             msj += "El apellido no debe contener números<br>";
             $("#pi-apellido").removeClass('is-valid').addClass('is-invalid');
-            enviar = true;
             flag_apellido = true;
-        }
-        else {
-            if (flag_apellido == false){
-                $("#pi-apellido").removeClass('is-invalid').addClass('is-valid');
-            }
         }
 
         var letra = apellido.charAt(0);
         if (!esMayuscula(letra)) {
             msj += "La primera letra del apellido debe ser mayúscula<br>";
             $("#pi-apellido").removeClass('is-valid').addClass('is-invalid');
-            enviar = true;
             flag_apellido = true;
         }
-        else {
-            if (flag_apellido == false){
-                $("#pi-apellido").removeClass('is-invalid').addClass('is-valid');
-            }
+
+        if (flag_apellido) {
+            $("#pi-apellido").removeClass('is-valid').addClass('is-invalid');
+            enviar = true;
+        } else {
+            $("#pi-apellido").removeClass('is-invalid').addClass('is-valid');
+            apellido = apellido.trim();
+            $("#pi-apellido").val(apellido);
         }
 
         /* Validar Telefono */
