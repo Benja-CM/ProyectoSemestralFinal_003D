@@ -6,6 +6,9 @@ $(document).ready(function () {
         var apellido = $("#pi-apellido").val();
         var telefono = $("#pi-telefono").val();
 
+        var flag_nombre = false;
+        var flag_apellido = false;
+
         var msj = "";
         let enviar = false;
 
@@ -25,18 +28,24 @@ $(document).ready(function () {
             msj += "El nombre debe ser entre 3 y 12 carácteres<br>";
             $("#pi-nombre").removeClass('is-valid').addClass('is-invalid');
             enviar = true;
+            flag_nombre = true;
         }
         else {
-            $("#pi-nombre").removeClass('is-invalid').addClass('is-valid');
+            if (flag_nombre == false){
+                $("#pi-nombre").removeClass('is-invalid').addClass('is-valid');
+            }
         }
 
         if (!validarNombre(nombre)) {
             msj += "El nombre no debe contener números<br>";
             $("#pi-nombre").removeClass('is-valid').addClass('is-invalid');
             enviar = true;
+            flag_nombre = true;
         }
         else {
-            $("#pi-nombre").removeClass('is-invalid').addClass('is-valid');
+            if (flag_nombre == false){
+                $("#pi-nombre").removeClass('is-invalid').addClass('is-valid');
+            }
         }
 
         var letra = nombre.charAt(0);
@@ -44,6 +53,12 @@ $(document).ready(function () {
             msj += "La primera letra del nombre debe ser mayúscula<br>";
             $("#pi-nombre").removeClass('is-valid').addClass('is-invalid');
             enviar = true;
+            flag_nombre = true;
+        }
+        else {
+            if (flag_nombre == false){
+                $("#pi-nombre").removeClass('is-invalid').addClass('is-valid');
+            }
         }
 
         /* Validar Apellido */
@@ -51,18 +66,24 @@ $(document).ready(function () {
             msj += "El apellido debe ser entre 3 y 12 carácteres<br>";
             $("#pi-apellido").removeClass('is-valid').addClass('is-invalid');
             enviar = true;
+            flag_apellido = true;
         }
         else {
-            $("#pi-apellido").removeClass('is-invalid').addClass('is-valid');
+            if (flag_apellido == false){
+                $("#pi-apellido").removeClass('is-invalid').addClass('is-valid');
+            }
         }
 
         if (!validarNombre(apellido)) {
             msj += "El apellido no debe contener números<br>";
             $("#pi-apellido").removeClass('is-valid').addClass('is-invalid');
             enviar = true;
+            flag_apellido = true;
         }
         else {
-            $("#pi-apellido").removeClass('is-invalid').addClass('is-valid');
+            if (flag_apellido == false){
+                $("#pi-apellido").removeClass('is-invalid').addClass('is-valid');
+            }
         }
 
         var letra = apellido.charAt(0);
@@ -70,6 +91,12 @@ $(document).ready(function () {
             msj += "La primera letra del apellido debe ser mayúscula<br>";
             $("#pi-apellido").removeClass('is-valid').addClass('is-invalid');
             enviar = true;
+            flag_apellido = true;
+        }
+        else {
+            if (flag_apellido == false){
+                $("#pi-apellido").removeClass('is-invalid').addClass('is-valid');
+            }
         }
 
         /* Validar Telefono */
