@@ -14,6 +14,43 @@
          background-color: #EDEDED;
       }
    </style>
+   {% if messages %}
+    {% for message in messages %}
+    {% if message.tags == 'alert-success' %}
+    <script>
+        Swal.fire({
+            "icon": "success",
+            "text": "{{ message }}",
+            "confirmButtonColor": "#15AE00"
+        });
+    </script>
+    {% elif message.tags == 'alert-danger' %}
+    <script>
+        Swal.fire({
+            "icon": "error",
+            "text": "{{ message }}",
+            "confirmButtonColor": "#FF0000"
+        });
+    </script>
+    {% elif message.tags == 'alert-warning' %}
+    <script>
+        Swal.fire({
+            "icon": "warning",
+            "text": "{{ message }}",
+            "confirmButtonColor": "#FFC107"
+        });
+    </script>
+    {% else %}
+    <script>
+        Swal.fire({
+            "icon": "info",
+            "text": "{{ message }}",
+            "confirmButtonColor": "#007BFF"
+        });
+    </script>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
    <!-- Menu Lateral -->
    <div class="container-fluid col-md-2 navbar-profile-color sidebar phs">
       <div class="row">

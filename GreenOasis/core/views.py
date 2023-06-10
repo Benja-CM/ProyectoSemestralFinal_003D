@@ -309,15 +309,25 @@ def cerrar_sesion(request):
 #PERMITE REGISTRAR DETALLE ASOCIADO A USUARIO CONECTADO
 @login_required
 def registrarDetalle(request, id_prod, precio):
-    id_usuario  = request.user.id
-    compra  = Compra.objects.get(usuario = id_usuario-1, cop_realizada=False)
+    usuario = Usuario.objects.get(c_alias=request.user)
+    c_usuario = usuario.id_usuario
+    
+    compra  = Compra.objects.get(usuario=c_usuario, cop_realizada=False)
+    
     producto    = Producto.objects.get(id_prod = id_prod)
     dr_cantidad = request.POST['cantidad']
     dr_subtotal = precio * int(dr_cantidad)
     
     if (int(dr_cantidad)<=producto.prod_stock):
         Detalle.objects.create(compra = compra, producto = producto, de_cantidad = dr_cantidad, de_subtotal = dr_subtotal)
-        return redirect('search', 5)
+        messages.success(request, '¡El producto se ha agregado al carrito!')
+        
+        if (request.POST['action'] == 'agregar'):
+            return redirect('search', 5)
+        elif (request.POST['action'] == 'comprar'):
+            return redirect('cart')
+        else:
+            messages.error(request, 'Opción invalida')
     else:
         messages.warning(request, 'La cantidad solicitada supera el stock disponible.')
         return redirect('product1', id_prod)
@@ -325,8 +335,10 @@ def registrarDetalle(request, id_prod, precio):
 #PERMITE MOSTRAR TODOS LOS DETALLES DEL USUARIO
 @login_required
 def cart(request):
-    id_usuario = request.user.id
-    compra  = Compra.objects.get(usuario = id_usuario-1, cop_realizada=False)
+    usuario = Usuario.objects.get(c_alias=request.user)
+    id_usuario = usuario.id_usuario
+    compra = Compra.objects.get(usuario=id_usuario, cop_realizada=False)
+    
     detalle = Detalle.objects.filter(compra = compra)
     costo_envio = compra.direccion.comuna.com_cost_envio
     
@@ -359,17 +371,17 @@ def eliminarDetalle(request,id):
 #PERMITE REALIZAR LA COMPRA DE UN CARRITO, GUARDAR LA INFORMACIÓN Y CREAR UN CARRITO NUEVO 
 @login_required
 def realizarCompra(request, total):
-    id_usuario  = request.user.id
-    compra  = Compra.objects.get(usuario = id_usuario-1, cop_realizada=False)
-    detalle = Detalle.objects.filter(compra = compra)
+    usuario = Usuario.objects.get(c_alias=request.user)
+    c_usuario = usuario.id_usuario
     
-    c_usuario   = compra.usuario
+    compra  = Compra.objects.get(usuario=c_usuario, cop_realizada=False)
+    detalle = Detalle.objects.filter(compra=compra)
+    
     c_direccion = compra.direccion
     
     if detalle.exists():
         if (c_direccion.comuna.id_com != 99):
             costo_envio = compra.direccion.comuna.com_cost_envio
-            costo_total = costo_envio + total
             flag_compra = True
 
             fecha_compra = date.today()
@@ -380,7 +392,7 @@ def realizarCompra(request, total):
             compra.cop_fechcom  = fecha_compra
             compra.cop_fech_entr = fecha_despacho
             compra.com_cost_envio = costo_envio
-            compra.cop_total    = costo_total
+            compra.cop_total    = total
             compra.cop_realizada = flag_compra
             
             for i in detalle:
@@ -388,23 +400,25 @@ def realizarCompra(request, total):
                 
                 i.producto.save()
             
+            Compra.objects.create(usuario = usuario, direccion = c_direccion)
+            
             compra.save()
             
-            Compra.objects.create(usuario = c_usuario, direccion = c_direccion)
-            
+            messages.success(request, '¡La compra se ha realizado exitosamente!')
             return redirect('h_buy')
         else:
-            messages.add_message(request, messages.ERROR, 'Primero ingrese su información de dirección')
+            messages.error(request, 'Primero ingrese su información de dirección')
             return redirect('p_info')
     else:
-        messages.add_message(request, messages.ERROR, 'El carrito no posee ningun producto')
+        messages.warning(request,'El carrito no posee ningun producto')
         return redirect('cart')
         
 #Lista las compras en la pagina h_buy/historial de compras
 @login_required
 def h_buy(request):
-    id_usuario = request.user.id
-    compra = Compra.objects.filter(usuario = id_usuario-1, cop_realizada=True)
+    usuario = Usuario.objects.get(c_alias=request.user)
+    id_usuario = usuario.id_usuario
+    compra = Compra.objects.filter(usuario=id_usuario, cop_realizada=True)
     
     contexto = {
         "listado": compra
@@ -418,12 +432,18 @@ def h_prod1(request, id_com):
     compra  = Compra.objects.get(id_compra = id_com)
     detalle = Detalle.objects.filter(compra = compra)
     direccion   = compra.direccion
-    costo_envio = compra.cop_total-compra.com_cost_envio
+    costo_sin_envio = compra.cop_total-compra.com_cost_envio
+    
+    subtotal = sum(d.de_subtotal for d in detalle)
+
+    # Calcular impuesto
+    impuesto = round(subtotal * 0.19)
     
     contexto = {
         "listado": detalle,
         "compra": compra,
         "direccion": direccion,
-        "costo_envio": costo_envio
+        "subtotal": subtotal,
+        "impuesto": impuesto
     }
     return render(request, 'core/h_prod1.html',contexto)

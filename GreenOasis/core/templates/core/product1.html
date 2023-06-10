@@ -96,7 +96,7 @@
                 <br>
                 <h1 class="font-weight-bold ttmoons">${{ p.prod_precio }} CLP</h1>
                 <hr>
-                <form action="{% url 'registrarDetalle' p.id_prod p.prod_precio %}" method="post">
+                <form id="prodDetalle" action="{% url 'registrarDetalle' p.id_prod p.prod_precio %}" method="post">
                     {% csrf_token %}
                     <div class="form-group">
                         <label for="cantidad">Cantidad</label>
@@ -113,8 +113,8 @@
                             </div>
                         </div>
                         <hr>
-                        <button type="submit" class="btn btn-custom rounded-0">Agregar al carrito</button>
-                        <a type="button" href="" class="btn btn-custom-1 rounded-0 border-custom-1">Comprar ahora</a>
+                        <button type="submit" name="action" value="agregar" class="btn btn-custom rounded-0">Agregar al carrito</button>
+                        <button type="submit" name="action" value="comprar" class="btn btn-custom-1 rounded-0 border-custom-1">Comprar ahora</a>
                 </form>
             </div>
         </div>
