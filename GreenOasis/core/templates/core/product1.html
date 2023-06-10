@@ -38,13 +38,50 @@
 </head>
 
 <body>
-	{% block title %}
-	<style>
-		body {
-			padding-top: 100px;
-		}
-	</style>
-	{% endblock title %}
+    {% block title %}
+    <style>
+        body {
+            padding-top: 100px;
+        }
+    </style>
+    {% if messages %}
+    {% for message in messages %}
+    {% if message.tags == 'alert-success' %}
+    <script>
+        Swal.fire({
+            "icon": "success",
+            "text": "{{ message }}",
+            "confirmButtonColor": "#15AE00"
+        });
+    </script>
+    {% elif message.tags == 'alert-danger' %}
+    <script>
+        Swal.fire({
+            "icon": "error",
+            "text": "{{ message }}",
+            "confirmButtonColor": "#FF0000"
+        });
+    </script>
+    {% elif message.tags == 'alert-warning' %}
+    <script>
+        Swal.fire({
+            "icon": "warning",
+            "text": "{{ message }}",
+            "confirmButtonColor": "#FFC107"
+        });
+    </script>
+    {% else %}
+    <script>
+        Swal.fire({
+            "icon": "info",
+            "text": "{{ message }}",
+            "confirmButtonColor": "#007BFF"
+        });
+    </script>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+    {% endblock title %}
     {% block body %}
     <!-- ----------------------------------------------------------------------------------------------------- -->
     <div class="container my-4">
@@ -68,22 +105,14 @@
                                 <button class="btn btn-outline-dark rounded-0" type="button"
                                     id="restarCantidad">-</button>
                             </div>
-                            <input type="number" class="form-control rounded-0 text-center border-custom-1"
-                                id="cant" name="cantidad" placeholder="1" min="1" value="1" required>
+                            <input type="number" class="form-control rounded-0 text-center border-custom-1" id="cant"
+                                name="cantidad" placeholder="1" min="1" value="1" required>
                             <div class="input-group-append">
                                 <button class="btn btn-outline-dark rounded-0" type="button"
                                     id="sumarCantidad">+</button>
                             </div>
                         </div>
                         <hr>
-                        {% if messages %}
-                        {% for message in messages %}
-                        <div class="alert {{ message.tags }} alert-dismissible fade show mt-2" role="alert">
-                            {{ message }}
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                        {% endfor %}
-                        {% endif %}
                         <button type="submit" class="btn btn-custom rounded-0">Agregar al carrito</button>
                         <a type="button" href="" class="btn btn-custom-1 rounded-0 border-custom-1">Comprar ahora</a>
                 </form>
@@ -144,9 +173,9 @@
             </div>
         </div>
     </footer>
-    {% endblock foot %}	
+    {% endblock foot %}
     {% block js %}
-    <script>	
+    <script>
         const inputCantidad = document.getElementById('cantidad');
         const btnSumarCantidad = document.getElementById('sumarCantidad');
         const btnRestarCantidad = document.getElementById('restarCantidad');
@@ -159,7 +188,7 @@
             inputCantidad.stepDown();
         });
     </script>
-	{% endblock js %}
+    {% endblock js %}
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
         integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"

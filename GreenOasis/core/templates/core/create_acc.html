@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-{% extends 'core/temp_topm_lo.html' %}		
+{% extends 'core/temp_topm_lo.html' %}
 {% load static %}
 
 <head>
@@ -17,6 +17,43 @@
 			background-color: #EDEDED;
 		}
 	</style>
+	{% if messages %}
+	{% for message in messages %}
+	{% if message.tags == 'alert-success' %}
+	<script>
+		Swal.fire({
+			"icon": "success",
+			"text": "{{ message }}",
+			"confirmButtonColor": "#15AE00"
+		});
+	</script>
+	{% elif message.tags == 'alert-danger' %}
+	<script>
+		Swal.fire({
+			"icon": "error",
+			"text": "{{ message }}",
+			"confirmButtonColor": "#FF0000"
+		});
+	</script>
+	{% elif message.tags == 'alert-warning' %}
+	<script>
+		Swal.fire({
+			"icon": "warning",
+			"text": "{{ message }}",
+			"confirmButtonColor": "#FFC107"
+		});
+	</script>
+	{% else %}
+	<script>
+		Swal.fire({
+			"icon": "info",
+			"text": "{{ message }}",
+			"confirmButtonColor": "#007BFF"
+		});
+	</script>
+	{% endif %}
+	{% endfor %}
+	{% endif %}
 	{% endblock title %}
 
 	<!-- Panel crear cuenta -->
@@ -27,8 +64,8 @@
 			{% csrf_token %}
 			<div class="form-group mb-3">
 				<label for="alias">Nombre de Usuario:</label>
-				<input type="text" class="form-control rounded-0 border-custom-2" placeholder="Ingrese su nombre de usuario"
-					name="alias" id="ca-nombre">
+				<input type="text" class="form-control rounded-0 border-custom-2"
+					placeholder="Ingrese su nombre de usuario" name="alias" id="ca-nombre">
 			</div>
 			<div class="form-group mb-2">
 				<label for="email">Email:</label>

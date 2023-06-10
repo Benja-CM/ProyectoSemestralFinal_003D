@@ -114,7 +114,7 @@ def actualizarCuenta(request):
         c_correo=correo_c,
         c_password=password_c,
     )
-    messages.add_message(request, messages.SUCCESS, '¡Su información se ha modificado exitosamente!')
+    messages.success(request,'¡Su información se ha modificado exitosamente!')
     return redirect('userAcc')
 
 # VISUALIZA LA INFO DE LA CUENTA
@@ -124,6 +124,115 @@ def userAcc(request):
         'usuario': usuario
     }
     return render(request, 'core/p_acc.html', context)
+
+# INGRESAR INFORMACION DE CUENTA
+def registrarInfAC(request):
+    alias_u = request.POST['alias']
+    correo_u = request.POST['email']
+    password_u = request.POST['password']
+    rol_u = 1
+    role = Rol.objects.get(id_rol=rol_u)
+
+    if User.objects.filter(username=alias_u).exists():
+        messages.error(request,'El nombre de usuario ya está ocupado. Por favor, elige otro nombre')
+        return redirect('create_acc')
+
+    if Usuario.objects.filter(c_alias=alias_u).exists():
+        messages.error(request,'El nombre de usuario ya está ocupado. Por favor, elige otro nombre')
+        return redirect('create_acc')
+    
+    if User.objects.filter(email=correo_u).exists():
+        messages.error(request, 'El correo electrónico ya está registrado. Por favor, utiliza otro correo.')
+        return redirect('create_acc')
+    
+    if Usuario.objects.filter(c_correo=correo_u).exists():
+        messages.error(request, 'El correo electrónico ya está registrado. Por favor, utiliza otro correo.')
+        return redirect('create_acc')
+
+    Usuario.objects.create(c_alias=alias_u, c_correo=correo_u, c_password=password_u, rol=role)
+    user = User.objects.create_user(username=alias_u, email=correo_u, password=password_u)
+    user.is_active = True
+    user.is_staff = False
+    user.save()
+    
+    Direccion.objects.create(usuario = Usuario.objects.get(c_alias=alias_u), comuna = Comuna.objects.get(id_com=99))
+    Compra.objects.create(usuario = Usuario.objects.get(c_alias=alias_u),
+                          direccion = Direccion.objects.get(usuario = Usuario.objects.get(c_alias=alias_u)))
+    
+    messages.success(request, '¡La cuenta se ha creado exitosamente!')
+
+    return redirect('index')
+
+# INGRESAR DE INFORMACION DEL USUARIO
+@login_required
+def registrarInfUS(request):
+    rut_u = request.POST['rut']
+    nombre_u = request.POST['nombre']
+    apellido_u = request.POST['apellido']
+    telefono_u = request.POST['telefono']
+
+    # Actualizar el usuario actual
+    Usuario.objects.filter(c_alias=request.user.username).update(
+        us_rut=rut_u,
+        us_nombre=nombre_u,
+        us_apellido=apellido_u,
+        us_telefono=telefono_u
+    )
+
+    messages.success(request, '¡Su información se ha modificado exitosamente!')
+
+    return redirect('userInfo')
+
+# INGRESAR DE DIRECCION DEL USUARIO
+@login_required
+def registrarDir(request):
+    usuariod = Usuario.objects.get(c_alias=request.user.username)
+    d_calle = request.POST['calle']
+    d_numero = request.POST['numero']
+    d_comuna = request.POST['comuna']
+    d_codigopostal = request.POST['codigo-postal']
+
+    dr_comuna = Comuna.objects.get(com_nom = d_comuna)
+
+    Direccion.objects.filter(usuario = usuariod.id_usuario).update(   
+        dir_calle=d_calle,
+        dir_numero=d_numero,
+        comuna=dr_comuna.id_com,
+        dir_cod_postal=d_codigopostal,
+        usuario = usuariod.id_usuario
+    )
+    messages.success(request, '¡Su información de dirección se ha modificado exitosamente!')
+    return redirect('userInfo') 
+        
+# VISUALIZA LA INFO DEL USUARIO
+def userInfo(request):
+    usuario = Usuario.objects.get(c_alias=request.user.username) 
+    direccion = Direccion.objects.get(usuario = usuario.id_usuario) 
+    context = {
+        'usuario': usuario,
+        'direccion': direccion,
+        'comuna_seleccionada': direccion.comuna
+    }
+    return render(request, 'core/p_info.html', context)
+    
+# INGRESAR DE PRODUCTOS
+@login_required
+def registrarProducto(request):
+    pr_nom      = request.POST['nombre']
+    pr_descripcion = request.POST['desc']
+    pr_precio   = request.POST['precio']
+    pr_stock    = request.POST['stock']
+    pr_imagen   = request.FILES['imagen']
+    pr_cat      = request.POST['sa-cat']
+
+    registroCat = Categoria.objects.get(id_cat = pr_cat)
+
+    Producto.objects.create(prod_nom = pr_nom, prod_descripcion = pr_descripcion, prod_precio = pr_precio,
+                        prod_stock = pr_stock, prod_imagen = pr_imagen, categoria = registroCat)
+    
+    messages.success(request, 'El producto se ha agregado correctamente.')
+
+    return redirect('vent_list')
 
 # ACTUALIZACION DEL PRODUCTO A LA BASE DE DATOS
 def actualizarProducto(request):
@@ -145,95 +254,8 @@ def actualizarProducto(request):
     registroCategoria = Categoria.objects.get(id_cat = categoria)
     producto.categoria = registroCategoria
     
-    messages.add_message(request, messages.SUCCESS, '¡El producto se ha modificado exitosamente!')
+    messages.success(request, '¡El producto se ha modificado exitosamente!')
     producto.save()
-    
-    return redirect('vent_list')
-
-# INGRESAR DE INFORMACION DEL USUARIO
-@login_required
-def registrarInfUS(request):
-    rut_u = request.POST['rut']
-    nombre_u = request.POST['nombre']
-    apellido_u = request.POST['apellido']
-    telefono_u = request.POST['telefono']
-
-    # Actualizar el usuario actual
-    Usuario.objects.filter(c_alias=request.user.username).update(
-        us_rut=rut_u,
-        us_nombre=nombre_u,
-        us_apellido=apellido_u,
-        us_telefono=telefono_u
-    )
-    messages.add_message(request, messages.SUCCESS, '¡Su información se ha modificado exitosamente!')
-    return redirect('userInfo')
-
-# INGRESAR DE DIRECCION DEL USUARIO
-@login_required
-def registrarDir(request):
-    usuariod = Usuario.objects.get(c_alias=request.user.username)
-    d_calle = request.POST['calle']
-    d_numero = request.POST['numero']
-    d_comuna = request.POST['comuna']
-    d_codigopostal = request.POST['codigo-postal']
-
-    dr_comuna = Comuna.objects.get(com_nom = d_comuna)
-
-    Direccion.objects.filter(usuario = usuariod.id_usuario).update(   
-        dir_calle=d_calle,
-        dir_numero=d_numero,
-        comuna=dr_comuna.id_com,
-        dir_cod_postal=d_codigopostal,
-        usuario = usuariod.id_usuario
-    )
-    messages.add_message(request, messages.SUCCESS, '¡Su información se ha modificado exitosamente!')
-    return redirect('userInfo') 
-        
-# VISUALIZA LA INFO DEL USUARIO
-def userInfo(request):
-    usuario = Usuario.objects.get(c_alias=request.user.username) 
-    direccion = Direccion.objects.get(usuario = usuario.id_usuario) 
-    context = {
-        'usuario': usuario,
-        'direccion': direccion,
-        'comuna_seleccionada': direccion.comuna
-    }
-    return render(request, 'core/p_info.html', context)
-    
-# INGRESAR INFORMACION DE CUENTA
-def registrarInfAC(request):
-    alias_u = request.POST['alias']
-    correo_u = request.POST['email']
-    password_u = request.POST['password']
-    rol_u = 1
-    role = Rol.objects.get(id_rol=rol_u)
-
-    Usuario.objects.create(c_alias=alias_u, c_correo=correo_u, c_password=password_u, rol=role)
-    user = User.objects.create_user(username=alias_u, email=correo_u, password=password_u)
-    user.is_active = True
-    user.is_staff = False
-    user.save()
-    
-    Direccion.objects.create(usuario = Usuario.objects.get(c_alias=alias_u), comuna = Comuna.objects.get(id_com=99))
-    Compra.objects.create(usuario = Usuario.objects.get(c_alias=alias_u),
-                          direccion = Direccion.objects.get(usuario = Usuario.objects.get(c_alias=alias_u)))
-    
-    return redirect('index')
-
-# INGRESAR DE PRODUCTOS
-@login_required
-def registrarProducto(request):
-    pr_nom      = request.POST['nombre']
-    pr_descripcion = request.POST['desc']
-    pr_precio   = request.POST['precio']
-    pr_stock    = request.POST['stock']
-    pr_imagen   = request.FILES['imagen']
-    pr_cat      = request.POST['sa-cat']
-
-    registroCat = Categoria.objects.get(id_cat = pr_cat)
-
-    Producto.objects.create(prod_nom = pr_nom, prod_descripcion = pr_descripcion, prod_precio = pr_precio,
-                        prod_stock = pr_stock, prod_imagen = pr_imagen, categoria = registroCat)
     
     return redirect('vent_list')
 
@@ -243,6 +265,8 @@ def eliminarProducto(request,id):
     producto = Producto.objects.get(id_prod = id)
     producto.delete()
     
+    messages.success(request, '¡El producto se ha eliminado exitosamente!')
+
     return redirect('vent_list')
 
 # MUESTRA LA INFORMACION DEL PRODUCTO
@@ -261,13 +285,12 @@ def iniciar_sesion(request):
     try:
         user = User.objects.get(username = user1)
     except User.DoesNotExist:
-        print(1)
-        messages.error(request, 'El usuario o la contraseña son incorrectos')
+        messages.add_message(request, messages.ERROR, 'El usuario o la contraseña son incorrectos')
         return redirect('index')
 
     pass_valid = check_password(pass1, user.password)
     if not pass_valid:
-        messages.error(request, 'El usuario o la contraseña son incorrectos')
+        messages.add_message(request, messages.ERROR, 'El usuario o la contraseña son incorrectos')
         return redirect('index')
     
     user2 = Usuario.objects.get(c_alias=user1, c_password=pass1)
@@ -275,11 +298,7 @@ def iniciar_sesion(request):
     
     if user is not None:
         login(request, user)
-        if user2.rol.id_rol == 1:
-            return redirect('profile')
-        # else:    (esto es para cuando la vista de administrador nos falta esa pagina)
-        #     contexto = {"usuario": correo2}
-        #     return render(request, '.html', contexto)
+        return redirect('profile')
     else:
         print("8")
     
@@ -296,12 +315,11 @@ def registrarDetalle(request, id_prod, precio):
     dr_cantidad = request.POST['cantidad']
     dr_subtotal = precio * int(dr_cantidad)
     
-    if (int(dr_cantidad)<producto.prod_stock):
+    if (int(dr_cantidad)<=producto.prod_stock):
         Detalle.objects.create(compra = compra, producto = producto, de_cantidad = dr_cantidad, de_subtotal = dr_subtotal)
-        
         return redirect('search', 5)
     else:
-        messages.add_message(request, messages.WARNING, 'La cantidad elegida supera el stock')
+        messages.warning(request, 'La cantidad solicitada supera el stock disponible.')
         return redirect('product1', id_prod)
 
 #PERMITE MOSTRAR TODOS LOS DETALLES DEL USUARIO
