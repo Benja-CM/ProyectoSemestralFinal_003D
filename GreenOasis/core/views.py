@@ -103,6 +103,17 @@ def search(request, categoria_id):
 
     return render(request, 'core/search.html', contexto)
 
+#BUSCADOR
+def buscar(request):
+    buscar = request.POST['buscar']
+    productos = Producto.objects.filter(prod_nom__icontains=buscar)
+    
+    contexto = {
+        "listado": productos
+    }
+    
+    return render(request, 'core/search.html', contexto)
+
 # ACTUALIZAR DE INFORMACION DE LA CUENTA
 @login_required
 def actualizarCuenta(request):
@@ -426,6 +437,7 @@ def h_buy(request):
     
     return render(request, 'core/h_buy.html', contexto)
 
+#LISTA LOS DETALLES DE UNA COMPRA
 @login_required
 def h_prod1(request, id_com):
     id_usuario  = request.user.id

@@ -4,6 +4,7 @@ from django.urls import path, include
 from .views import index, product1, profile, cart, search, conf_pago, create_acc, h_buy, h_prod1, p_acc, p_info, p_pch, pss_fg, vent_edit
 from .views import vent_ing, vent_list, ong, registrarInfUS, registrarInfAC, registrarProducto, eliminarProducto, eliminarDetalle, realizarCompra
 from .views import actualizarProducto, actualizarCuenta, iniciar_sesion, cerrar_sesion, registrarProducto, userInfo, userAcc, registrarDetalle, registrarDir
+from .views import buscar
 
 urlpatterns = [
     path('', index, name='index'),
@@ -38,4 +39,5 @@ urlpatterns = [
     path('userAcc/', userAcc, name='userAcc'),
     path('eliminarDetalle/<int:id>/', eliminarDetalle, name='eliminarDetalle'),
     path('realizarCompra/<int:total>/', realizarCompra, name='realizarCompra'),
+    path('buscar/', buscar, name='buscar'),
 ]

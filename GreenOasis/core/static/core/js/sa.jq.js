@@ -1,4 +1,7 @@
 $(document).ready(function () {
+  var imagenURL = "{{ datos.prod_imagen.url }}";
+  $('#sa-img').val(imagenURL);
+
   $("#sa-form").submit(function (e) {
     var nombre = $("#sa-nombre").val();
     var desc = $("#sa-desc").val();
@@ -6,6 +9,9 @@ $(document).ready(function () {
     var stock = $("#sa-stock").val();
     var cat = $("#sa-cat").val();
     var img = $("#sa-img").val();
+
+    var flag_nombre = false;
+    var flag_desc = false;
 
     var allowedExtensions = ["jpg", "jpeg", "png", "gif"];
 
@@ -15,34 +21,45 @@ $(document).ready(function () {
     /* Validacion nombre */
     if (nombre.trim().length < 4 || nombre.trim().length > 120) {
       msj += "El nombre debe ser entre 4 y 120 carácteres<br>";
-      $("#sa-nombre").removeClass("is-valid").addClass("is-invalid");
-      enviar = true;
-    } else {
-      $("#sa-nombre").removeClass("is-invalid").addClass("is-valid");
-    }
+      flag_nombre = true;
+    } 
 
     var letra = nombre.charAt(0);
     if (!esMayuscula(letra)) {
       msj += "La primera letra del nombre debe ser mayúscula<br>";
-      $("#sa-nombre").removeClass("is-valid").addClass("is-invalid");
+      flag_nombre = true;
+    }
+
+    if (flag_nombre) {
+      $("#sa-nombre").removeClass('is-valid').addClass('is-invalid');
       enviar = true;
+    } else {
+      $("#sa-nombre").removeClass("is-invalid").addClass("is-valid");
+      nombre = nombre.trim();
+      $("#sa-nombre").val(nombre);
     }
 
     /* Validacion descripcion */
     if (desc.trim().length < 4 || desc.trim().length > 1250) {
       msj += "La descripción debe ser entre 4 y 1250 carácteres<br>";
-      $("#sa-desc").removeClass("is-valid").addClass("is-invalid");
-      enviar = true;
-    } else {
-      $("#sa-desc").removeClass("is-invalid").addClass("is-valid");
-    }
+      flag_desc = true;
+    } 
 
     var letra = desc.charAt(0);
     if (!esMayuscula(letra)) {
       msj += "La primera letra de la descripción debe ser mayúscula<br>";
-      $("#sa-desc").removeClass("is-valid").addClass("is-invalid");
-      enviar = true;
+      flag_desc = true;
     }
+
+    if (flag_desc) {
+      $("#sa-desc").removeClass('is-valid').addClass('is-invalid');
+      enviar = true;
+    } else {
+      $("#sa-desc").removeClass("is-invalid").addClass("is-valid");
+      desc = desc.trim();
+      $("#sa-desc").val(nomdescbre);
+    }
+
     /* Validacion de precio */
     if (/^[0-9]+$/.test(precio) == false) {
       msj +=
@@ -88,7 +105,7 @@ $(document).ready(function () {
     }
 
     /* Enviar Form */
-    if (enviar) {
+    if (enviar == true) {
       $("#sa-w").html(msj);
       e.preventDefault();
 
@@ -99,8 +116,6 @@ $(document).ready(function () {
 
   /* Funcion de Validacion de Mayuscula */
   function esMayuscula(letra) {
-    console.log(letra);
-    console.log(letra.toUpperCase());
     if (letra == letra.toUpperCase()) {
       return true;
     } else {

@@ -56,9 +56,9 @@
 				</ul>
 				<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 					<li class="nav-item flex-grow-1">
-						<form class="d-flex flex-grow-1" action="{% url 'search' 5 %}">
+						<form class="d-flex flex-grow-1" action="{% url 'buscar' %}" method="POST">
 							{% csrf_token %}
-							<input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar">
+							<input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar" name="buscar">
 							<button class="btn btn-outline-success rounded-0" type="submit">Buscar</button>
 						</form>
 					</li>
