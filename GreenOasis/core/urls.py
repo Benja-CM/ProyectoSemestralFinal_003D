@@ -1,9 +1,9 @@
 """Core URL Configuration"""
 from django.contrib import admin
 from django.urls import path, include
-from .views import index, product1, profile, cart, search, conf_pago, create_acc, h_buy, h_prod1, p_acc, p_info, p_pch, pss_fg, vent_edit
+from .views import index, product1, profile, cart, search, conf_pago, create_acc, h_buy, h_prod1, p_acc, p_info, p_pch, pss_fg, vent_edit, vend_create
 from .views import vent_ing, vent_list, ong, registrarInfUS, registrarInfAC, registrarProducto, eliminarProducto, eliminarDetalle, realizarCompra
-from .views import actualizarProducto, actualizarCuenta, iniciar_sesion, cerrar_sesion, registrarProducto, userInfo, userAcc, registrarDetalle, registrarDir
+from .views import actualizarProducto, actualizarCuenta, iniciar_sesion, cerrar_sesion, registrarProducto, userInfo, userAcc, registrarDetalle, registrarDir, registrarVendAcc
 from .views import buscar
 
 urlpatterns = [
@@ -15,6 +15,7 @@ urlpatterns = [
     path('search/<int:categoria_id>/', search, name='search'),
     path('conf_pago/', conf_pago, name='conf_pago'),
     path('create_acc/', create_acc, name='create_acc'),
+    path('vend_create/', vend_create, name='vend_create'),
     path('h_buy/', h_buy, name='h_buy'),
     path('h_prod1/<int:id_com>', h_prod1, name='h_prod'),
     path('p_acc/', p_acc, name='p_acc'),
@@ -26,6 +27,7 @@ urlpatterns = [
     path('vent_list/', vent_list, name='vent_list'),
     path('registrarInfUS/', registrarInfUS, name="registrarInfUS"),
     path('registrarInfAC/', registrarInfAC, name="registrarInfAC"),
+    path('registrarVendAcc/', registrarVendAcc, name="registrarVendAcc"),
     path('registrarProducto/', registrarProducto, name='registrarProducto'),
     path('registrarDir/', registrarDir, name='registrarDir'),
     path('eliminarProducto/<int:id>/', eliminarProducto, name='eliminarProducto'),

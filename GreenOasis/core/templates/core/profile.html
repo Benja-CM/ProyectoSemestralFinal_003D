@@ -2,20 +2,58 @@
 <html lang="en">
 {% extends 'core/temp_topm_lo.html' %}
 {% load static %}
+
 <head>
     {% block header %}
-	<title>Mi Perfil</title>
-	{% endblock header %}
+    <title>Mi Perfil</title>
+    {% endblock header %}
 </head>
 
 <body>
     {% block title %}
-	<style>
-		body {
-			padding-top: 75px;
+    <style>
+        body {
+            padding-top: 75px;
             background-color: #EDEDED;
-		}
-	</style>
+        }
+    </style>
+    {% if messages %}
+    {% for message in messages %}
+    {% if message.tags == 'alert-success' %}
+    <script>
+        Swal.fire({
+            "icon": "success",
+            "text": "{{ message }}",
+            "confirmButtonColor": "#15AE00"
+        });
+    </script>
+    {% elif message.tags == 'alert-danger' %}
+    <script>
+        Swal.fire({
+            "icon": "error",
+            "text": "{{ message }}",
+            "confirmButtonColor": "#FF0000"
+        });
+    </script>
+    {% elif message.tags == 'alert-warning' %}
+    <script>
+        Swal.fire({
+            "icon": "warning",
+            "text": "{{ message }}",
+            "confirmButtonColor": "#FFC107"
+        });
+    </script>
+    {% else %}
+    <script>
+        Swal.fire({
+            "icon": "info",
+            "text": "{{ message }}",
+            "confirmButtonColor": "#007BFF"
+        });
+    </script>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
     <!-- Menu Lateral -->
     <div class="container-fluid col-md-2 navbar-profile-color sidebar phs">
         <div class="row">
@@ -42,37 +80,40 @@
                             <div class="collapse" id="home-collapse">
                                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small ms-4">
                                     <li><a href="{% url 'userInfo' %}" class="link-dark rounded">Personal</a></li>
-                                    <li><a href="{% url 'userAcc' %}" class="link-dark rounded">Cuenta</a></li>   
-                                    </li>
-                                    <li><a href="{% url 'ong' %}" class="link-dark rounded">ONG</a></li>
-                                </ul>
-                            </div>
+                                    <li><a href="{% url 'userAcc' %}" class="link-dark rounded">Cuenta</a></li>
                         </li>
-                        <li class="mb-1">
-                            <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
-                            data-bs-target="#dashboard-collapse" aria-expanded="false">
-                            <i class="fa-sharp fa-solid fa-clipboard" style="color: #000000;"></i>
-                            Ventas
-                            </button>
-                            <div class="collapse" id="dashboard-collapse">
-                            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small ms-4">
-                                <li><a href="{% url 'vent_ing' %}" class="link-dark rounded">Agregar</a></li>
-                                <li><a href="{% url 'vent_list' %}" class="link-dark rounded">Lista</a></li>
-                            </ul>
-                            </div>
-                        </li>
-                        <li class="mb-1">
-                            <a href="{% url 'h_buy' %}">
-                                <button class="btn btn-toggle rounded">
-                                    <i class="fa-sharp fa-solid fa-bag-shopping" style="color: #000000;"></i>
-                                    Compras
-                                </button>
-                            </a>
-                        </li>
+                        <li><a href="{% url 'ong' %}" class="link-dark rounded">ONG</a></li>
                     </ul>
                 </div>
+                </li>
+                {% if request.session.lvl == 'Vendedor' %}
+                <li class="mb-1">
+                    <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
+                        data-bs-target="#dashboard-collapse" aria-expanded="false">
+                        <i class="fa-sharp fa-solid fa-clipboard" style="color: #000000;"></i>
+                        Ventas
+                    </button>
+                    <div class="collapse" id="dashboard-collapse">
+                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small ms-4">
+                            <li><a href="{% url 'vent_ing' %}" class="link-dark rounded">Agregar</a></li>
+                            <li><a href="{% url 'vent_list' %}" class="link-dark rounded">Lista</a></li>
+                            <li><a href="{% url 'vend_create' %}" class="link-dark rounded">Crear Vendedor</a></li>
+                        </ul>
+                    </div>
+                </li>
+                {% endif %}
+                <li class="mb-1">
+                    <a href="{% url 'h_buy' %}">
+                        <button class="btn btn-toggle rounded">
+                            <i class="fa-sharp fa-solid fa-bag-shopping" style="color: #000000;"></i>
+                            Compras
+                        </button>
+                    </a>
+                </li>
+                </ul>
             </div>
         </div>
+    </div>
     </div>
     <!-- Version Movil -->
     <div
@@ -88,9 +129,11 @@
         <div class="sidebar-icon" id="icon2">
             <i class="fa-sharp fa-solid fa-house" style="color: #000000;"></i>
         </div>
+        {% if request.session.lvl == 'Vendedor' %}
         <div class="sidebar-icon" id="icon3">
             <i class="fa-sharp fa-solid fa-clipboard" style="color: #000000;"></i>
         </div>
+        {% endif %}
         <div class="sidebar-icon" id="icon4">
             <i class="fa-sharp fa-solid fa-bag-shopping" style="color: #000000;"></i>
         </div>
@@ -123,37 +166,40 @@
                             <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small ms-4">
                                 <li><a href="{% url 'userInfo' %}" class="link-dark rounded">Personal</a></li>
                                 <li><a href="{% url 'userAcc' %}" class="link-dark rounded">Cuenta</a></li>
-                                </li>
-                                <li><a href="{% url 'ong' %}" class="link-dark rounded">ONG</a></li>
-                            </ul>
-                        </div>
                     </li>
-                    <li class="mb-1">
-                        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
-                            data-bs-target="#dashboard-collapse" aria-expanded="false">
-                            <i class="fa-sharp fa-solid fa-clipboard" style="color: #000000;"></i>
-                            Ventas
-                        </button>
-                        <div class="collapse" id="dashboard-collapse">
-                            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small ms-4">
-                                <li><a href="{% url 'vent_ing' %}" class="link-dark rounded">Agregar</a></li>
-                                <li><a href="{% url 'vent_list' %}" class="link-dark rounded">Lista</a></li>
-                                </ul>
-                        </div>
-                    </li>
-                    <li class="mb-1">
-                        <a href="{% url 'h_buy' %}">
-                            <button class="btn btn-toggle rounded">
-                                <i class="fa-sharp fa-solid fa-bag-shopping" style="color: #000000;"></i>
-                                Compras
-                            </button>
-                        </a>
-                    </li>
+                    <li><a href="{% url 'ong' %}" class="link-dark rounded">ONG</a></li>
                 </ul>
             </div>
+            </li>
+            {% if request.session.lvl == 'Vendedor' %}
+            <li class="mb-1">
+                <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
+                    data-bs-target="#dashboard-collapse" aria-expanded="false">
+                    <i class="fa-sharp fa-solid fa-clipboard" style="color: #000000;"></i>
+                    Ventas
+                </button>
+                <div class="collapse" id="dashboard-collapse">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small ms-4">
+                        <li><a href="{% url 'vent_ing' %}" class="link-dark rounded">Agregar</a></li>
+                        <li><a href="{% url 'vent_list' %}" class="link-dark rounded">Lista</a></li>
+                        <li><a href="{% url 'vend_create' %}" class="link-dark rounded">Crear Vendedor</a></li>
+                    </ul>
+                </div>
+            </li>
+            {% endif %}
+            <li class="mb-1">
+                <a href="{% url 'h_buy' %}">
+                    <button class="btn btn-toggle rounded">
+                        <i class="fa-sharp fa-solid fa-bag-shopping" style="color: #000000;"></i>
+                        Compras
+                    </button>
+                </a>
+            </li>
+            </ul>
         </div>
     </div>
-	{% endblock title %}
+    </div>
+    {% endblock title %}
     <!--------------------------------------------------------------------------------------------------------->
     <!-- Account Conf -->
     {% block body %}

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends 'core/temp_topm_lo.html' %}
+{% load static %}
+
+<head>
+    <!-- JavaScript Bundle with Popper -->
+    {% block header %}
+
+    {% endblock header %}
+</head>
+
+<body>
+    {% block title %}
+    <style>
+        body {
+            padding-top: 75px;
+            background-color: #EDEDED;
+        }
+    </style>
+    <!-- Menu Lateral -->
+    <div class="container-fluid col-md-2 navbar-profile-color sidebar phs">
+        <div class="row">
+            <div>
+                <div class="pt-3 pb-2 mb-3 border-bottom justify-content-center">
+                    <div
+                        class="d-flex align-items-center ms-2 pb-3 mb-3 link-dark text-decoration-none border-bottom text-center">
+                        <div class="d-flex align-content-center">
+                            <div class="col-auto">
+                                <i class="fa-solid fa-user me-2" style="color: #000000;"></i>
+                            </div>
+                            <div class="col">
+                                <h5> Mi Cuenta </h5>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="list-unstyled ps-0">
+                        <li class="mb-1">
+                            <button class="btn btn-toggle align-items-center rounded collapsed"
+                                data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="false">
+                                <i class="fa-sharp fa-solid fa-house" style="color: #000000;"></i>
+                                General
+                            </button>
+                            <div class="collapse" id="home-collapse">
+                                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small ms-4">
+                                    <li><a href="{% url 'userInfo' %}" class="link-dark rounded">Personal</a></li>
+                                    <li><a href="{% url 'userAcc' %}" class="link-dark rounded">Cuenta</a></li>
+                        </li>
+                        <li><a href="{% url 'ong' %}" class="link-dark rounded">ONG</a></li>
+                    </ul>
+                </div>
+                </li>
+                {% if request.session.lvl == 'Vendedor' %}
+                <li class="mb-1">
+                    <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
+                        data-bs-target="#dashboard-collapse" aria-expanded="false">
+                        <i class="fa-sharp fa-solid fa-clipboard me-1" style="color: #000000;"></i>
+                        Ventas
+                    </button>
+                    <div class="collapse" id="dashboard-collapse">
+                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small ms-4">
+                            <li><a href="{% url 'vent_ing' %}" class="link-dark rounded">Agregar</a></li>
+                            <li><a href="{% url 'vent_list' %}" class="link-dark rounded">Lista</a></li>
+                        </ul>
+                    </div>
+                </li>
+                {% endif %}
+                <li class="mb-1">
+                    <a href="{% url 'h_buy' %}">
+                        <button class="btn btn-toggle rounded">
+                            <i class="fa-sharp fa-solid fa-bag-shopping" style="color: #000000;"></i>
+                            Compras
+                        </button>
+                    </a>
+                </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </div>
+    <!-- Version Movil -->
+    <div
+        class="container-fluid sidebar col-1 mhs navbar-profile-color mb-3 align-items-center flex-column text-center pt-2 g-0">
+        <div class="sidebar-icon" id="menu">
+            <a data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+                <i class="fa-solid fa-bars"></i>
+            </a>
+        </div>
+        <div class="sidebar-icon" id="Home">
+            <i class="fa-solid fa-user" style="color: #000000;"></i>
+        </div>
+        <div class="sidebar-icon" id="icon2">
+            <i class="fa-sharp fa-solid fa-house" style="color: #000000;"></i>
+        </div>
+        {% if request.session.lvl == 'Vendedor' %}
+        <div class="sidebar-icon" id="icon3">
+            <i class="fa-sharp fa-solid fa-clipboard" style="color: #000000;"></i>
+        </div>
+        {% endif %}
+        <div class="sidebar-icon" id="icon4">
+            <i class="fa-sharp fa-solid fa-bag-shopping" style="color: #000000;"></i>
+        </div>
+    </div>
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+        <div class="offcanvas-header">
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="pt-3 pb-2 mb-3 border-bottom">
+                <a href="#"
+                    class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom text-center">
+                    <div class="d-flex align-content-center">
+                        <div class="col-auto">
+                            <i class="fa-solid fa-user me-2" style="color: #000000;"></i>
+                        </div>
+                        <div class="col">
+                            <h5> Mi Cuenta </h5>
+                        </div>
+                    </div>
+                </a>
+                <ul class="list-unstyled ps-0">
+                    <li class="mb-1">
+                        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
+                            data-bs-target="#home-collapse" aria-expanded="false">
+                            <i class="fa-sharp fa-solid fa-house" style="color: #000000;"></i>
+                            General
+                        </button>
+                        <div class="collapse" id="home-collapse">
+                            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small ms-4">
+                                <li><a href="{% url 'userInfo' %}" class="link-dark rounded">Personal</a></li>
+                                <li><a href="{% url 'userAcc' %}" class="link-dark rounded">Cuenta</a></li>
+                    </li>
+                    <li><a href="{% url 'ong' %}" class="link-dark rounded">ONG</a></li>
+                </ul>
+            </div>
+            </li>
+            {% if request.session.lvl == 'Vendedor' %}
+            <li class="mb-1">
+                <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
+                    data-bs-target="#dashboard-collapse" aria-expanded="false">
+                    <i class="fa-sharp fa-solid fa-clipboard" style="color: #000000;"></i>
+                    Ventas
+                </button>
+                <div class="collapse" id="dashboard-collapse">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small ms-4">
+                        <li><a href="{% url 'vent_ing' %}" class="link-dark rounded">Agregar</a></li>
+                        <li><a href="{% url 'vent_list' %}" class="link-dark rounded">Lista</a></li>
+                    </ul>
+                </div>
+            </li>
+            {% endif %}
+            <li class="mb-1">
+                <a href="{% url 'h_buy' %}">
+                    <button class="btn btn-toggle rounded">
+                        <i class="fa-sharp fa-solid fa-bag-shopping" style="color: #000000;"></i>
+                        Compras
+                    </button>
+                </a>
+            </li>
+            </ul>
+        </div>
+    </div>
+    </div>
+    {% endblock title %}
+    <!-- Edit Form -->
+    {% block body %}
+    <div class="container-fluid col-md-10 offset-md-2 col-11 offset-1 py-md-3 px-md-5 py-1 px-3">
+        <div class="px-md-5 mb-2">
+            <div class="card rounded-0">
+                <div class="container mt-3 ms-3 py-2 px-1">
+                    <h2 class="vogue">Crear Vendedor</h2>
+                </div>
+            </div>
+        </div>
+        <div class="px-md-5">
+            <div class="card rounded-0 p-4">
+                <form action="{% url 'registrarVendAcc' %}" method="post" id="pp-form">
+                    {% csrf_token %}
+                    <div class="border-bottom">
+                        <div class="col-md-12 mb-3 mt-3 d-flex row">
+                            <div class="form-group mb-3">
+                                <div class="col-3">
+                                    <label for="alias" class="form-label me-3"><strong>Nombre de
+                                            Usuario:</strong></label>
+                                </div>
+                                <input type="text" class="form-control rounded-0 border-custom-2"
+                                    placeholder="Ingrese su nombre de usuario" name="alias" id="ca-nombre">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="border-bottom">
+                        <div class="col-md-12 mb-3 mt-3 d-flex row">
+                            <div class="form-group mb-3">
+                                <div class="col-3">
+                                    <label for="email" class="form-label me-3"><strong>Email:</strong></label>
+                                </div>
+                                <input type="text" class="form-control rounded-0 border-custom-2"
+                                    placeholder="Ingrese su nombre de usuario" name="email" id="ca-email">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="border-bottom">
+                        <div class="col-md-12 mb-3 mt-3 d-flex row">
+                            <div class="form-group mb-3">
+                                <div class="col-3">
+                                    <label for="contrasena" class="form-label me-3"><strong>Contraseña:</strong></label>
+                                </div>
+                                <input type="password" class="form-control rounded-0 border-custom-2"
+                                    placeholder="Ingrese su contraseña" name="password" id="ca-clave">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="border-bottom">
+                        <div class="col-md-12 mb-3 mt-3 d-flex row">
+                            <div class="form-group mb-3">
+                                <div class="col-3">
+                                    <label for="confirmar-contrasena" class="form-label me-3"><strong>Confirmar
+                                            contraseña:</strong></label>
+                                </div>
+                                <input type="password" type="password" class="form-control rounded-0 border-custom-2"
+                                    placeholder="Confirme su contraseña" name="confirmar-password" id="ca-confClave">
+                            </div>
+                        </div>
+                    </div>
+                    <p class="warnings mt-2" id="ca-w"></p>
+                    <button type="submit" class="btn btn-custom rounded-0 btn-hover">Crear cuenta</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% endblock body %}
+
+    <!--------------------------------------------------------------------------------------------------------->
+    <!-- JQuery -->
+    {% block js %}
+    <script src="{% static 'core/js/sa.jq.js' %}"></script>
+    {% endblock js %}
+</body>
+
+</html>

@@ -40,6 +40,7 @@ def create_acc(request):
 def h_buy(request):
     return render(request, 'core/h_buy.html')
 
+@login_required
 def h_prod1(request):
     return render(request, 'core/h_prod1.html')
 
@@ -60,6 +61,9 @@ def pss_fg(request):
 
 def vent_ing(request):
     return render(request, 'core/vent_ing.html')
+
+def vend_create(request):
+    return render(request, 'core/vend_create.html')
 
 # PERMITE EDITAR UN PRODUCTO SELECCIONADO DE LA LISTA
 @login_required
@@ -173,6 +177,44 @@ def registrarInfAC(request):
     messages.success(request, '¡La cuenta se ha creado exitosamente!')
 
     return redirect('index')
+
+# INGRESAR INFORMACION DE CUENTA
+def registrarVendAcc(request):
+    alias_u = request.POST['alias']
+    correo_u = request.POST['email']
+    password_u = request.POST['password']
+    rol_u = 2
+    role = Rol.objects.get(id_rol=rol_u)
+
+    if User.objects.filter(username=alias_u).exists():
+        messages.error(request,'El nombre de usuario ya está ocupado. Por favor, elige otro nombre')
+        return redirect('vend_create')
+
+    if Usuario.objects.filter(c_alias=alias_u).exists():
+        messages.error(request,'El nombre de usuario ya está ocupado. Por favor, elige otro nombre')
+        return redirect('vend_create')
+    
+    if User.objects.filter(email=correo_u).exists():
+        messages.error(request, 'El correo electrónico ya está registrado. Por favor, utiliza otro correo.')
+        return redirect('vend_create')
+    
+    if Usuario.objects.filter(c_correo=correo_u).exists():
+        messages.error(request, 'El correo electrónico ya está registrado. Por favor, utiliza otro correo.')
+        return redirect('vend_create')
+
+    Usuario.objects.create(c_alias=alias_u, c_correo=correo_u, c_password=password_u, rol=role)
+    user = User.objects.create_user(username=alias_u, email=correo_u, password=password_u)
+    user.is_active = True
+    user.is_staff = False
+    user.save()
+    
+    Direccion.objects.create(usuario = Usuario.objects.get(c_alias=alias_u), comuna = Comuna.objects.get(id_com=99))
+    Compra.objects.create(usuario = Usuario.objects.get(c_alias=alias_u),
+                          direccion = Direccion.objects.get(usuario = Usuario.objects.get(c_alias=alias_u)))
+    
+    messages.success(request, '¡La cuenta se ha creado exitosamente!')
+
+    return redirect('profile')
 
 # INGRESAR DE INFORMACION DEL USUARIO
 @login_required
@@ -309,7 +351,13 @@ def iniciar_sesion(request):
     
     if user is not None:
         login(request, user)
-        return redirect('profile')
+        if user2.rol.id_rol == 1:
+            request.session['lvl'] = 'Cliente'
+            return redirect('profile')
+        if user2.rol.id_rol == 2:
+            request.session['lvl'] = 'Vendedor'
+            print(request.session.get('lvl'))
+            return redirect('profile')
     else:
         print("8")
     

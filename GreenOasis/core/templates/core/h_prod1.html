@@ -28,7 +28,7 @@
         <div class="sidebar-icon mb-3" id="icon2">
             <i class="fa-sharp fa-solid fa-house fa-xl" style="color: #000000;"></i>
         </div>
-        {% if user.Usuario.rol == 2 %}
+        {% if request.session.lvl == 'Vendedor' %}
         <div class="sidebar-icon" id="icon3">
             <i class="fa-sharp fa-solid fa-clipboard" style="color: #000000;"></i>
         </div>
@@ -70,7 +70,7 @@
                 </ul>
             </div>
             </li>
-            {% if user.Usuario.rol == 2 %}
+            {% if request.session.lvl == 'Vendedor' %}
             <li class="mb-1">
                 <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
                     data-bs-target="#dashboard-collapse" aria-expanded="false">
@@ -81,6 +81,7 @@
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small ms-4">
                         <li><a href="{% url 'vent_ing' %}" class="link-dark rounded">Agregar</a></li>
                         <li><a href="{% url 'vent_list' %}" class="link-dark rounded">Lista</a></li>
+                        <li><a href="{% url 'vend_create' %}" class="link-dark rounded">Crear Vendedor</a></li>
                     </ul>
                 </div>
             </li>
