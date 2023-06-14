@@ -1,16 +1,15 @@
 """Core URL Configuration"""
 from django.contrib import admin
 from django.urls import path, include
-from .views import index, product1, profile, cart, search, conf_pago, create_acc, h_buy, h_prod1, p_acc, p_info, p_pch, pss_fg, vent_edit, vend_create
-from .views import vent_ing, vent_list, ong, registrarInfUS, registrarInfAC, registrarProducto, eliminarProducto, eliminarDetalle, realizarCompra
+from .views import index, product1, profile, cart, search, conf_pago, create_acc, h_buy, h_prod1, p_acc, p_info, pss_fg, vent_edit, vend_create
+from .views import vent_ing, vent_list, registrarInfUS, registrarInfAC, registrarProducto, eliminarProducto, eliminarDetalle, realizarCompra
 from .views import actualizarProducto, actualizarCuenta, iniciar_sesion, cerrar_sesion, registrarProducto, userInfo, userAcc, registrarDetalle, registrarDir, registrarVendAcc
-from .views import buscar
+from .views import buscar, buscarProd
 
 urlpatterns = [
     path('', index, name='index'),
     path('product1/<int:id>/', product1, name='product1'),
     path('profile/', profile, name='profile'),
-    path('ong/', ong, name='ong'),
     path('cart/', cart, name='cart'),
     path('search/<int:categoria_id>/', search, name='search'),
     path('conf_pago/', conf_pago, name='conf_pago'),
@@ -20,7 +19,6 @@ urlpatterns = [
     path('h_prod1/<int:id_com>', h_prod1, name='h_prod'),
     path('p_acc/', p_acc, name='p_acc'),
     path('p_info/', p_info, name='p_info'),
-    path('p_pch/', p_pch, name='p_pch'),
     path('pss_fg/', pss_fg, name='pss_fg'),
     path('vent_edit/<int:id>/', vent_edit, name='vent_edit'),
     path('vent_ing/', vent_ing, name='vent_ing'),
@@ -42,4 +40,5 @@ urlpatterns = [
     path('eliminarDetalle/<int:id>/', eliminarDetalle, name='eliminarDetalle'),
     path('realizarCompra/<int:total>/', realizarCompra, name='realizarCompra'),
     path('buscar/', buscar, name='buscar'),
+    path('buscarProd/', buscarProd, name='buscarProd'),
 ]
