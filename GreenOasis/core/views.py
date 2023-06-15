@@ -80,14 +80,18 @@ def vend_create(request):
 # PERMITE EDITAR UN PRODUCTO SELECCIONADO DE LA LISTA
 def vent_edit(request, id):
     if request.user.is_authenticated:
-        categorias = Categoria.objects.all()
-        producto = Producto.objects.get(id_prod = id)
-        contexto = {
-            "datos": producto,
-            "listaCategorias": categorias
-        }
-        
-        return render(request, 'core/vent_edit.html', contexto)
+        if request.session.get('lvl') == 'Vendedor':
+            categorias = Categoria.objects.all()
+            producto = Producto.objects.get(id_prod = id)
+            contexto = {
+                "datos": producto,
+                "listaCategorias": categorias
+            }
+            
+            return render(request, 'core/vent_edit.html', contexto)
+        else:
+            messages.warning(request,'Debe ser un vendedor para acceder a esta pagina')
+            return redirect('profile')
     else:
         messages.warning(request,'Debe estar registrado para acceder a esta pagina')
         return redirect('index')
@@ -95,11 +99,15 @@ def vent_edit(request, id):
 # LISTA LOS PRODUCTOS DE LA BASE DE DATOS
 def vent_list(request):
     if request.user.is_authenticated:
-        productos = Producto.objects.all()
-        contexto = {
-            "listado": productos
-        }
-        return render(request, 'core/vent_list.html',contexto)
+        if request.session.get('lvl') == 'Vendedor':
+            productos = Producto.objects.all()
+            contexto = {
+                "listado": productos
+            }
+            return render(request, 'core/vent_list.html',contexto)
+        else:
+            messages.warning(request,'Debe ser un vendedor para acceder a esta pagina')
+            return redirect('profile')
     else:
         messages.warning(request,'Debe estar registrado para acceder a esta pagina')
         return redirect('index')
@@ -306,7 +314,8 @@ def registrarDir(request):
 # VISUALIZA LA INFO DEL USUARIO
 def userInfo(request):
     if request.user.is_authenticated:
-        usuario = Usuario.objects.get(c_alias=request.user.username) 
+        usuario = Usuario.objects.get(c_alias=request.user.username)
+         
         direccion = Direccion.objects.get(usuario = usuario.id_usuario) 
         context = {
             'usuario': usuario,
@@ -353,7 +362,6 @@ def actualizarProducto(request):
             descripcion = request.POST['desc']
             precio  = request.POST['precio']
             stock   = request.POST['stock']
-            imagen  = request.FILES['imagen']
             categoria   = request.POST['categoria']
 
             producto = Producto.objects.get(id_prod = id)
@@ -361,14 +369,24 @@ def actualizarProducto(request):
             producto.prod_descripcion = descripcion
             producto.prod_precio = precio
             producto.prod_stock = stock
-            producto.prod_imagen = imagen
             
             registroCategoria = Categoria.objects.get(id_cat = categoria)
             producto.categoria = registroCategoria
             
+            if bool(request.FILES.get('imagen')):
+                imagen  = request.FILES['imagen']
+                producto.prod_imagen = imagen
+                producto.save()
+            else:
+                Producto.objects.filter(id_prod=id).update(
+                    prod_nom = nombre,
+                    prod_descripcion = descripcion,
+                    prod_precio = precio,
+                    prod_stock = stock,
+                    categoria = categoria
+                )
+                
             messages.success(request, '¡El producto se ha modificado exitosamente!')
-            producto.save()
-            
             return redirect('vent_list')
         else:
             messages.warning(request,'Debe ser un vendedor para acceder a esta pagina')
@@ -447,11 +465,16 @@ def registrarDetalle(request, id_prod, precio):
         
         producto    = Producto.objects.get(id_prod = id_prod)
         dr_cantidad = request.POST['cantidad']
-        dr_subtotal = precio * int(dr_cantidad)
+        stock   = int(dr_cantidad)
         
-        if (int(dr_cantidad)<=producto.prod_stock):
-            Detalle.objects.create(compra = compra, producto = producto, de_cantidad = dr_cantidad, de_subtotal = dr_subtotal)
+        dr_subtotal = precio * stock
+        
+        if (stock<=producto.prod_stock):
+            Detalle.objects.create(compra = compra, producto = producto, de_cantidad = stock, de_subtotal = dr_subtotal)
             messages.success(request, '¡El producto se ha agregado al carrito!')
+            
+            producto.prod_stock = producto.prod_stock-stock
+            producto.save()
             
             if (request.POST['action'] == 'agregar'):
                 return redirect('search', 5)
@@ -501,8 +524,15 @@ def cart(request):
 def eliminarDetalle(request,id):
     if request.user.is_authenticated:
         detalle = Detalle.objects.get(id_detalle = id)
+        id_prod = detalle.producto.id_prod
+        prod    = Producto.objects.get(id_prod = id_prod)
+        
+        prod.prod_stock = prod.prod_stock + detalle.de_cantidad
+        
+        prod.save()
         detalle.delete()
         
+        messages.success(request,'Se eliminó el detalle del carrito')
         return redirect('cart')
     else:
         messages.warning(request,'Debe estar registrado para acceder a esta pagina')
@@ -534,11 +564,6 @@ def realizarCompra(request, total):
                 compra.com_cost_envio = costo_envio
                 compra.cop_total    = total
                 compra.cop_realizada = flag_compra
-                
-                for i in detalle:
-                    i.producto.prod_stock = i.producto.prod_stock - i.de_cantidad
-                    
-                    i.producto.save()
                 
                 Compra.objects.create(usuario = usuario, direccion = c_direccion)
                 
