@@ -11,6 +11,7 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 
 # Create your views here.
+# User Views
 @csrf_exempt
 @api_view(['GET', 'POST'])
 @permission_classes((IsAuthenticated,))
@@ -48,4 +49,45 @@ def detalle_usuario(request, id):
             return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
     elif request.method == 'DELETE':
         usuario.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+    
+# Direccion Views
+
+@csrf_exempt
+@api_view(['GET', 'POST'])
+@permission_classes((IsAuthenticated,))
+def lista_direccion(request):
+    if request.method == 'GET':
+        direccion = Direccion.objects.all()
+        serializer = DireccionSerializer(direccion, many = True)
+        return Response(serializer.data)
+    elif request.method == 'POST':
+        data = JSONParser().parse(request)
+        serializer = DireccionSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+@api_view(['GET', 'PUT', 'DELETE'])
+@permission_classes((IsAuthenticated,))
+def detalle_direccion(request, id):
+    try:
+        direccion = Direccion.objects.get(id_dir = id)
+    except Direccion.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    if request.method == 'GET':
+        serializer = DireccionSerializer(direccion)
+        return Response(serializer.data)
+    if request.method == 'PUT':
+        data = JSONParser().parse(request)
+        serializer = DireccionSerializer(direccion, data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        else:
+            return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == 'DELETE':
+        direccion.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
