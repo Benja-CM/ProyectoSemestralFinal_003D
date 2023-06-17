@@ -637,5 +637,3 @@ def h_prod1(request, id_com):
         messages.warning(request,'Debe estar registrado para acceder a esta pagina')
         return redirect('index')
  
-def error_404(request, exception):
-    return render(request, 'core/404.html')

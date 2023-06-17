@@ -9,5 +9,7 @@ urlpatterns = [
     path('detalle_usuario/<id>', detalle_usuario, name='detalle_usuario'),
     path('lista_direccion/', lista_direccion, name='lista_direccion'),
     path('detalle_direccion/<id>', detalle_direccion, name='detalle_direccion'),
+    path('lista_direccion/', lista_direccion, name='lista_direccion'),
+    path('detalle_direccion/<id>', detalle_direccion, name='detalle_direccion'),
     path('login', login, name="login"),
 ]

@@ -1,5 +1,5 @@
 from rest_framework import serializers 
-from core.models import Usuario, Direccion
+from core.models import Usuario, Direccion, Detalle
 
 from django.contrib.auth.models import User
 
@@ -19,8 +19,12 @@ class UsuarioSerializer(serializers.ModelSerializer):
 
         return usuario
     
+class DetalleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Detalle
+        fields = ['id_detalle','compra','producto','de_cantidad','de_subtotal']
+
 class DireccionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Direccion
         fields = ['id_dir','dir_calle','dir_numero','dir_cod_postal','usuario','comuna']
-

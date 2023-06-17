@@ -39,9 +39,6 @@ class Producto(models.Model):
     def __str__(self) -> str:
         return self.prod_nom
 
-# NO MODIFICAR ARRIBA POR DIOS SANTO
-# QUE SÍ QUE SÍ
-
 class Comuna(models.Model):
     id_com   = models.AutoField(primary_key=True, verbose_name='ID de Comuna')
     com_nom     = models.CharField(max_length=50, blank=False, verbose_name='Nombre de Comuna')
