@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from rest_framework import status
 from rest_framework.decorators import api_view,permission_classes
+from django.contrib.auth.models import User
 from rest_framework.response import Response
 from rest_framework.parsers import JSONParser
 from django.views.decorators.csrf import csrf_exempt
@@ -34,6 +35,7 @@ def lista_usuario(request):
 def detalle_usuario(request, id):
     try:
         usuario = Usuario.objects.get(id_usuario = id)
+        user = User.objects.filter(username = usuario.c_alias)
     except Usuario.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
     if request.method == 'GET':
@@ -49,6 +51,7 @@ def detalle_usuario(request, id):
             return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
     elif request.method == 'DELETE':
         usuario.delete()
+        user.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
     
 # Direccion Views

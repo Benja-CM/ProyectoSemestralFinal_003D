@@ -7,7 +7,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth import authenticate, login, logout
 from .models import Rol, Usuario, Producto, Direccion, Comuna, Categoria, Detalle, Compra
-from django.views.defaults import page_not_found
+from django.contrib.auth.hashers import make_password
+
 
 # Create your views here.
 def index(request):
@@ -166,10 +167,23 @@ def actualizarCuenta(request):
             c_correo=correo_c,
             c_password=password_c,
         )
+        # Obtén el objeto del usuario
+        user = User.objects.get(username=request.user.username)
+
+        # Actualiza los campos del usuario
+        user.email = correo_c
+
+        # Encripta la nueva contraseña antes de actualizarla
+        if password_c:
+            user.password = make_password(password_c)
+
+        # Guarda los cambios en la base de datos
+        user.save()
+
         messages.success(request,'¡Su información se ha modificado exitosamente!')
         return redirect('userAcc')
     else:
-        messages.warning(request,'Debe estar registrado para acceder a esta pagina')
+        messages.warning(request,'Por favor, inicie sesión')
         return redirect('index')
 
 # VISUALIZA LA INFO DE LA CUENTA
