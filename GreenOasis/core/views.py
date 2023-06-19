@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth import authenticate, login, logout
 from .models import Rol, Usuario, Producto, Direccion, Comuna, Categoria, Detalle, Compra
@@ -450,20 +451,24 @@ def iniciar_sesion(request):
         messages.add_message(request, messages.ERROR, 'El usuario o la contraseña son incorrectos')
         return redirect('index')
     
-    user2 = Usuario.objects.get(c_alias=user1, c_password=pass1)
-    user = authenticate(request, username=user1, password=pass1)
-    
-    if user is not None:
-        login(request, user)
-        if user2.rol.id_rol == 1:
-            request.session['lvl'] = 'Cliente'
-            return redirect('profile')
-        if user2.rol.id_rol == 2:
-            request.session['lvl'] = 'Vendedor'
-            print(request.session.get('lvl'))
-            return redirect('profile')
-    else:
-        print("8")
+    try:    
+        user2 = Usuario.objects.get(c_alias=user1, c_password=pass1)
+        user = authenticate(request, username=user1, password=pass1)
+        
+        if user is not None:
+            login(request, user)
+            if user2.rol.id_rol == 1:
+                request.session['lvl'] = 'Cliente'
+                return redirect('profile')
+            if user2.rol.id_rol == 2:
+                request.session['lvl'] = 'Vendedor'
+                print(request.session.get('lvl'))
+                return redirect('profile')
+        else:
+            print("8")
+    except ObjectDoesNotExist:
+        messages.add_message(request, messages.ERROR, 'El usuario o la contraseña son incorrectos')
+        return redirect('index')
     
 def cerrar_sesion(request):
     logout(request)
@@ -565,29 +570,34 @@ def realizarCompra(request, total):
         
         if detalle.exists():
             if (c_direccion.comuna.id_com != 99):
-                costo_envio = compra.direccion.comuna.com_cost_envio
-                flag_compra = True
+                if (usuario.us_rut != ""):
+                
+                    costo_envio = compra.direccion.comuna.com_cost_envio
+                    flag_compra = True
 
-                fecha_compra = date.today()
-                fecha_despacho = date.today() + timedelta(days=7)
+                    fecha_compra = date.today()
+                    fecha_despacho = date.today() + timedelta(days=7)
+                    
+                    costo_envio = compra.direccion.comuna.com_cost_envio
                 
-                costo_envio = compra.direccion.comuna.com_cost_envio
-            
-                compra.cop_fechcom  = fecha_compra
-                compra.cop_fech_entr = fecha_despacho
-                compra.com_cost_envio = costo_envio
-                compra.cop_total    = total
-                compra.cop_realizada = flag_compra
-                
-                Compra.objects.create(usuario = usuario, direccion = c_direccion)
-                
-                compra.save()
-                
-                messages.success(request, '¡La compra se ha realizado exitosamente!')
-                return redirect('h_buy')
+                    compra.cop_fechcom  = fecha_compra
+                    compra.cop_fech_entr = fecha_despacho
+                    compra.com_cost_envio = costo_envio
+                    compra.cop_total    = total
+                    compra.cop_realizada = flag_compra
+                    
+                    Compra.objects.create(usuario = usuario, direccion = c_direccion)
+                    
+                    compra.save()
+                    
+                    messages.success(request, '¡La compra se ha realizado exitosamente!')
+                    return redirect('h_buy')
+                else:
+                    messages.error(request, 'Primero ingrese su información de usuario')
+                    return redirect('userInfo')
             else:
                 messages.error(request, 'Primero ingrese su información de dirección')
-                return redirect('p_info')
+                return redirect('userInfo')
         else:
             messages.warning(request,'El carrito no posee ningun producto')
             return redirect('cart')

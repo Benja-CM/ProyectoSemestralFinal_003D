@@ -1,0 +1,26 @@
+---------
+
+alter session set "_ORACLE_SCRIPT"=TRUE;
+create user KING identified by ZAZA161;
+grant connect, resource to KING;
+alter user KING default tablespace users quota unlimited on users;
+
+---------
+
+python -m pip install Pillow
+pip install djangorestframework
+
+---------
+
+python manage.py makemigrations
+python manage.py migrate
+
+---------
+
+python manage.py createsuperuser
+
+---------
+
+KING
+greenoasis@gmail.com
+ZAZA161

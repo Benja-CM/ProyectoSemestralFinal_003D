@@ -60,7 +60,10 @@ INSERT INTO core_producto VALUES (10, 'Semillas de Nabo Blanco',
 -------------------------------------
 
 -------- USUARIO VENDEDOR -----------
-INSERT INTO core_usuario (ID_USUARIO, C_ALIAS, C_CORREO, C_PASSWORD, ROL_ID) VALUES (1, 'Fernando', 'fer.alvarezd@gmail.com', 'Asd1234#', 2);
+INSERT INTO core_usuario (ID_USUARIO, C_ALIAS, C_CORREO, C_PASSWORD, ROL_ID) VALUES (0, 'Fernando', 'fer.alvarezd@gmail.com', 'Asdf1234#', 2);
+INSERT INTO auth_user (ID, PASSWORD, IS_SUPERUSER, USERNAME, EMAIL, IS_STAFF, IS_ACTIVE, DATE_JOINED) VALUES (0, 'pbkdf2_sha256$600000$aqVQNY6B1f03A8DwrFyZcw$mAUvrYPvQMmS4kR/+ozhL4mxpOB0uzkR5oS7Uh2YUq4=', 0, 'Fernando', 'fer.alvarezd@gmail.com', 0, 1, sysdate);
+INSERT INTO core_direccion (ID_DIR, COMUNA_ID, USUARIO_ID) VALUES (0, 99, 0);
+INSERT INTO core_compra (ID_COMPRA, DIRECCION_ID, COP_REALIZADA, USUARIO_ID) VALUES (0, 0, 0, 0);
 
 ------------ COMUNAS ----------------
 INSERT INTO core_comuna VALUES (1, 'Cerrillos', 2000);
