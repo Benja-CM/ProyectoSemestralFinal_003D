@@ -290,12 +290,19 @@
                         <div class="border-bottom">
                             <div class="col-md-12 mb-3 mt-3 d-flex row">
                                 <div class="col-1">
-                                    <label for="numero" class="form-label me-3"><strong>Nro</strong></label>
+                                    <label for="numero" class="form-label me-3"><strong>Numero de calle</strong></label>
                                 </div>
+                                {% if direccion.dir_numero == none %}
+                                <div class="col-12 col-xxl-11">
+                                    <input type="text" class="form-control rounded-0 border-custom-2" id="pi-numero"
+                                        name="numero" value="" required>
+                                </div>
+                                {% else %}
                                 <div class="col-12 col-xxl-11">
                                     <input type="text" class="form-control rounded-0 border-custom-2" id="pi-numero"
                                         name="numero" value="{{ direccion.dir_numero }}" required>
                                 </div>
+                                {% endif %}
                             </div>
                         </div>
                         <div class="border-bottom">
@@ -316,11 +323,19 @@
                                     <label for="codigo-postal" class="form-label me-3"><strong>Código
                                             Postal</strong></label>
                                 </div>
+                                {% if direccion.dir_cod_postal == none %}
+                                <div class="col-12 col-xxl-11">
+                                    <input type="text" class="form-control rounded-0 border-custom-2"
+                                        id="pi-codigo-postal" name="codigo-postal"
+                                        value="" required>
+                                </div>
+                                {% else %}
                                 <div class="col-12 col-xxl-11">
                                     <input type="text" class="form-control rounded-0 border-custom-2"
                                         id="pi-codigo-postal" name="codigo-postal"
                                         value="{{ direccion.dir_cod_postal }}" required>
                                 </div>
+                                {% endif %}
                             </div>
                         </div>
                     </div>

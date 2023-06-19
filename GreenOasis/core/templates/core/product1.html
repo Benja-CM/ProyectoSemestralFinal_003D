@@ -103,13 +103,13 @@
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <button class="btn btn-outline-dark rounded-0" type="button"
-                                    id="restarCantidad">-</button>
+                                    onclick="restarValor()" id="restarCantidad">-</button>
                             </div>
                             <input type="number" class="form-control rounded-0 text-center border-custom-1" id="cant"
                                 name="cantidad" placeholder="1" min="1" value="1" required>
                             <div class="input-group-append">
                                 <button class="btn btn-outline-dark rounded-0" type="button"
-                                    id="sumarCantidad">+</button>
+                                    onclick="sumarValor()" id="sumarCantidad">+</button>
                             </div>
                         </div>
                         <hr>
@@ -176,17 +176,21 @@
     {% endblock foot %}
     {% block js %}
     <script>
-        const inputCantidad = document.getElementById('cantidad');
-        const btnSumarCantidad = document.getElementById('sumarCantidad');
-        const btnRestarCantidad = document.getElementById('restarCantidad');
+        function sumarValor()
+        {
+            var value = parseInt(document.getElementById('cant').value, 10);
+            value = isNaN(value) ? 0 : value;
+            value++;
+            document.getElementById('cant').value = value;
+        }
 
-        btnSumarCantidad.addEventListener('click', () => {
-            inputCantidad.stepUp();
-        });
-
-        btnRestarCantidad.addEventListener('click', () => {
-            inputCantidad.stepDown();
-        });
+        function restarValor()
+        {
+            var value = parseInt(document.getElementById('cant').value, 10);
+            value = isNaN(value) ? 0 : value;
+            value--;
+            document.getElementById('cant').value = value;
+        }
     </script>
     {% endblock js %}
     <!-- Bootstrap JS -->
