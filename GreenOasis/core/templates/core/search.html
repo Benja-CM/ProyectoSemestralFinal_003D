@@ -65,7 +65,7 @@
                         <h4 class="vogue">Categorías</h5>
                     </div>
                     <div>
-                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 ttmoons ms-4">
+                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 ms-4">
                             {% for c in listaCategorias %}
                             	<li><a class="dropdown-item" href="{% url 'search' c.id_cat %}">{{ c.cat_nom }}</a></li>
                             {% endfor %}

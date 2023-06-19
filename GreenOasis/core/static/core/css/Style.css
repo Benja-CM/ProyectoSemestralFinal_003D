@@ -250,6 +250,11 @@ a:focus {
     color: #1ba000;
 }
 
+.dropdown-item:focus{
+    background-color: #039F0C;
+    color: #F5F5F5;
+}
+
 /* Responsive para pantallas con los breakpoints correspondientes */
 
 @media (max-width: 1040px) {
