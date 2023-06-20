@@ -9,6 +9,7 @@ from django.contrib.auth.hashers import check_password
 from django.contrib.auth import authenticate, login, logout
 from .models import Rol, Usuario, Producto, Direccion, Comuna, Categoria, Detalle, Compra
 from django.contrib.auth.hashers import make_password
+from django.utils.safestring import mark_safe
 
 
 # Create your views here.
@@ -181,8 +182,8 @@ def actualizarCuenta(request):
         # Guarda los cambios en la base de datos
         user.save()
 
-        messages.success(request,'¡Su información se ha modificado exitosamente!')
-        return redirect('userAcc')
+        messages.success(request, '¡Su información se ha modificado exitosamente! <br> Inicie sesión nuevamente por favor')
+        return redirect('index')
     else:
         messages.warning(request,'Por favor, inicie sesión')
         return redirect('index')

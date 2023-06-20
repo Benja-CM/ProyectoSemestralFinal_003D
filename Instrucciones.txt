@@ -7,7 +7,7 @@ alter user KING default tablespace users quota unlimited on users;
 
 ---------
 
-python -m pip install Pillow
+python -m pip install pillow
 pip install djangorestframework
 
 ---------
@@ -19,6 +19,8 @@ python manage.py migrate
 
 python manage.py createsuperuser
 
+---------
+Credenciales para el super usuario
 ---------
 
 KING

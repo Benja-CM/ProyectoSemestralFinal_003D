@@ -18,7 +18,7 @@
 	<script>
 		Swal.fire({
 			"icon": "success",
-			"text": "{{ message }}",
+			html: "{{ message|safe }}",
 			"confirmButtonColor": "#15AE00"
 		});
 	</script>
