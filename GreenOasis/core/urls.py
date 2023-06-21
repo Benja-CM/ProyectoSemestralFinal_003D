@@ -4,7 +4,7 @@ from django.urls import path, include
 from .views import index, product1, profile, cart, search, conf_pago, create_acc, h_buy, h_prod1, p_acc, p_info, pss_fg, vent_edit, vend_create
 from .views import vent_ing, vent_list, registrarInfUS, registrarInfAC, registrarProducto, eliminarProducto, eliminarDetalle, realizarCompra
 from .views import actualizarProducto, actualizarCuenta, iniciar_sesion, cerrar_sesion, registrarProducto, userInfo, userAcc, registrarDetalle, registrarDir, registrarVendAcc
-from .views import buscar, buscarProd
+from .views import buscar, buscarProd, actualizarStock
 
 urlpatterns = [
     path('', index, name='index'),
@@ -41,4 +41,5 @@ urlpatterns = [
     path('realizarCompra/<int:total>/', realizarCompra, name='realizarCompra'),
     path('buscar/', buscar, name='buscar'),
     path('buscarProd/', buscarProd, name='buscarProd'),
+    path('actualizarStock/<int:id>/', actualizarStock, name='actualizarStock'),
 ]

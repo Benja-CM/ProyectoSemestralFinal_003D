@@ -14,6 +14,43 @@
          background-color: #EDEDED;
       }
    </style>
+   {% if messages %}
+    {% for message in messages %}
+    {% if message.tags == 'alert-success' %}
+    <script>
+        Swal.fire({
+            "icon": "success",
+            html: "{{ message|safe }}",
+            "confirmButtonColor": "#15AE00"
+        });
+    </script>
+    {% elif message.tags == 'alert-danger' %}
+    <script>
+        Swal.fire({
+            "icon": "error",
+            "text": "{{ message }}",
+            "confirmButtonColor": "#FF0000"
+        });
+    </script>
+    {% elif message.tags == 'alert-warning' %}
+    <script>
+        Swal.fire({
+            "icon": "warning",
+            "text": "{{ message }}",
+            "confirmButtonColor": "#FFC107"
+        });
+    </script>
+    {% else %}
+    <script>
+        Swal.fire({
+            "icon": "info",
+            "text": "{{ message }}",
+            "confirmButtonColor": "#007BFF"
+        });
+    </script>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
    <!-- Menu Lateral -->
    <div class="container-fluid col-md-2 navbar-profile-color sidebar phs">
       <div class="row">
@@ -179,7 +216,7 @@
                         <div class="col-4">
                            <label for="alias" class="form-label me-3"><strong> Nombre de Usuario </strong></label>
                         </div>
-                        <div class="col-12 col-xxl-11">
+                        <div class="col-12 col-xxl-12">
                            <input type="text" class="form-control rounded-0 border-custom-2" id="ai-alias" name="alias"
                               disabled value="{{ usuario.c_alias }}">
                         </div>
@@ -188,24 +225,32 @@
 
                   <div class="border-bottom">
                      <div class="col-md-12 mb-3 mt-3  d-flex row">
-                        <div class="col-xxl-1 col-12">
+                        <div class="col-xxl-3 col-12">
                            <label for="correo" class="form-label me-3" place><strong> Correo
                                  Electrónico</strong></label>
                         </div>
-                        <div class="col-12 col-xxl-11">
+                        <div class="col-12 col-xxl-12">
                            <input type="text" class="form-control rounded-0 border-custom-2" id="ai-email" name="correo"
                               value="{{ usuario.c_correo }}" required>
                         </div>
                      </div>
                   </div>
                   <div class="border-bottom">
-                     <div class="col-md-12 mb-3 mt-3 d-flex row">
-                        <div class="col-12 col-xxl-1">
+                     <div class="col-md-12 mb-3 mt-3 d-flex row align-items-start">
+                        <div class="col-12 col-xxl-3">
                            <label for="password" class="form-label me-3"><strong> Modificar Contraseña</strong></label>
                         </div>
-                        <div class="col-12 col-xxl-11">
+                        <div class="col-12 col-xxl-12 mb-3">
                            <input type="password" class="form-control rounded-0 border-custom-2" id="ai-password"
-                              name="password" value="{{ usuario.c_password }}" required>
+                              name="clave_actual" placeholder="Contraseña actual">
+                        </div>
+                        <div class="col-12 col-xxl-12 mb-3">
+                           <input type="password" class="form-control rounded-0 border-custom-2" id="clave_nueva"
+                              name="clave_nueva" placeholder="Nueva contraseña">
+                        </div>
+                        <div class="col-12 col-xxl-12 mb-3">
+                           <input type="password" class="form-control rounded-0 border-custom-2" id="clave_nueva_conf"
+                              name="clave_nueva_conf" placeholder="Confirmar nueva contraseña">
                         </div>
                      </div>
                   </div>
@@ -213,14 +258,7 @@
                <p class="warnings mt-2" id="ai-w"></p>
                <button class="btn btn-dark rounded-0 mt-3" type="submit">Guardar</button>
             </form>
-            {% if messages %}
-            {% for message in messages %}
-            <div class="alert {{ message.tags }} alert-dismissible fade show mt-2" role="alert">
-               {{ message }}
-               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            {% endfor %}
-            {% endif %}
+            
          </div>
       </div>
    </div>

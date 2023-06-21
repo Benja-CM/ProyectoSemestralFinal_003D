@@ -40,7 +40,11 @@ def conf_pago(request):
     return render(request, 'core/conf_pago.html')
 
 def create_acc(request):
-    return render(request, 'core/create_acc.html')
+    if request.user.is_authenticated:
+        messages.warning(request,'Debe estar registrado para acceder a esta pagina')
+        return redirect('index')
+    else:
+        return render(request, 'core/create_acc.html')
 
 def h_buy(request):
     if request.user.is_authenticated:
@@ -161,29 +165,45 @@ def buscarProd(request):
 # ACTUALIZAR DE INFORMACION DE LA CUENTA
 def actualizarCuenta(request):
     if request.user.is_authenticated:
+        usuario = Usuario.objects.get(c_alias=request.user.username)
         correo_c = request.POST['correo']
-        password_c = request.POST['password']
+        clave_a = request.POST['clave_actual']
+        clave_n = request.POST['clave_nueva']
 
-        # Actualizar el usuario actual
         Usuario.objects.filter(c_alias=request.user.username).update(
-            c_correo=correo_c,
-            c_password=password_c,
+                c_correo=correo_c,
         )
-        # Obtén el objeto del usuario
+        
         user = User.objects.get(username=request.user.username)
-
         # Actualiza los campos del usuario
         user.email = correo_c
-
-        # Encripta la nueva contraseña antes de actualizarla
-        if password_c:
-            user.password = make_password(password_c)
-
+        
         # Guarda los cambios en la base de datos
         user.save()
+        if (len(clave_a)!=0):
+            if (clave_a == usuario.c_password):
+                # Actualizar el usuario actual
+                Usuario.objects.filter(c_alias=request.user.username).update(
+                    c_password=clave_n,
+                )
+                # Obtén el objeto del usuario
+                user = User.objects.get(username=request.user.username)
 
-        messages.success(request, '¡Su información se ha modificado exitosamente! <br> Inicie sesión nuevamente por favor')
-        return redirect('index')
+                # Encripta la nueva contraseña antes de actualizarla
+                if clave_n:
+                    user.password = make_password(clave_n)
+
+                # Guarda los cambios en la base de datos
+                user.save()
+
+                messages.success(request, '¡Su información se ha modificado exitosamente! <br> Inicie sesión nuevamente por favor')
+                return redirect('index')
+            else:
+                messages.error(request,'La contraseña no coincide con la contraseña actual')
+                return redirect('userAcc')
+        else:
+            messages.success(request, '¡Su información se ha modificado exitosamente! <br> Inicie sesión nuevamente por favor')
+            return redirect('userAcc')
     else:
         messages.warning(request,'Por favor, inicie sesión')
         return redirect('index')
@@ -493,9 +513,6 @@ def registrarDetalle(request, id_prod, precio):
             Detalle.objects.create(compra = compra, producto = producto, de_cantidad = stock, de_subtotal = dr_subtotal)
             messages.success(request, '¡El producto se ha agregado al carrito!')
             
-            producto.prod_stock = producto.prod_stock-stock
-            producto.save()
-            
             if (request.POST['action'] == 'agregar'):
                 return redirect('search', 5)
             elif (request.POST['action'] == 'comprar'):
@@ -544,16 +561,35 @@ def cart(request):
 def eliminarDetalle(request,id):
     if request.user.is_authenticated:
         detalle = Detalle.objects.get(id_detalle = id)
-        id_prod = detalle.producto.id_prod
-        prod    = Producto.objects.get(id_prod = id_prod)
-        
-        prod.prod_stock = prod.prod_stock + detalle.de_cantidad
-        
-        prod.save()
         detalle.delete()
         
         messages.success(request,'Se eliminó el detalle del carrito')
         return redirect('cart')
+    else:
+        messages.warning(request,'Debe estar registrado para acceder a esta pagina')
+        return redirect('index')
+    
+#PERMITE CAMBIAR LA CANTIDAD DE STOCK EN EL CARRITO
+def actualizarStock(request , id):
+    if request.user.is_authenticated:
+        detalle = Detalle.objects.get(id_detalle = id)
+        id_prod = detalle.producto.id_prod
+        producto= Producto.objects.get(id_prod = id_prod)
+        
+        stock = request.POST['cantidad']
+        stock = int(stock)
+        
+        if (stock<=producto.prod_stock):
+            
+            detalle.de_cantidad = stock
+            
+            detalle.save()
+            
+            messages.success(request, 'La cantidad se actualizó.')
+            return redirect('cart')
+        else:
+            messages.warning(request, 'La cantidad solicitada supera el stock disponible.')
+            return redirect('cart')
     else:
         messages.warning(request,'Debe estar registrado para acceder a esta pagina')
         return redirect('index')

@@ -73,9 +73,13 @@
                                 <tbody>
                                     {% for d in listado %}
                                     <tr>
-                                        <td>{{ d.producto.prod_nom }}</td>
+                                        <td><a href="{% url 'product1' d.producto.id_prod %}">{{ d.producto.prod_nom }}</a></td>
                                         <td>
-                                            <span class="mx-2">{{ d.de_cantidad }}</span>
+                                            <form action="{% url 'actualizarStock' d.id_detalle %}" method="POST" id="cart-form">
+                                                {% csrf_token %}
+                                                <input type="number" class="mx-2" value="{{ d.de_cantidad }}" name="cantidad">
+                                                <button type="button" class="btn btn-danger btn-sm">Guardar</button>
+                                            </form>
                                         </td>
                                         <td>{{ d.producto.prod_precio }}</td>
                                         <td>{{ d.de_subtotal }}</td>
