@@ -21,6 +21,17 @@ class Usuario(models.Model):
     def __str__(self) -> str:
         return self.c_correo
 
+class Pregunta(models.Model):
+    id_pregunta = models.AutoField(primary_key=True, verbose_name='Id de la pregunta')
+    pregunta    = models.CharField(max_length=100, verbose_name='Pregunta')
+    
+class Respuesta(models.Model):
+    id_pregunta = models.AutoField(primary_key=True, verbose_name='ID de la Respuesta')
+    respuesta   = models.CharField(max_length=100, verbose_name='Respuesta')
+    pregunta    = models.ForeignKey(Pregunta, on_delete=models.CASCADE)
+    usuario     = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    
+
 class Categoria(models.Model):
     id_cat      = models.AutoField(primary_key=True, verbose_name='ID de Categoria')
     cat_nom     = models.CharField(max_length=20, blank=False, verbose_name='Nombre de Categoria')
@@ -70,3 +81,12 @@ class Detalle(models.Model):
     producto    = models.ForeignKey(Producto, on_delete=models.CASCADE)
     de_cantidad = models.IntegerField(null=False, blank=False)
     de_subtotal = models.IntegerField(null=False, blank=False)
+    
+class Historial(models.Model):
+    id_historial = models.AutoField(primary_key=True, verbose_name='ID de Historial')
+    compra  = models.ForeignKey(Compra, on_delete=models.CASCADE)
+    nom_prod    = models.CharField(max_length=50, verbose_name='Nombre de Producto')
+    img_prod    = models.ImageField(verbose_name='Foto de Producto')
+    cant_prod   = models.IntegerField(verbose_name='Foto de Producto')
+    precio_prod = models.IntegerField(verbose_name='Precio del producto')
+    subtotal_prod = models.IntegerField(verbose_name='Subtotal')

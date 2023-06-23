@@ -7,10 +7,8 @@ from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth import authenticate, login, logout
-from .models import Rol, Usuario, Producto, Direccion, Comuna, Categoria, Detalle, Compra
+from .models import Rol, Usuario, Producto, Direccion, Comuna, Categoria, Detalle, Compra, Historial, Pregunta, Respuesta
 from django.contrib.auth.hashers import make_password
-from django.utils.safestring import mark_safe
-
 
 # Create your views here.
 def index(request):
@@ -506,19 +504,32 @@ def registrarDetalle(request, id_prod, precio):
         producto    = Producto.objects.get(id_prod = id_prod)
         dr_cantidad = request.POST['cantidad']
         stock   = int(dr_cantidad)
+    
+        detalle_cant = Detalle.objects.filter(producto = producto, compra = compra)
         
         dr_subtotal = precio * stock
         
         if (stock<=producto.prod_stock):
-            Detalle.objects.create(compra = compra, producto = producto, de_cantidad = stock, de_subtotal = dr_subtotal)
-            messages.success(request, '¡El producto se ha agregado al carrito!')
+            if detalle_cant.exists():
+                detalle = Detalle.objects.get(producto = producto, compra = compra)
+                detalle.de_cantidad += stock
+                if (detalle.de_cantidad > producto.prod_stock):
+                    messages.error(request, 'Esta intentando agregar más productos de los que existen en stock')
+                    return redirect('cart')
+                else: 
+                    detalle.save()
+            else:
+                Detalle.objects.create(compra = compra, producto = producto, de_cantidad = stock, de_subtotal = dr_subtotal)
             
+            messages.success(request, '¡El producto se ha agregado al carrito!')
+                                 
             if (request.POST['action'] == 'agregar'):
                 return redirect('search', 5)
             elif (request.POST['action'] == 'comprar'):
                 return redirect('cart')
             else:
                 messages.error(request, 'Opción invalida')
+                
         else:
             messages.warning(request, 'La cantidad solicitada supera el stock disponible.')
             return redirect('product1', id_prod)
@@ -535,6 +546,12 @@ def cart(request):
         
         detalle = Detalle.objects.filter(compra = compra)
         costo_envio = compra.direccion.comuna.com_cost_envio
+        
+        for d in detalle:
+            if d.de_cantidad > d.producto.prod_stock:
+                d.de_cantidad = d.producto.prod_stock
+                d.save()
+                messages.warning(request, 'El stock de ' + d.producto.prod_nom + ' ha cambiado')
         
         # Calcular subtotal
         subtotal = sum(d.de_subtotal for d in detalle)
@@ -608,27 +625,44 @@ def realizarCompra(request, total):
         if detalle.exists():
             if (c_direccion.comuna.id_com != 99):
                 if (usuario.us_rut != ""):
-                
-                    costo_envio = compra.direccion.comuna.com_cost_envio
-                    flag_compra = True
+                    if (detalle.de_cantidad > detalle.producto.prod_stock):
+                        costo_envio = compra.direccion.comuna.com_cost_envio
+                        flag_compra = True
 
-                    fecha_compra = date.today()
-                    fecha_despacho = date.today() + timedelta(days=7)
+                        fecha_compra = date.today()
+                        fecha_despacho = date.today() + timedelta(days=7)
+                        
+                        for d in detalle:
+                            nombre = d.producto.prod_nom
+                            imagen = d.producto.prod_imagen
+                            cantidad = d.de_cantidad
+                            precio = d.producto.prod_precio
+                            subtotal = d.de_subtotal
+                            
+                            producto = Producto.objects.get(id_prod = d.producto.id_prod)
+                            producto.prod_stock -= cantidad
+                            producto.save()
+                            
+                            Historial.objects.create(compra = compra, nom_prod = nombre,
+                                                    img_prod = imagen, cant_prod = cantidad,
+                                                    precio_prod = precio, subtotal_prod = subtotal)
+                        
+                        costo_envio = compra.direccion.comuna.com_cost_envio
                     
-                    costo_envio = compra.direccion.comuna.com_cost_envio
-                
-                    compra.cop_fechcom  = fecha_compra
-                    compra.cop_fech_entr = fecha_despacho
-                    compra.com_cost_envio = costo_envio
-                    compra.cop_total    = total
-                    compra.cop_realizada = flag_compra
-                    
-                    Compra.objects.create(usuario = usuario, direccion = c_direccion)
-                    
-                    compra.save()
-                    
-                    messages.success(request, '¡La compra se ha realizado exitosamente!')
-                    return redirect('h_buy')
+                        compra.cop_fechcom  = fecha_compra
+                        compra.cop_fech_entr = fecha_despacho
+                        compra.com_cost_envio = costo_envio
+                        compra.cop_total    = total
+                        compra.cop_realizada = flag_compra
+                        
+                        Compra.objects.create(usuario = usuario, direccion = c_direccion)
+                        
+                        compra.save()
+                        
+                        messages.success(request, '¡La compra se ha realizado exitosamente!')
+                        return redirect('h_buy')
+                    else:
+                        return redirect('cart')
                 else:
                     messages.error(request, 'Primero ingrese su información de usuario')
                     return redirect('userInfo')
@@ -663,17 +697,17 @@ def h_prod1(request, id_com):
     if request.user.is_authenticated:
         id_usuario  = request.user.id
         compra  = Compra.objects.get(id_compra = id_com)
-        detalle = Detalle.objects.filter(compra = compra)
+        historial = Historial.objects.filter(compra = compra)
         direccion   = compra.direccion
         costo_sin_envio = compra.cop_total-compra.com_cost_envio
         
-        subtotal = sum(d.de_subtotal for d in detalle)
+        subtotal = sum(d.subtotal_prod for d in historial)
 
         # Calcular impuesto
         impuesto = round(subtotal * 0.19)
         
         contexto = {
-            "listado": detalle,
+            "listado": historial,
             "compra": compra,
             "direccion": direccion,
             "subtotal": subtotal,
@@ -683,4 +717,3 @@ def h_prod1(request, id_com):
     else:
         messages.warning(request,'Debe estar registrado para acceder a esta pagina')
         return redirect('index')
- 

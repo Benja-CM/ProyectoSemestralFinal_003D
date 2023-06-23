@@ -98,12 +98,12 @@
                                 <div class="border-bottom">
                                     <div class="row align-items-center py-2">
                                         <div class="col-md-9 d-flex">
-                                            <img src="{{ p.producto.prod_imagen.url }}" alt="prod3"
+                                            <img src="{{ p.img_prod.url }}" alt="producto"
                                                 class="img-search me-2 mt-md-auto mt-4">
                                             <div class="col my-md-1">
-                                                <h5 class="mb-0 mt-3 vogue">{{ p.producto.prod_nom }}</h5>
-                                                <p class="mb-1 state-1 ttmoons">Cantidad: {{ p.de_cantidad }}</p>
-                                                <h5 class="mb-0 ttmoons">${{ p.producto.prod_precio }} CLP</h5>
+                                                <h5 class="mb-0 mt-3 vogue">{{ p.nom_prod }}</h5>
+                                                <p class="mb-1 state-1 ttmoons">Cantidad: {{ p.cant_prod }}</p>
+                                                <h5 class="mb-0 ttmoons">${{ p.precio_prod }} CLP  C/U</h5>
                                             </div>
                                         </div>
                                     </div>
