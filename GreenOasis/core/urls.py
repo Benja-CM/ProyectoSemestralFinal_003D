@@ -4,7 +4,7 @@ from django.urls import path, include
 from .views import index, product1, profile, cart, search, conf_pago, create_acc, h_buy, h_prod1, p_acc, p_info, pss_fg, vent_edit, vend_create
 from .views import vent_ing, vent_list, registrarInfUS, registrarInfAC, registrarProducto, eliminarProducto, eliminarDetalle, realizarCompra
 from .views import actualizarProducto, actualizarCuenta, iniciar_sesion, cerrar_sesion, registrarProducto, userInfo, userAcc, registrarDetalle, registrarDir, registrarVendAcc
-from .views import buscar, buscarProd, actualizarStock
+from .views import buscar, buscarProd, actualizarStock, recup_pssw, change_pssw, change_pssw_commit
 
 urlpatterns = [
     path('', index, name='index'),
@@ -20,6 +20,8 @@ urlpatterns = [
     path('p_acc/', p_acc, name='p_acc'),
     path('p_info/', p_info, name='p_info'),
     path('pss_fg/', pss_fg, name='pss_fg'),
+    path('change_pssw/', change_pssw, name='change_pssw'),
+    path('change_pssw_commit/', change_pssw_commit, name='change_pssw_commit'),
     path('vent_edit/<int:id>/', vent_edit, name='vent_edit'),
     path('vent_ing/', vent_ing, name='vent_ing'),
     path('vent_list/', vent_list, name='vent_list'),
@@ -42,4 +44,5 @@ urlpatterns = [
     path('buscar/', buscar, name='buscar'),
     path('buscarProd/', buscarProd, name='buscarProd'),
     path('actualizarStock/<int:id>/', actualizarStock, name='actualizarStock'),
+    path('recup_pssw/', recup_pssw, name='recup_pssw'),
 ]

@@ -65,6 +65,11 @@ INSERT INTO auth_user (ID, PASSWORD, IS_SUPERUSER, USERNAME, EMAIL, IS_STAFF, IS
 INSERT INTO core_direccion (ID_DIR, COMUNA_ID, USUARIO_ID) VALUES (0, 99, 0);
 INSERT INTO core_compra (ID_COMPRA, DIRECCION_ID, COP_REALIZADA, USUARIO_ID) VALUES (0, 0, 0, 0);
 
+----------- PREGUNTAS ---------------
+INSERT INTO core_pregunta VALUES (1, '¿A que edad tuviste tu primera mascota?');
+INSERT INTO core_pregunta VALUES (2, '¿A que edad tuviste te diste cuenta que la navidad es un invento comercial?');
+INSERT INTO core_pregunta VALUES (3, '¿Cúal es tu modelo de tanque de guerra favorito?');
+
 ------------ COMUNAS ----------------
 INSERT INTO core_comuna VALUES (1, 'Cerrillos', 2000);
 INSERT INTO core_comuna VALUES (2, 'Cerro Navia', 1500);

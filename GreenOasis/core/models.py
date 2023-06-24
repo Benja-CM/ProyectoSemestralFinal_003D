@@ -23,11 +23,11 @@ class Usuario(models.Model):
 
 class Pregunta(models.Model):
     id_pregunta = models.AutoField(primary_key=True, verbose_name='Id de la pregunta')
-    pregunta    = models.CharField(max_length=100, verbose_name='Pregunta')
+    pregunta_pred    = models.CharField(max_length=100, verbose_name='Pregunta')
     
 class Respuesta(models.Model):
-    id_pregunta = models.AutoField(primary_key=True, verbose_name='ID de la Respuesta')
-    respuesta   = models.CharField(max_length=100, verbose_name='Respuesta')
+    id_respuesta = models.AutoField(primary_key=True, verbose_name='ID de la Respuesta')
+    respuesta_pred   = models.CharField(max_length=100, verbose_name='Respuesta')
     pregunta    = models.ForeignKey(Pregunta, on_delete=models.CASCADE)
     usuario     = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     

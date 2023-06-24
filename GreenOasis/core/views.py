@@ -38,11 +38,17 @@ def conf_pago(request):
     return render(request, 'core/conf_pago.html')
 
 def create_acc(request):
+    preguntas = Pregunta.objects.all()
+    
+    contexto = {
+        "listadoPreguntas": preguntas
+    }
+
     if request.user.is_authenticated:
-        messages.warning(request,'Debe estar registrado para acceder a esta pagina')
+        messages.warning(request,'Ya tiene una sesión iniciada para acceder a la pagina')
         return redirect('index')
     else:
-        return render(request, 'core/create_acc.html')
+        return render(request, 'core/create_acc.html', contexto)
 
 def h_buy(request):
     if request.user.is_authenticated:
@@ -65,7 +71,16 @@ def p_info(request):
     return render(request, 'core/p_info.html')
 
 def pss_fg(request):
-    return render(request, 'core/pss_fg.html')
+    preguntas = Pregunta.objects.all()
+    
+    contexto = {
+        "listadoPreguntas": preguntas
+    }
+
+    return render(request, 'core/pss_fg.html', contexto)
+
+def change_pssw(request):
+    return render(request, 'core/change_pssw.html')
 
 def vent_ing(request):
     return render(request, 'core/vent_ing.html')
@@ -226,6 +241,11 @@ def registrarInfAC(request):
     rol_u = 1
     role = Rol.objects.get(id_rol=rol_u)
 
+    pregunta = request.POST['pregunta']
+    respuesta = request.POST['respuesta']
+
+    preg = Pregunta.objects.get(id_pregunta = pregunta)
+
     if User.objects.filter(username=alias_u).exists():
         messages.error(request,'El nombre de usuario ya está ocupado. Por favor, elige otro nombre')
         return redirect('create_acc')
@@ -251,6 +271,8 @@ def registrarInfAC(request):
     Direccion.objects.create(usuario = Usuario.objects.get(c_alias=alias_u), comuna = Comuna.objects.get(id_com=99))
     Compra.objects.create(usuario = Usuario.objects.get(c_alias=alias_u),
                           direccion = Direccion.objects.get(usuario = Usuario.objects.get(c_alias=alias_u)))
+    
+    Respuesta.objects.create(respuesta_pred = respuesta, pregunta = preg, usuario = Usuario.objects.get(c_alias=alias_u))
     
     messages.success(request, '¡La cuenta se ha creado exitosamente!')
 
@@ -717,3 +739,51 @@ def h_prod1(request, id_com):
     else:
         messages.warning(request,'Debe estar registrado para acceder a esta pagina')
         return redirect('index')
+
+def recup_pssw(request):
+    user = request.POST['username']
+    pregunta = request.POST['pregunta']
+    respuesta = request.POST['respuesta']
+
+    usuario = Usuario.objects.get(c_alias = user)
+
+    if Usuario.objects.filter(c_alias = user).exists():
+        resp = Respuesta.objects.get(usuario = usuario.id_usuario)
+
+        id_preg = resp.pregunta.id_pregunta
+
+        contexto = {
+            "usuario": usuario
+        }
+
+        if pregunta == str(id_preg): 
+            if respuesta == resp.respuesta_pred:
+                return render(request, 'core/change_pssw.html', contexto)
+            else:
+                messages.error(request,'La respuesta es incorrecta')
+                return redirect('pss_fg')
+        else:
+            messages.error(request,'La pregunta seleccionada es incorrecta') 
+            return redirect('pss_fg')   
+    else:
+        messages.error(request,'No existe una cuenta con ese nombre de usuario asociado')
+        return redirect('pss_fg')
+    
+def change_pssw_commit(request):
+    pssw = request.POST['clave_nueva']
+    username = request.POST['username']
+
+    print(username)
+    
+    Usuario.objects.filter(c_alias=username).update(
+        c_password=pssw,
+    )
+
+    user = User.objects.get(username=username)
+
+    if pssw:
+        user.password = make_password(pssw)
+
+    user.save()
+
+    return redirect('index')
