@@ -573,7 +573,11 @@ def cart(request):
             if d.de_cantidad > d.producto.prod_stock:
                 d.de_cantidad = d.producto.prod_stock
                 d.save()
-                messages.warning(request, 'El stock de ' + d.producto.prod_nom + ' ha cambiado')
+                messages.warning(request, 'El stock de ' + d.producto.prod_nom + ' ha cambiado<br>')
+            
+            d.de_subtotal = d.de_cantidad * d.producto.prod_precio
+            if d.de_cantidad==0:
+                d.delete()
         
         # Calcular subtotal
         subtotal = sum(d.de_subtotal for d in detalle)
@@ -647,44 +651,44 @@ def realizarCompra(request, total):
         if detalle.exists():
             if (c_direccion.comuna.id_com != 99):
                 if (usuario.us_rut != ""):
-                    if (detalle.de_cantidad > detalle.producto.prod_stock):
-                        costo_envio = compra.direccion.comuna.com_cost_envio
-                        flag_compra = True
+                    costo_envio = compra.direccion.comuna.com_cost_envio
+                    flag_compra = True
 
-                        fecha_compra = date.today()
-                        fecha_despacho = date.today() + timedelta(days=7)
-                        
-                        for d in detalle:
-                            nombre = d.producto.prod_nom
-                            imagen = d.producto.prod_imagen
-                            cantidad = d.de_cantidad
-                            precio = d.producto.prod_precio
-                            subtotal = d.de_subtotal
-                            
-                            producto = Producto.objects.get(id_prod = d.producto.id_prod)
-                            producto.prod_stock -= cantidad
-                            producto.save()
-                            
-                            Historial.objects.create(compra = compra, nom_prod = nombre,
-                                                    img_prod = imagen, cant_prod = cantidad,
-                                                    precio_prod = precio, subtotal_prod = subtotal)
-                        
-                        costo_envio = compra.direccion.comuna.com_cost_envio
+                    fecha_compra = date.today()
+                    fecha_despacho = date.today() + timedelta(days=7)
                     
-                        compra.cop_fechcom  = fecha_compra
-                        compra.cop_fech_entr = fecha_despacho
-                        compra.com_cost_envio = costo_envio
-                        compra.cop_total    = total
-                        compra.cop_realizada = flag_compra
+                    for d in detalle:
+                        nombre = d.producto.prod_nom
+                        imagen = d.producto.prod_imagen
+                        cantidad = d.de_cantidad
+                        precio = d.producto.prod_precio
+                        subtotal = d.de_subtotal
                         
-                        Compra.objects.create(usuario = usuario, direccion = c_direccion)
+                        if (cantidad > d.producto.prod_stock):
+                            return redirect('cart')
                         
-                        compra.save()
+                        producto = Producto.objects.get(id_prod = d.producto.id_prod)
+                        producto.prod_stock -= cantidad
+                        producto.save()
                         
-                        messages.success(request, '¡La compra se ha realizado exitosamente!')
-                        return redirect('h_buy')
-                    else:
-                        return redirect('cart')
+                        Historial.objects.create(compra = compra, nom_prod = nombre,
+                                                img_prod = imagen, cant_prod = cantidad,
+                                                precio_prod = precio, subtotal_prod = subtotal)
+                    
+                    costo_envio = compra.direccion.comuna.com_cost_envio
+                
+                    compra.cop_fechcom  = fecha_compra
+                    compra.cop_fech_entr = fecha_despacho
+                    compra.com_cost_envio = costo_envio
+                    compra.cop_total    = total
+                    compra.cop_realizada = flag_compra
+                    
+                    Compra.objects.create(usuario = usuario, direccion = c_direccion)
+                    
+                    compra.save()
+                    
+                    messages.success(request, '¡La compra se ha realizado exitosamente!')
+                    return redirect('h_buy')
                 else:
                     messages.error(request, 'Primero ingrese su información de usuario')
                     return redirect('userInfo')
@@ -704,6 +708,7 @@ def h_buy(request):
         usuario = Usuario.objects.get(c_alias=request.user)
         id_usuario = usuario.id_usuario
         compra = Compra.objects.filter(usuario=id_usuario, cop_realizada=True)
+        compra = compra.reverse()
         
         contexto = {
             "listado": compra
@@ -741,13 +746,16 @@ def h_prod1(request, id_com):
         return redirect('index')
 
 def recup_pssw(request):
-    user = request.POST['username']
-    pregunta = request.POST['pregunta']
-    respuesta = request.POST['respuesta']
-
-    usuario = Usuario.objects.get(c_alias = user)
-
-    if Usuario.objects.filter(c_alias = user).exists():
+    user = request.POST.get('username', None)
+    
+    if user is not None:
+        pregunta = request.POST['pregunta']
+        respuesta = request.POST['respuesta']
+        
+        try:
+            usuario = Usuario.objects.get(c_alias = user)
+        except Usuario.DoesNotExist:
+            messages.add_message(request, messages.ERROR, 'El nombre usuario ingresado no existe')
         resp = Respuesta.objects.get(usuario = usuario.id_usuario)
 
         id_preg = resp.pregunta.id_pregunta
@@ -758,22 +766,21 @@ def recup_pssw(request):
 
         if pregunta == str(id_preg): 
             if respuesta == resp.respuesta_pred:
+                messages.success(request,'Cambie su contraseña por una que pueda recordar')
                 return render(request, 'core/change_pssw.html', contexto)
             else:
                 messages.error(request,'La respuesta es incorrecta')
                 return redirect('pss_fg')
         else:
             messages.error(request,'La pregunta seleccionada es incorrecta') 
-            return redirect('pss_fg')   
+            return redirect('pss_fg')
     else:
-        messages.error(request,'No existe una cuenta con ese nombre de usuario asociado')
+        messages.error(request,'Error inesperado')
         return redirect('pss_fg')
     
 def change_pssw_commit(request):
     pssw = request.POST['clave_nueva']
     username = request.POST['username']
-
-    print(username)
     
     Usuario.objects.filter(c_alias=username).update(
         c_password=pssw,
@@ -786,4 +793,5 @@ def change_pssw_commit(request):
 
     user.save()
 
+    messages.success(request,'La contraseña se ha cambiado exitosamente')
     return redirect('index')

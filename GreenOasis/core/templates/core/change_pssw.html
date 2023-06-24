@@ -59,7 +59,7 @@
 	{% block body %}
 	<div class="container col-md-5 col-sm-8 col-10 card rounded-0 p-md-4 mt-5 p-3">
 		<h2 class="vogue mb-3">¿Has olvidado tu contraseña?</h2>
-		<form action="{% url 'change_pssw_commit' %}" method="POST"> 
+		<form action="{% url 'change_pssw_commit' %}" method="POST" id="pf-form"> 
 			{% csrf_token %}
             <div class="col-12 col-xxl-12 mb-3">
                 <input type="text" class="form-control rounded-0 border-custom-2" id="username"
@@ -68,14 +68,14 @@
             <div class="col-12 col-xxl-12 mb-3">
                 <label for="alias" class="form-label me-3"><strong>Contraseña nueva:</strong></label>
                 <input type="password" class="form-control rounded-0 border-custom-2" id="clave_nueva"
-                   name="clave_nueva" placeholder="Nueva contraseña">
+                   name="clave_nueva" placeholder="Nueva contraseña" required>
              </div>
              <div class="col-12 col-xxl-12 mb-3">
                 <label for="alias" class="form-label me-3"><strong>Confirmar Contraseña:</strong></label>
                 <input type="password" class="form-control rounded-0 border-custom-2" id="clave_nueva_conf"
-                   name="clave_nueva_conf" placeholder="Confirmar nueva contraseña">
+                   name="clave_nueva_conf" placeholder="Confirmar nueva contraseña" required>
              </div>
-			<p class="warnings mt-2" id="pi-w2"></p>
+			<p class="warnings mt-2" id="pf-w"></p>
 			<button type="submit" class="btn btn-custom rounded-0 btn-hover" id="po-btn"> 
 					Confirmar
 			</button>
@@ -85,6 +85,8 @@
 
 	<!-- Jquerry JS-->
 	{% block js %}
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="{% static 'core/js/passfg_jq.js' %}"></script>
 	{% endblock js %}
 
 </body>

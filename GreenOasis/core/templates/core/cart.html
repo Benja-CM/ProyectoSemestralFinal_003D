@@ -34,7 +34,7 @@
     <script>
         Swal.fire({
             "icon": "warning",
-            "text": "{{ message }}",
+            html: "{{ message|safe }}",
             "confirmButtonColor": "#FFC107"
         });
     </script>
@@ -77,7 +77,7 @@
                                         <td>
                                             <form action="{% url 'actualizarStock' d.id_detalle %}" method="POST" id="cart-form">
                                                 {% csrf_token %}
-                                                <input type="number" class="mx-2" value="{{ d.de_cantidad }}" name="cantidad">
+                                                <input type="number" class="mx-2 col-4" value="{{ d.de_cantidad }}" name="cantidad">
                                                 <button type="submit" class="btn btn-success btn-sm">Guardar</button>
                                             </form>
                                         </td>
