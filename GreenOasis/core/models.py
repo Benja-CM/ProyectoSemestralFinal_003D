@@ -85,7 +85,7 @@ class Detalle(models.Model):
 class Historial(models.Model):
     id_historial = models.AutoField(primary_key=True, verbose_name='ID de Historial')
     compra  = models.ForeignKey(Compra, on_delete=models.CASCADE)
-    nom_prod    = models.CharField(max_length=50, verbose_name='Nombre de Producto')
+    nom_prod    = models.CharField(max_length=120, verbose_name='Nombre de Producto')
     img_prod    = models.ImageField(verbose_name='Foto de Producto')
     cant_prod   = models.IntegerField(verbose_name='Foto de Producto')
     precio_prod = models.IntegerField(verbose_name='Precio del producto')

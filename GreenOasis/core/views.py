@@ -565,6 +565,7 @@ def cart(request):
         usuario = Usuario.objects.get(c_alias=request.user)
         id_usuario = usuario.id_usuario
         compra = Compra.objects.get(usuario=id_usuario, cop_realizada=False)
+        msj = ''
         
         detalle = Detalle.objects.filter(compra = compra)
         costo_envio = compra.direccion.comuna.com_cost_envio
@@ -573,12 +574,18 @@ def cart(request):
             if d.de_cantidad > d.producto.prod_stock:
                 d.de_cantidad = d.producto.prod_stock
                 d.save()
-                messages.warning(request, 'El stock de ' + d.producto.prod_nom + ' ha cambiado<br>')
+                msj += ('<br>El stock de ' + d.producto.prod_nom + ' ha cambiado ')
             
             d.de_subtotal = d.de_cantidad * d.producto.prod_precio
-            if d.de_cantidad==0:
+            if d.de_cantidad==0 or d.id_detalle is None:
+                msj += ('a 0')
                 d.delete()
         
+        detalle = Detalle.objects.filter(compra = compra)
+        
+        if msj != '':
+            messages.warning(request, msj)
+            
         # Calcular subtotal
         subtotal = sum(d.de_subtotal for d in detalle)
 
@@ -613,7 +620,7 @@ def eliminarDetalle(request,id):
         return redirect('index')
     
 #PERMITE CAMBIAR LA CANTIDAD DE STOCK EN EL CARRITO
-def actualizarStock(request , id):
+def actualizarStock(request, id):
     if request.user.is_authenticated:
         detalle = Detalle.objects.get(id_detalle = id)
         id_prod = detalle.producto.id_prod

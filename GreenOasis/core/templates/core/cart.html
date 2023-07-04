@@ -77,7 +77,7 @@
                                         <td>
                                             <form action="{% url 'actualizarStock' d.id_detalle %}" method="POST" id="cart-form">
                                                 {% csrf_token %}
-                                                <input type="number" class="mx-2 col-4" value="{{ d.de_cantidad }}" name="cantidad">
+                                                <input type="number" class="mx-2 col-4" value="{{ d.de_cantidad }}" min="1" name="cantidad">
                                                 <button type="submit" class="btn btn-success btn-sm">Guardar</button>
                                             </form>
                                         </td>
@@ -91,22 +91,22 @@
                                     </tr>
                                     {% endfor %}
                                 </tbody>
-                                <tfoot>
+                                <tfoot class="text-end">
                                     <tr>
-                                        <td colspan="3" class="text-end"><strong>Subtotal</strong></td>
-                                        <td colspan="2">$ {{ subtotal }} CLP</td>
+                                        <td colspan="2" class="text-end"><strong>Subtotal</strong></td>
+                                        <td colspan="2" class="col-3">$ {{ subtotal }} CLP</td>
                                     </tr>
                                     <tr>
-                                        <td colspan="3" class="text-end"><strong>Impuesto</strong></td>
-                                        <td colspan="2">$ {{ impuesto }} CLP</td>
+                                        <td colspan="2" class="text-end"><strong>Impuesto</strong></td>
+                                        <td colspan="2" class="col-3">$ {{ impuesto }} CLP</td>
                                     </tr>
                                     <tr>
-                                        <td colspan="3" class="text-end"><strong>Costo de Envio</strong></td>
-                                        <td colspan="2">$ {{ costo_envio }} CLP</td>
+                                        <td colspan="2" class="text-end"><strong>Costo de Envio</strong></td>
+                                        <td colspan="2" class="col-3">$ {{ costo_envio }} CLP</td>
                                     </tr>
                                     <tr>
-                                        <td colspan="3" class="text-end"><strong>Total</strong></td>
-                                        <td colspan="2">$ {{ total }} CLP</td>
+                                        <td colspan="2" class="text-end"><strong>Total</strong></td>
+                                        <td colspan="2" class="col-3">$ {{ total }} CLP</td>
                                     </tr>
                                     <tr>
                                         <td>
